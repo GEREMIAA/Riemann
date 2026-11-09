@@ -1,138 +1,87 @@
-# Où en est l'hypothèse de Riemann ? (novembre 2026)
+# La musique des nombres premiers
 
-Ce dossier complète la page *La musique des nombres premiers*. Il résume où en est la recherche, explique pourquoi l'hypothèse résiste, et propose une expérience à refaire soi-même dans Colab.
+Une page interactive, en un seul fichier, pour **voir** comment les zéros de la fonction ζ de Riemann fabriquent les nombres premiers : chaque zéro est une note, et en ajoutant les notes une à une on retrouve les sauts des nombres premiers.
 
-> **À lire d'abord.** Rien ici ne démontre l'hypothèse de Riemann. Elle reste ouverte.
+> **À lire d'abord.** Rien ici ne démontre l'hypothèse de Riemann. C'est une mise en images de résultats connus (la formule explicite de Riemann et von Mangoldt) et de calculs numériques sur les 150 premiers zéros.
 
-[![Ouvrir dans Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GEREMIAA/Musique-Des-Premiers/blob/main/exploration/weil_haute_precision.ipynb) Le carnet `weil_haute_precision.ipynb` refait l'expérience en haute précision, en moins d'une minute.
+**Ouvrir la page :** télécharger `index.html` et l'ouvrir dans un navigateur, ou activer GitHub Pages sur le dépôt.
 
-## Ce qui a bougé en 2026
+## Ce que fait la page
 
-- **Août, Claude (Anthropic).** Une version de recherche de Claude a trouvé et rédigé une preuve que plus des deux tiers des zéros (67,25 %) sont simples et sur la droite critique. Le record précédent était 5/12, soit 41,7 %. Levent Alpöge et Ralph Furman ont vérifié la preuve, puis Youness Lamzouri (Université de Lorraine) l'a redémontrée autrement, plus simplement.
-- **Octobre, OpenAI.** OpenAI a annoncé une preuve de l'« hypothèse de quasi-Riemann » : tous les zéros auraient une partie réelle comprise entre 1/12 et 11/12, au lieu de 0 et 1. Une version plus forte, entre 1/8 et 7/8, a été vérifiée par ordinateur avec le logiciel Lean. Selon *Quanta Magazine*, les spécialistes pensent que c'est juste, mais ils n'ont pas fini de vérifier.
+1. **Ajoute les notes, une par une.** Un curseur règle le nombre K de notes : la ligne grise est ce que font vraiment les nombres premiers, la ligne bleue est la somme des K premières ondes. Quand K grandit, la bleue épouse la grise.
+2. **Et si une note sortait de la droite ?** Un zéro s'écrit σ + iγ ; son onde grandit comme x^σ. Avec σ = ½ (la « droite critique »), toutes les ondes grandissent au même rythme, √x, et aucune n'écrase les autres. On peut pousser un zéro hors de la droite et voir son onde finir par dominer. L'hypothèse de Riemann affirme que cela n'arrive jamais.
+3. **Écoute les notes.** Le bouton « Écouter » joue les K notes en même temps : chaque zéro devient un son pur de 10 × γ hertz (141 Hz pour le premier, 3 189 Hz pour le 150ᵉ), d'autant plus doux qu'il est aigu, comme le poids 1/|ρ| de la formule.
 
-Ni l'une ni l'autre n'est l'hypothèse. Même 100 % des zéros « en proportion » laisserait la place à une infinité de zéros hors de la droite, s'ils sont assez rares. Et la bande doit encore se réduire à la seule droite ½.
+## La vague
 
-## Dans ce monde-là, l'hypothèse est démontrée
+![Le « bruit » des nombres premiers est une somme de vagues : la courbe exacte en gris, une seule vague en orange, la somme de 30 vagues en vert](ondes_et_premiers.png)
 
-![Pour la courbe y² = x³ + x + 1, la valeur a_p/(2√p) reste entre −1 et 1 pour les 1 958 premiers p jusqu'à 17 000](monde_demontre.png)
+*En gris : ce que font vraiment les nombres premiers (l'écart ψ(x) − x, qui saute vers le haut à chaque premier et à chaque puissance de premier ; les premiers sont repérés en violet). En orange : une seule vague, celle du premier zéro (hauteur γ₁ = 14,13). En vert : la somme des 30 premières vagues. Plus on ajoute de vagues, plus la courbe verte colle à la grise.*
 
-Pour la courbe y² = x³ + x + 1, on compte ses points modulo chaque nombre premier p, ce qui donne un nombre a_p. Dans ce monde, l'hypothèse de Riemann dit |a_p| ≤ 2√p : les deux zéros de la fonction zêta de la courbe sont pile sur la droite Re s = ½. Sur les 1 958 premiers jusqu'à 17 000, aucun point ne sort de la bande ; le plus proche du bord est p = 14 051, à 0,9997.
+## L'analogie : monter sur la vague
 
-Le calcul ne prouve rien : c'est un théorème qui le garantit pour tous les p (Hasse dans les années 1930, Weil pour toutes les courbes en 1948, Deligne en 1974). La preuve repose sur deux ingrédients :
-- le « Frobenius », une symétrie qui élève chaque coordonnée à la puissance p ;
-- une inégalité de positivité sur la surface « courbe × courbe ».
+Pour expliquer la relativité, on peut s'imaginer sur un rayon de lumière, au sommet d'une vague, et regarder le monde depuis la vague. Même geste ici :
 
-Pour les nombres entiers, personne ne sait ce qui joue le rôle de la courbe, de la surface ou du Frobenius. C'est ce que cherche le programme d'Alain Connes.
+- **Sur la vague d'un zéro, on n'entend qu'une note.** Un balancement régulier (la courbe orange). Les nombres premiers n'y sont pas : ni dans cette vague, ni dans aucune autre prise seule.
+- **Ils sont dans la somme.** Il faut descendre de la vague et écouter toutes les vagues ensemble : avec 30, les sauts apparaissent ; avec 150, des pics se dressent sur les premiers (figure suivante).
+- **Le parallèle : tout le monde sur le même pied.** En relativité, la lumière a la même vitesse pour tous les observateurs. Avec Riemann, si l'hypothèse est vraie, toutes les vagues grandissent au même rythme (√x) : aucune n'a de privilège. Si un zéro quittait la droite, sa vague finirait par écraser les autres, et l'écart entre le vrai nombre de premiers et son estimation dépasserait nettement √x.
+- **Limite de l'image.** La relativité est un principe vérifié par l'expérience. L'hypothèse de Riemann est une affirmation mathématique **non démontrée**. L'image aide à voir, pas à conclure.
 
-## Les nombres premiers « connaissent » les zéros
+## Et les harmoniques ?
 
-On prend une onde qui ne vit qu'entre 1/√x et √x. Son *énergie de Weil* se calcule de deux façons, qui donnent le même nombre :
-- avec les seuls nombres premiers inférieurs à x (et leurs puissances), plus quelques constantes comme π ;
-- ou comme la somme, sur tous les zéros, du carré du « son » de l'onde à chaque fréquence γ.
+En musique, une note s'accompagne de ses harmoniques, des notes plus aiguës et de plus en plus faibles. L'idée revient deux fois ici.
 
-Si l'hypothèse est vraie, c'est une somme de carrés, donc jamais négative. Weil a montré la réciproque : si l'énergie est positive pour toutes les ondes, l'hypothèse est vraie.
+**Les harmoniques d'un premier, ce sont ses puissances.** Dans la formule, chaque puissance pᵏ compte comme un premier de plus : un pic de même hauteur ln p, placé plus loin (4 = 2², 8 = 2³, 16 = 2⁴ pour le nombre 2). Riemann, lui, les compte de moins en moins fort : pᵏ pèse 1/k dans sa fonction J(x) = π(x) + ½π(x^(1/2)) + ⅓π(x^(1/3)) + …, comme des harmoniques qui s'affaiblissent.
 
-On cherche alors l'onde d'énergie la plus petite, calculée **sans aucun zéro**. Pour être la plus discrète possible, elle doit se taire à chaque zéro de ζ, et ses creux tombent dessus.
+**Les zéros, eux, ne sont pas des harmoniques** au sens strict : 14,13 ; 21,02 ; 25,01 ; 30,42… ne sont pas des multiples d'une fondamentale, et leurs écarts ne sont pas réguliers. Ils se repoussent un peu comme les niveaux d'énergie d'un noyau lourd (conjecture de Montgomery, 1973, confortée par les calculs d'Odlyzko). « Les notes » est une image, pas un instrument de musique.
 
-![La meilleure onde construite avec 2, 3 et 4 : ses creux tombent sur les zéros de ζ](weil_zeros.png)
+![Pour chaque entier n de 2 à 40, la valeur exacte et la somme des 150 premiers zéros](harmoniques.png)
 
-En haute précision (150 chiffres, 60 ondes de base), on va beaucoup plus loin :
+*En gris foncé : la valeur exacte Λ(n), égale à ln p si n est une puissance pᵏ d'un premier p, et à 0 sinon. En vert : la somme des 150 premiers zéros, −(2π/T)·√n·Σ cos(γ ln n), sans rien ajuster (formule de Landau–Gonek). Un point violet marque les nombres premiers ; 2², 2³, 2⁴… (les « harmoniques » de 2) ont la même hauteur que 2.*
 
-![Décimales justes retrouvées et plus petite énergie, selon les nombres premiers utilisés](haute_precision.png)
+**Qu'en faire ?**
 
-| x | Premiers et puissances utilisés | Plus petite énergie | Décimales justes de γ₁ | de γ₁₀ |
-|---|---|---|---|---|
-| 2 | aucun | 5·10⁻⁴ | 0 | 0 |
-| 3 | 2 | 3·10⁻⁸ | 4 | 0 |
-| 5 | 2, 3, 4 | 8·10⁻¹⁸ | 13 | 1 |
-| 7 | 2, 3, 4, 5 | 8·10⁻²⁸ | 23 | 8 |
-| 11 | jusqu'à 9 | 2·10⁻⁴⁸ | 44 | 26 |
-| 13 | jusqu'à 11 | 9·10⁻⁵⁹ | 54 | 36 |
-| 17 | jusqu'à 16 | 1·10⁻⁷³ | 69 | 49 |
-| 19 | jusqu'à 17 | 3·10⁻⁷⁹ | 74 | 54 |
-| 23 | jusqu'à 19 | 8·10⁻⁸⁸ | 83 | 62 |
-| 29 | jusqu'à 27 | 5·10⁻⁹⁷ | 92 | 70 |
-| 31 | jusqu'à 29 | 2·10⁻⁹⁹ | 94 | 72 |
+- **Reconstruire.** Additionner 150 zéros suffit à faire ressortir les premiers et leurs puissances. Jusqu'à n = 30, un simple seuil à 0,3 retrouve les 29 entiers sans erreur (les puissances de premiers sortent entre 0,56 et 3,09, les autres restent entre −0,83 et +0,06). Ensuite ça se dégrade : 32 = 2⁵ est déjà raté. Il faudrait plus de zéros, plus on regarde loin (règle empirique, pas un théorème : des zéros jusqu'à quelques fois 2π·n).
+- **Tester l'hypothèse.** Un zéro hors de la droite serait un harmonique « trop fort », qui finirait par couvrir les autres (section 2 de la page).
+- **Les écouter.** C'est le bouton « Écouter » de la page. Le son est la somme des ondes, divisée par √x et parcourue en accéléré (ln x avance de 20π par seconde) : les petits nombres premiers passent dans le premier vingtième de seconde, ensuite on n'entend plus que les zéros. Leurs fréquences ne sont pas des multiples d'une même note : c'est comme pour une cloche, pas comme pour une corde.
 
-À chaque fois, la matrice de l'énergie est définie positive (factorisation de Cholesky) : la positivité de Weil tient pour ces ondes. Avec les nombres premiers jusqu'à 29, le premier zéro sort avec 94 décimales justes, γ₁ = 14,134725141734693790457251983562470270784257115699… Pour x = 11, notre plus petite énergie est du même ordre que celle mesurée par Connes et Consani (2,4·10⁻⁴⁸).
+## Ce que ça ne montre pas
 
-Ce n'est pas une découverte : le phénomène a été mis au jour par Alain Connes et Caterina Consani en 2021, et nous le refaisons en petit.
+- Aucune preuve. Les zéros calculés à ce jour sont tous sur la droite, mais ce n'est pas une démonstration : il y en a une infinité.
+- Seuls les 150 premiers zéros sont utilisés. C'est assez pour des figures parlantes, pas pour de grands nombres.
+- Dans la page, le « monde orange » (un zéro poussé hors de la droite) est un jeu : un vrai zéro hors de la droite viendrait avec un jumeau symétrique, que la page laisse de côté.
 
-## Pourquoi on ne peut pas aller plus loin
+## Données et vérification
 
-1. **L'infini.** Le critère de Weil exige la positivité pour des ondes aussi longues qu'on veut, donc pour x aussi grand qu'on veut. Or la marge fond à toute vitesse : 2·10⁻⁹⁹ dès x = 31, et environ 10⁻⁵³⁵ vers x = 100 selon l'estimation de Groskin. Aucun calcul n'atteint l'infini : il faut une *raison* pour laquelle c'est positif.
-2. **Le cercle vicieux.** Dans l'énergie, chaque nombre premier n pèse 1/√n. C'est exactement l'échelle √x où se jouent les irrégularités des premiers, celle que l'hypothèse contrôle. Pour démontrer la positivité, il faudrait donc déjà savoir ce que l'hypothèse affirme.
-3. **La symétrie ne suffit pas.** Davenport et Heilbronn ont construit une fonction qui a la même symétrie miroir que ζ, mais des zéros hors de la droite. Une preuve doit donc utiliser ce qui rend ζ unique : son produit d'Euler, c'est-à-dire les nombres premiers comme briques de base. Personne ne sait transformer ce produit en positivité.
+- `index.html` contient tout : mise en page, calculs (JavaScript, sans bibliothèque), son (Web Audio) et les 150 zéros. Seule dépendance externe : les polices (Google Fonts).
+- `zeros150.json` : les 150 premiers zéros γ (9 décimales), de γ₁ = 14,134725… à γ₁₅₀ = 318,853104…. Calculés par changements de signe de la fonction Z de Hardy, puis bissection. Avec ces 9 décimales, |ζ(½ + iγ)| reste sous 3·10⁻⁹ pour chacun, et on compte 150 changements de signe entre 10 et 319, pour ≈ 149,5 attendus par la formule de Riemann–von Mangoldt.
+- Pour retrouver les pics de la deuxième figure, en dix lignes :
 
-S'y ajoute un piège : il n'y a aucune marge. Vers la hauteur 7005, deux zéros consécutifs ne sont séparés que de 0,038 (la « paire de Lehmer », 7005,06266… et 7005,10056…). Rodgers et Tao ont montré que si l'hypothèse est vraie, elle l'est de justesse. Les méthodes par approximation, qui ont besoin d'un peu de jeu, n'ont donc aucune chance : il faut une raison exacte.
+```python
+import json, math
 
-## Cristal ou quasi-cristal
+z = json.load(open("zeros150.json"))
+T = z[-1]
 
-![Un seul nombre premier donne une onde périodique ; une courbe modulo 5 a des zéros rangés en cristal ; les zéros de ζ forment un quasi-cristal](cristal_quasicristal.png)
+def somme(n):  # somme des 150 ondes, formule de Landau–Gonek
+    return -(2 * math.pi / T) * math.sqrt(n) * sum(math.cos(g * math.log(n)) for g in z)
 
-- **A. Un seul nombre premier, c'est un cristal.** Le long de la droite critique, le facteur du seul nombre 2 se répète avec une période parfaite, 2π/ln 2 ≈ 9,06. Il oscille entre 2 − √2 et 2 + √2, et le rapport entre les deux vaut exactement (1 + √2)².
-- **B et C. Dans le monde où l'hypothèse est démontrée, les zéros forment un cristal.** Pour la courbe modulo 5, un motif de deux zéros se répète tous les 2π/ln 5 ≈ 3,90. Sa « diffraction » donne des taches régulières aux multiples de ln 5, comme un réseau cristallin. La hauteur de chaque tache est fixée par le nombre de points de la courbe dans les corps à 5, 25 et 125 éléments.
-- **D. Les zéros de ζ forment un quasi-cristal.** Ils ne se répètent jamais, mais leur diffraction est faite de taches nettes : une en ln p pour chaque nombre premier p, de hauteur ln p, et d'autres pour ses puissances. C'est exactement la définition d'un quasi-cristal que Freeman Dyson a proposée en 2009 : ordonné sans être périodique, comme les cristaux de Shechtman (prix Nobel de chimie 2011).
+for n in range(2, 11):
+    print(n, round(somme(n), 2))
+# 2 0.65 · 3 1.07 · 4 0.68 · 5 1.59 · 6 -0.09 · 7 1.87 · 8 0.58 · 9 1.01 · 10 -0.1
+# les pics sont sur 2, 3, 4, 5, 7, 8, 9 (premiers et puissances) ; 6 et 10 restent à 0
+```
 
-Ce que ça éclaire : pour une courbe donnée, tout se répète, donc vérifier une seule « maille » de quelques zéros suffit. Le tour de force de Weil a été de le démontrer pour toutes les courbes à la fois. Pour ζ, les fréquences ln 2, ln 3, ln 5… sont incommensurables : il n'y a pas de maille à vérifier. C'est le mur de l'infini, vu par un cristallographe.
+## Où en est la recherche ? (novembre 2026)
 
-Dyson proposait justement de classer tous les quasi-cristaux à une dimension, en espérant y retrouver les zéros de ζ, ce qui démontrerait l'hypothèse. Il jugeait lui-même ce programme très difficile. Ces « quasi-cristaux de Fourier » sont aujourd'hui un sujet de recherche actif. Le carnet refait cette figure (bonus 2).
+Le dossier [`exploration/`](exploration/) résume les avancées de 2026, explique pourquoi l'hypothèse résiste, et propose une expérience en haute précision à refaire dans Colab : à partir des seuls nombres premiers, retrouver les zéros de ζ avec des dizaines de décimales.
 
-## π, le nombre d'or et 1 + √2
+Nouveau : peut-on raisonner par récurrence ? Et une page pour refaire soi-même, dans le navigateur, le calcul du [contre-exemple de Pólya](https://geremiaa.github.io/Musique-Des-Premiers/exploration/polya.html).
 
-![π sort du produit sur tous les premiers ; le nombre d'or est une somme de Gauss ; les sommes de Gauss restent à l'échelle √p](pi_or_argent.png)
+## Pour aller plus loin
 
-- **π sort de tous les nombres premiers à la fois.** Le produit de (1 − 1/p²) sur tous les premiers vaut exactement 6/π² ≈ 0,6079. C'est aussi la probabilité que deux entiers pris au hasard n'aient aucun diviseur commun ; jusqu'à un million, on trouve 0,607927 par les deux calculs. π est aussi dans la symétrie miroir de ζ, où il joue le rôle d'un « nombre premier à l'infini ». Dans l'expérience de Weil, avec x = 2, ce premier à l'infini agit seul et donne déjà γ₁ à 0,2 près. Enfin, les zéros se comptent en demi-tours d'une phase qui tourne.
-- **Le nombre d'or et 1 + √2 sont des nombres de polygones.** φ = 2 cos(π/5) vient du pentagone, 1 + √2 = 1/tan(π/8) de l'octogone, 2 + √3 = 1/tan(π/12) du dodécagone. Ils apparaissent dans ζ par les facteurs des premiers 5, 2 et 3 : sur la droite critique, le rapport entre leurs valeurs extrêmes vaut φ², (1 + √2)² et 2 + √3.
-- **Le lien le plus profond : √5 est une « somme de Gauss ».** En additionnant les sommets du pentagone dans l'ordre a² modulo 5, on passe par φ à mi-chemin et on arrive pile à √5. Pour chaque nombre premier p, ces sommes ont une taille exactement √p (Gauss ; vérifié ici pour les 429 premiers impairs sous 3 000), et les sommes cubiques restent sous 2√p (Weil). C'est l'hypothèse de Riemann dans le monde des nombres modulo p, déjà démontrée.
-
-Pour ζ elle-même, on ne connaît aucun lien entre ces nombres et la position des zéros : π vient des rotations et du premier à l'infini, et le nombre d'or et 1 + √2 apparaissent parce que √5 et √2 y sont. Le carnet refait ces calculs (bonus 3).
-
-## Le photon : aucune onde ne vieillit
-
-![Sur la droite, l'onde d'un zéro divisée par √x tourne sur un cercle ; hors de la droite, elle part en spirale](photon_ondes.png)
-
-Pour un photon, le temps ne s'écoule pas : son « temps propre » reste nul. On retrouve une image proche avec les zéros. Divisée par √x, la croissance commune à toutes les ondes, l'onde d'un zéro situé sur la droite critique ne grandit ni ne s'éteint : elle ne fait que tourner, sur un cercle. Si un zéro quittait la droite, il viendrait avec un jumeau symétrique : l'onde de l'un enflerait comme x^(σ − ½), celle de l'autre s'éteindrait.
-
-L'hypothèse de Riemann revient donc à dire qu'aucune onde ne vieillit. C'est le langage de l'idée de Hilbert et Pólya. En physique quantique, un état d'énergie réelle évolue par pure rotation et reste stable, alors qu'un état d'énergie complexe se désintègre, comme une particule instable. Trouver un système dont les zéros seraient les énergies, toutes réelles, démontrerait l'hypothèse.
-
-Berry et Keating ont remarqué que le « temps » de ces ondes, ln x, est celui des changements d'échelle, engendrés par le hamiltonien classique H = xp. Les opérateurs de Connes, Consani et Moscovici sont construits pour que leurs notes ne vieillissent pas. Personne n'a encore trouvé le bon. Le carnet refait cette figure (bonus 4).
-
-## Ce qu'il faudrait ajouter
-
-- **Une géométrie** qui écrive l'énergie comme une somme de carrés, comme la surface « courbe × courbe » le fait pour les courbes modulo p. C'est le rêve du « corps à un élément » et le programme d'Alain Connes.
-- **Un instrument** : un opérateur dont les fréquences propres seraient exactement les γ, ce qui les mettrait forcément sur la droite (idée de Hilbert et Pólya). Connes, Consani et Moscovici (2025) en construisent des approximations à partir des seuls nombres premiers ≤ x. Avec les premiers jusqu'à 13, ils retrouvent déjà le premier zéro à 10⁻⁵⁵ près. Ils écrivent qu'une preuve rigoureuse que leur construction converge établirait l'hypothèse.
-- **Une idée analytique nouvelle.** 2026 rappelle que les murs tombent parfois : si la « quasi-Riemann » est confirmée, une barrière vieille de plus d'un siècle est tombée.
-
-## La carte des pistes
-
-| Piste | L'idée | Où on en est | Ce qui bloque |
-|---|---|---|---|
-| Compter les zéros sur la droite | Une part toujours plus grande des notes est « accordée » | Plus des 2/3 (2026) | Une proportion, même 100 %, ne suffit pas |
-| Rétrécir la bande | Interdire aux zéros de trop s'éloigner | Bande 1/12–11/12 annoncée (2026) ; Guth et Maynard (2024) : les zéros hors de la droite, s'il y en a, sont plus rares qu'on ne savait le montrer | Réduire la bande à la droite elle-même |
-| Vérifier par calcul | Contrôler les notes une à une | Tous les zéros jusqu'à la hauteur 3·10¹² sont sur la droite, soit plus de 10 000 milliards | Il en restera toujours une infinité |
-| La « chaleur » (de Bruijn–Newman) | On fait diffuser la fonction comme de la chaleur ; ses zéros deviennent réels à partir d'un instant Λ | 0 ≤ Λ ≤ 0,2 ; l'hypothèse revient à Λ = 0 | Faire descendre 0,2 jusqu'à 0 |
-| La positivité (Weil) | Une énergie toujours positive | Équivalent exact ; vérifiée ici jusqu'à x = 31 | Il faut toutes les ondes, x → ∞ |
-| L'instrument caché (Hilbert–Pólya, Connes) | Les zéros comme fréquences propres | Écarts entre zéros semblables aux niveaux d'énergie des noyaux lourds (Montgomery, Odlyzko) | Personne n'a trouvé l'opérateur |
-| Les quasi-cristaux (Dyson) | Des zéros ordonnés sans être périodiques, dont la « diffraction » tombe sur les ln p | Programme proposé en 2009 ; « quasi-cristaux de Fourier » étudiés activement | Classer tous les quasi-cristaux à une dimension |
-| Les courbes modulo p (Hasse, Weil, Deligne) | Le même énoncé dans un autre monde | **Démontré** | Aucun équivalent connu pour les entiers |
-
-## Projets pour continuer
-
-1. **Pousser Weil plus loin** avec le carnet : augmenter la précision, le nombre d'ondes et x, essayer d'autres familles d'ondes.
-2. **Voir pourquoi la symétrie ne suffit pas** : calculer la fonction de Davenport–Heilbronn, traquer ses zéros hors de la droite, et regarder son « énergie » devenir négative.
-3. **Là où l'hypothèse a failli tomber** : zoomer sur la paire de Lehmer, à la hauteur 7005.
-4. **Lire** : *La Symphonie des nombres premiers* de Marcus du Sautoy, et *Prime Numbers and the Riemann Hypothesis* de Barry Mazur et William Stein (en anglais).
-
-## Sources
-
-- *Quanta Magazine*, 19 octobre 2026 : [l'hypothèse de quasi-Riemann](https://quantamagazine.org/ai-proved-the-quasi-riemann-hypothesis-what-happens-now-20261019)
-- L. Alpöge, R. Furman : [arXiv 2608.13637](https://arxiv.org/pdf/2608.13637) ; Y. Lamzouri : [arXiv 2609.02882](https://arxiv.org/pdf/2609.02882)
-- A. Connes, C. Consani : [arXiv 2106.01715](https://arxiv.org/abs/2106.01715) ; A. Connes, C. Consani, H. Moscovici : [arXiv 2511.22755](https://arxiv.org/abs/2511.22755)
-- A. Groskin : [arXiv 2605.20224](https://arxiv.org/abs/2605.20224)
-- D. Platt, T. Trudgian : [arXiv 2004.09765](https://arxiv.org/abs/2004.09765) ; L. Guth, J. Maynard : [Annals of Mathematics](https://annals.math.princeton.edu/2026/203-2/p06)
-- F. Dyson, *Birds and Frogs* (2009) : [les zéros comme quasi-cristal](https://empslocal.ex.ac.uk/people/staff/mrwatkin/zeta/dyson-quasicrystal.htm)
-- [Paire de Lehmer](https://en.wikipedia.org/wiki/Lehmer_pair) ; [fonction de Davenport–Heilbronn](https://arxiv.org/pdf/1602.06328)
+- Bernhard Riemann, *Über die Anzahl der Primzahlen unter einer gegebenen Grösse* (1859) ; Hans von Mangoldt (1895) pour la formule explicite de ψ.
+- La formule de Landau (1911), rendue uniforme en x par Gonek : [MathWorld, « Landau's formula »](https://mathworld.wolfram.com/LandausFormula.html).
+- Polices : Newsreader et IBM Plex Mono (Google Fonts, licence OFL) ; figures : Inter.
 
 Réalisé avec l'aide de Claude (Anthropic).
