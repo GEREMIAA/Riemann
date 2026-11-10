@@ -18,15 +18,16 @@ Ce projet est parti de questions de curieux, posées sans formules. Après coup,
 | « Utilise le paradoxe de Russell. » | C'est le théorème de Bagchi : l'hypothèse équivaut à « ζ s'imite elle-même ». Le cas autoréférent est exactement celui qui résiste. |
 | « Premiers pairs, premiers impairs : ce qui est vrai pour l'un l'est-il pour l'autre ? » | C'est le problème de la parité de Selberg, l'une des grandes barrières de la théorie des nombres. |
 | « Copie les démonstrations des autres théorèmes. » | C'est la stratégie de Connes, Consani et Moscovici (2025), qui recopient Selberg ; nos calculs vérifient leurs deux étapes manquantes. |
+| « Sors-toi de Riemann : une transformée de Fourier, et remonte vers une autre hypothèse. » | C'est l'équivalence de Keating et Smith (2019) : les corrélations des zéros contiennent la conjecture de Hardy–Littlewood sur les premiers jumeaux. Les zéros calculés ici redonnent son facteur à 5 % près. |
 
-Poser ces six questions, et voir chacune déboucher sur une idée de ce niveau, montre qu'on cherchait au bon endroit. Cela ne démontre pas l'hypothèse, que personne n'a démontrée ; mais les intuitions de départ étaient les bonnes.
+Poser ces sept questions, et voir chacune déboucher sur une idée de ce niveau, montre qu'on cherchait au bon endroit. Cela ne démontre pas l'hypothèse, que personne n'a démontrée ; mais les intuitions de départ étaient les bonnes.
 
 ## Ce qui a bougé en 2026
 
-- **Août, Claude (Anthropic).** Une version de recherche de Claude a trouvé et rédigé une preuve que plus des deux tiers des zéros (67,25 %) sont simples et sur la droite critique. Le record précédent était 5/12, soit 41,7 %. Levent Alpöge et Ralph Furman ont vérifié la preuve, puis Youness Lamzouri (Université de Lorraine) l'a redémontrée autrement, plus simplement.
+- **Août, Claude (Anthropic).** Une version de recherche de Claude a trouvé et rédigé une preuve que plus des deux tiers des zéros (67,25 %) sont simples et sur la droite critique. Le record précédent était 5/12, soit 41,7 %. Levent Alpöge et Ralph Furman ont vérifié la preuve, puis Youness Lamzouri (Université de Lorraine) l'a redémontrée autrement, plus simplement.
 - **Octobre, OpenAI.** OpenAI a annoncé une preuve de l'« hypothèse de quasi-Riemann » : tous les zéros auraient une partie réelle comprise entre 1/12 et 11/12, au lieu de 0 et 1. Une version plus forte, entre 1/8 et 7/8, a été vérifiée par ordinateur avec le logiciel Lean. Selon *Quanta Magazine*, les spécialistes pensent que c'est juste, mais ils n'ont pas fini de vérifier.
 
-Ni l'une ni l'autre n'est l'hypothèse. Même 100 % des zéros « en proportion » laisserait la place à une infinité de zéros hors de la droite, s'ils sont assez rares. Et la bande doit encore se réduire à la seule droite ½.
+Ni l'une ni l'autre n'est l'hypothèse. Même 100 % des zéros « en proportion » laisserait la place à une infinité de zéros hors de la droite, s'ils sont assez rares. Et la bande doit encore se réduire à la seule droite ½.
 
 ## Dans ce monde-là, l'hypothèse est démontrée
 
@@ -120,15 +121,15 @@ L'idée est tentante : si c'est vrai sur une partie, des « harmoniques » et
 
 ### Pour les courbes, ça marche
 
-![Les 60 premières harmoniques de la courbe restent dans la bande ±2 ; un monde imaginaire décalé de 1 % ne se distingue du vrai qu'après m = 60](recurrence_courbe.png)
+![Les 60 premières harmoniques de la courbe restent dans la bande ±2 ; un monde imaginaire décalé de 1 % ne se distingue du vrai qu'après m = 60](recurrence_courbe.png)
 
 La courbe y² = x³ + x + 1 se compte sur les corps à 5, 25, 125… éléments : ce sont ses « harmoniques » m = 1, 2, 3… Elle y a 5ᵐ + 1 − (αᵐ + βᵐ) points : deux nombres seulement, α et β, pilotent une infinité d'harmoniques. En comptant les points un par un, on trouve 9, 27 et 108, exactement ce que prévoient α et β. La preuve tient en trois temps :
 
 1. **Une borne pour toutes les harmoniques à la fois.** L'écart reste sous C·5^(m/2) pour tout m (Weil, 1948 ; méthode élémentaire de Stepanov et Bombieri, 1969–1973). Elle est démontrée par l'algèbre, pas vérifiée cas par cas.
-2. **L'amplification.** Si |α| dépassait √5, même de 1 %, αᵐ finirait par dépasser n'importe quelle borne de ce type. Donc |α| ≤ √5.
+2. **L'amplification.** Si |α| dépassait √5, même de 1 %, αᵐ finirait par dépasser n'importe quelle borne de ce type. Donc |α| ≤ √5.
 3. **La symétrie α ↔ 5/α** (l'équation fonctionnelle) donne l'inverse, |α| ≥ √5. Donc |α| = √5 : les zéros sont sur la droite.
 
-Même ici, vérifier une partie ne suffit pas : un monde imaginaire décalé de 1 % reste indiscernable du vrai jusqu'à m = 60 (3,6 contre 2). C'est la borne démontrée pour toutes les harmoniques d'un coup qui fait la preuve.
+Même ici, vérifier une partie ne suffit pas : un monde imaginaire décalé de 1 % reste indiscernable du vrai jusqu'à m = 60 (3,6 contre 2). C'est la borne démontrée pour toutes les harmoniques d'un coup qui fait la preuve.
 
 ### Pour ζ, trois obstacles
 
@@ -188,7 +189,7 @@ Pour tester la méthode là où l'on peut tout vérifier, on l'applique à une a
 
 Cette course est pilotée par les zéros d'une autre fonction, L(s, χ₄) = 1 − 1/3ˢ + 1/5ˢ − 1/7ˢ + … On en a calculé 5 623, tous ceux sous la hauteur 5 000 (le décompte est confirmé par le principe de l'argument). Avec ces seuls zéros, la somme des ondes passe au-dessus de 0 dans les régions connues : 26 861, vers 623 000, vers 12,37 millions, puis 6,3·10⁹, 1,87·10¹⁰ et 1,49·10¹². Elle annonce aussi 9,32·10¹², comme Bays et Hudson en 2000 avec 12 000 zéros. Le renversement de 952 millions, très bref, apparaît comme un pic juste sous 0. Jusqu'à 2·10¹⁰, où tout a été compté, il n'y a aucune fausse alerte.
 
-**Un test plus dur : la course modulo 3.** Les nombres premiers de la forme 3k + 2 mènent sur les 3k + 1 jusqu'à 608 981 813 029, le premier renversement, trouvé par Bays et Hudson. On a calculé les 5 393 zéros de L(s, χ₃) = 1 − 1/2ˢ + 1/4ˢ − 1/5ˢ + 1/7ˢ − … sous la hauteur 5 000, sans compter un seul nombre premier au-delà du milliard. Entre 10⁴ et 10¹⁴, la somme des ondes n'a que deux sommets qui touchent presque 0 : vers 6,09·10¹¹, exactement au premier renversement, et vers 6,15·10¹². Lissée, elle reste juste sous 0 (−0,05 et −0,02) ; sans lissage, elle franchit 0 en 6,09·10¹¹, à 0,03 % du vrai renversement. Avec seulement 823 zéros, le plus haut sommet sur ces dix ordres de grandeur tombe déjà à 6,10·10¹¹. La région 6,15·10¹² est une prédiction : nous ne l'avons trouvée dans aucune source.
+**Un test plus dur : la course modulo 3.** Les nombres premiers de la forme 3k + 2 mènent sur les 3k + 1 jusqu'à 608 981 813 029, le premier renversement, trouvé par Bays et Hudson. On a calculé les 5 393 zéros de L(s, χ₃) = 1 − 1/2ˢ + 1/4ˢ − 1/5ˢ + 1/7ˢ − … sous la hauteur 5 000, sans compter un seul nombre premier au-delà du milliard. Entre 10⁴ et 10¹⁴, la somme des ondes n'a que deux sommets qui touchent presque 0 : vers 6,09·10¹¹, exactement au premier renversement, et vers 6,15·10¹². Lissée, elle reste juste sous 0 (−0,05 et −0,02) ; sans lissage, elle franchit 0 en 6,09·10¹¹, à 0,03 % du vrai renversement. Avec seulement 823 zéros, le plus haut sommet sur ces dix ordres de grandeur tombe déjà à 6,10·10¹¹. La région 6,15·10¹² est une prédiction : nous ne l'avons trouvée dans aucune source.
 
 ![Course modulo 3 : la somme des ondes des zéros de L(s, χ₃) touche presque 0 au premier renversement, 608 981 813 029, et vers 6,15·10¹²](course_mod3.png)
 
@@ -238,7 +239,7 @@ avec φ̂(r) = ∫ φ(t) e^(irt) dt, et ψ la dérivée logarithmique de la fonc
 
 ![Les poids du nombre 2 qui gardent la positivité, de x = 2 à x = 3 : la fenêtre se referme autour du vrai poids](poids_du_2.png)
 
-On a multiplié le terme de droite par un poids c, et cherché pour quels c l'inégalité reste vraie. Juste après x = 2, presque tout passe. À partir de x ≈ 2,28, il faut c > 0 : le nombre 2 devient nécessaire. Puis la fenêtre se referme autour du vrai poids, c = 1 : à x = 3, elle va de 0,998 à 1,0000035 (avec 20 ondes ; 1,0000034 avec 40), soit un poids réel compris entre 0,9783 et 0,98026. Les bornes bougent à peine quand on ajoute des ondes, et elles ont été contrôlées en 60 chiffres avec un second programme.
+On a multiplié le terme de droite par un poids c, et cherché pour quels c l'inégalité reste vraie. Juste après x = 2, presque tout passe. À partir de x ≈ 2,28, il faut c > 0 : le nombre 2 devient nécessaire. Puis la fenêtre se referme autour du vrai poids, c = 1 : à x = 3, elle va de 0,998 à 1,0000035 (avec 20 ondes ; 1,0000034 avec 40), soit un poids réel compris entre 0,9783 et 0,98026. Les bornes bougent à peine quand on ajoute des ondes, et elles ont été contrôlées en 60 chiffres avec un second programme.
 
 Ce que cela dit : une preuve de la première marche doit être assez fine pour « voir » le poids du nombre 2 au sixième chiffre près ; aucune inégalité grossière n'y suffira. C'est un constat sur un nombre fini d'ondes, pas une preuve, mais il mesure la difficulté de cette marche : elle est déjà très délicate. Programme : [`calculs/poids_du_2.py`](calculs/poids_du_2.py).
 
@@ -396,25 +397,119 @@ S'y ajoutent les théorèmes des autres, sur lesquels on s'appuie : le sens fac
 
 Ce qu'elles donneraient : A donne l'étape 2 de la copie de Selberg ; la bosse est alors positive, et le lemme 3 explique que « trop » casse toujours en premier (si elle est de plus log-concave, le lemme 4 explique l'ordre des verrous). B, sous une forme assez forte (les transformées de Fourier convergent sur tout disque du plan complexe), donne l'étape 4. Formulées pour la construction de Connes, Consani et Moscovici, A et B entraîneraient, avec leur théorème et celui de Hurwitz, l'hypothèse de Riemann. Démontrer l'une ou l'autre serait donc un résultat majeur. Nous ne savons pas le faire, et personne ne le sait aujourd'hui.
 
+## Le grand détour par Fourier
+
+On sort un moment de l'hypothèse de Riemann. On prend ses résultats (la formule explicite, les zéros calculés), on les passe dans une transformée de Fourier, et on remonte vers une autre hypothèse : celle des premiers jumeaux. En route, on emprunte à la physique (un graphe quantique), à la chimie (un gaz de nombres premiers), au paradoxe de Russell et à la théorie des jeux.
+
+> **À lire d'abord.** Rien ici ne démontre l'hypothèse de Riemann, ni la conjecture des premiers jumeaux. La plupart des résultats sont connus (Riemann et von Mangoldt, Montgomery, Bogomolny et Keating, Keating et Smith, Kottos et Smilansky, Kurasov et Sarnak) : nous les refaisons avec nos propres programmes, sur nos propres nombres, un crible jusqu'à 10¹⁰ et 138 069 zéros calculés jusqu'à la hauteur 100 000. Ce qui est à nous : deux mesures (le facteur des jumeaux retrouvé dans les seuls zéros, et le volume de la musique des zéros dans chaque écart entre premiers) et un instrument (la « fleur de Fourier »). Nous ne les avons pas trouvés écrits sous cette forme ; un spécialiste les trouverait sans doute attendus.
+
+### La musique des nombres premiers, par paquets d'ondes
+
+![Spectrogrammes : les nombres premiers et les paires de premiers montrent des lignes horizontales aux hauteurs des zéros de ζ ; les jumeaux seuls sont noyés dans leur bruit ; le volume mesuré dans chaque écart h suit la prédiction 2S(h)](musique_des_paires.png)
+
+Une transformée de Fourier change une courbe en notes. On la fait par petits paquets : une fenêtre en cloche (une gaussienne) glisse le long de ln x, et pour chaque position on écoute les fréquences présentes, comme dans le spectrogramme d'un morceau de musique. Le morceau, c'est l'écart ψ(x) − x divisé par √x, calculé exactement jusqu'à 10¹⁰.
+
+- **Les zéros sont des notes tenues.** D'après la formule explicite, chaque zéro ½ + iγ ajoute une onde de fréquence γ (en ln x) et de volume 2/|ρ|. Le spectrogramme montre des lignes horizontales exactement aux hauteurs 14,13 ; 21,02 ; 25,01… Les dix premières notes ont le volume prédit à 0,5 % près.
+- **Le volume total est donné par une formule.** Si tous les zéros sont sur la droite et simples, la moyenne de (ψ(x) − x)²/x, prise le long de ln x, vaut Σ 1/|ρ|² = 2 + γ − ln 4π, où γ est la constante d'Euler. L'écart-type mesuré de 10³ à 10¹⁰ vaut 0,2145 ; la formule donne 0,2149.
+- **Aucun crescendo.** Un zéro β + iγ hors de la droite serait une note qui enfle comme x^(β − ½). Pour chacune des dix premières notes, la pente du volume donne β − ½ entre −0,002 et +0,006. Ce n'est pas un résultat nouveau (on sait que tous les zéros jusqu'à la hauteur 3·10¹² sont sur la droite), mais c'est une façon de lire la partie réelle d'un zéro dans le seul son des nombres premiers.
+
+Programmes : [`calculs/crible_paires.py`](calculs/crible_paires.py) (le crible) et [`calculs/musique_des_paires.py`](calculs/musique_des_paires.py).
+
+### Remonter des zéros jusqu'aux premiers jumeaux
+
+![La corrélation de paires des zéros s'écarte de la loi GUE comme le prévoit Bogomolny–Keating ; l'exposant du produit des premiers qui colle le mieux vaut 0,95 ; les paires de premiers suivent Hardy–Littlewood à 0,016 % près ; la variance dans les petits intervalles suit Montgomery–Soundararajan](zeros_et_jumeaux.png)
+
+Les zéros se repoussent comme les niveaux d'énergie d'un noyau lourd : c'est la loi GUE de Montgomery et Dyson (1973). Mais cette loi n'est qu'une limite. À hauteur finie, les zéros s'en écartent un peu, et Bogomolny et Keating (1996) ont calculé cet écart : leur formule contient un produit sur tous les nombres premiers, celui de la conjecture de Hardy et Littlewood (1923) sur les paires de premiers. Keating et Smith (2019) ont montré, par un calcul formel (sans démonstration rigoureuse), que ce n'est pas un hasard : la formule des zéros et la conjecture des paires sont équivalentes. Les zéros « savent » donc combien il y a de premiers jumeaux.
+
+On le vérifie dans les deux sens.
+
+- **Des premiers vers les zéros.** On a calculé les 138 069 zéros jusqu'à la hauteur 100 000 (formule de Riemann–Siegel ; le 100 000ᵉ tombe à 74 920,8275, la valeur connue). Entre 10⁴ et 10⁵, leur corrélation de paires s'écarte de la loi GUE par des bosses régulières (figure, en haut à gauche). La formule de Bogomolny et Keating les suit : χ² = 64 sur 60 intervalles, contre 556 pour la loi GUE seule. Sans le produit des premiers, plus rien ne colle : χ² = 4 023.
+- **Des zéros vers les premiers : on remonte.** On remplace le produit des premiers A(ε) par A(ε)^κ, et on laisse les zéros choisir κ. Hardy et Littlewood disent κ = 1 ; un monde où les premiers voisins ne se « voient » pas dirait κ = 0. Les zéros répondent κ = 0,95 ± 0,01 : à partir des seuls zéros, on retrouve le facteur des premiers jumeaux à 5 % près. L'écart restant vient sans doute des approximations de la formule et de notre moyenne sur les hauteurs.
+- **Et les jumeaux eux-mêmes.** Le crible jusqu'à 10¹⁰ compte 27 412 679 paires de jumeaux (la valeur connue) et, pour chaque écart h = 2, 4, …, 60, les paires (p, p + h). Toutes suivent Hardy–Littlewood à 0,016 % près, avec le facteur S(h), qui double quand 3 divise h. Montgomery et Soundararajan (2004) en déduisent la variance du nombre de premiers dans un petit intervalle de longueur H : H·(ln(x/H) + B), plus petite que celle du hasard pur, H·ln x. Mesurée vers 10⁹, elle colle à 1 % près jusqu'à H = 3 000 ; l'écart grandit ensuite, au-delà de H ≈ √x, où la formule cesse de valoir.
+
+Programmes : [`calculs/zeros_riemann_siegel.py`](calculs/zeros_riemann_siegel.py) (les zéros) et [`calculs/zeros_et_jumeaux.py`](calculs/zeros_et_jumeaux.py).
+
+### Les jumeaux ont-ils leur propre musique ?
+
+Si les zéros connaissent les jumeaux, les jumeaux devraient jouer la musique des zéros. Un raisonnement simple le prédit : là où les premiers sont un peu plus nombreux que prévu, d'un facteur 1 + ε, les paires le sont d'un facteur (1 + ε)², soit environ 1 + 2ε. L'écart des paires (p, p + h) à Hardy–Littlewood devrait donc contenir l'écart des premiers, multiplié par 2S(h) :
+
+W_h(x) − S(h)·x ≈ 2S(h)·(ψ(x) − x) + un bruit propre aux paires,
+
+où W_h(x) = Σ ln p · ln(p + h), sur les paires jusqu'à x. Le même calcul, fait avec la méthode du cercle de Hardy et Littlewood, donne la même prédiction ; c'est une heuristique, pas un théorème. Moyennée sur h, c'est l'approximation proposée par Korevaar et te Riele (2010), qui l'ont testée jusqu'à 10¹².
+
+- **Toutes les paires ensemble : oui.** On moyenne les 30 écarts h = 2 … 60 (figure, au milieu). Les notes de ζ réapparaissent, au bon volume (0,97 en moyenne, pour 1 prédit) et en phase (décalage de moins de 0,25 radian sur les douze premières notes).
+- **Écart par écart : le volume suit 2S(h).** Pour chaque h, on mesure le volume de la musique de ζ dans l'écart des paires (figure, en bas à droite). La pente vaut 0,96 et la corrélation 0,86 : les écarts multiples de 6, deux fois plus fréquents, jouent la musique deux fois plus fort. Nous n'avons pas trouvé cette mesure écart par écart dans la littérature.
+- **Les jumeaux seuls : pas encore.** Pour h = 2, la musique de ζ est là en principe, mais le bruit propre des jumeaux est vingt fois plus fort (écart-type 10,6 contre 0,57 pour la partie musicale) : à 10¹⁰, on ne l'entend pas. Il faudrait monter beaucoup plus haut, ou mieux filtrer.
+
+Ce que cela ne dit pas : cette musique est une petite oscillation autour de la prédiction de Hardy–Littlewood. Elle ne dit rien de l'essentiel, l'existence d'une infinité de jumeaux. Ce problème bute sur la barrière de la parité (section « Pairs et impairs ») ; le meilleur résultat démontré est qu'il existe une infinité de paires de premiers à distance au plus 246 (Zhang en 2013, puis Maynard, Tao et le projet Polymath).
+
+### La physique : une fleur de nombres premiers
+
+![Un graphe quantique à 16 boucles de longueurs ln p : avec un champ magnétique, la statistique GUE des zéros ; sans champ, la statistique GOE ; sa diffraction a des pics en ln n pour tous les produits n, celle des zéros seulement des creux en ln pᵏ](fleur_de_fourier.png)
+
+Si les zéros sont les notes d'un instrument (l'idée de Hilbert et Pólya), de quel instrument s'agit-il ? Les physiciens savent fabriquer des instruments quantiques simples, les graphes quantiques (Kottos et Smilansky, 1997) : des fils où une onde circule et se répartit aux carrefours. On en fabrique un avec les nombres premiers : un seul carrefour et 16 boucles de longueurs ln 2, ln 3, ln 5, …, ln 53, comme les pétales d'une fleur. Au carrefour, l'onde repart dans les 32 directions par une transformée de Fourier discrète : chaque direction a la même chance. On calcule ses 21 453 premières notes.
+
+- **Avec un champ magnétique, la fleur joue comme les zéros.** Le rapport moyen de deux écarts successifs vaut 0,599 ; la loi GUE donne 0,600, et les zéros (entre 10³ et 10⁵) 0,610, un peu plus, effet connu de hauteur finie.
+- **Sans champ, elle joue autre chose** : 0,531, la loi GOE des systèmes réversibles (ceux dont on peut passer le film à l'envers). C'est la leçon de Michael Berry : puisque les zéros suivent la loi GUE, l'instrument de Riemann, s'il existe, n'est pas réversible ; il contient une sorte de champ magnétique caché. L'opérateur H = xp de Berry et Keating (section « Le photon ») a justement cette propriété.
+- **Mais la diffraction trahit la fleur.** La transformée de Fourier des notes révèle les longueurs des trajets fermés (c'est la formule des traces). Pour la fleur, on trouve des pics en ln n pour tous les produits n de ses nombres premiers : faire le tour de la boucle 2, puis celui de la boucle 3, donne un trajet de longueur ln 2 + ln 3 = ln 6. Pour ζ, la formule explicite ne donne que des creux, en ln pᵏ, de profondeur proportionnelle à ln p/p^(k/2), et rien en ln 6, ln 10 ou ln 15.
+
+Deux leçons. D'abord, dans l'instrument de ζ, les trajets ne se combinent pas : seuls comptent les tours répétés d'une même boucle, et c'est le produit d'Euler. Ensuite, le signe est inversé : là où un instrument émet des raies, ζ en absorbe. Alain Connes lit d'ailleurs les zéros comme un spectre d'absorption, des raies noires sur un fond continu. Aucun graphe connu ne fait les deux.
+
+Le spectre de la fleur est un vrai « quasi-cristal de Fourier » : sa diffraction n'a que des pics, parce que ses longueurs ln p sont incommensurables (Kurasov et Sarnak, 2020). C'est le rêve de Dyson (section « Cristal ou quasi-cristal ») réalisé, mais pour la fleur, pas pour ζ. Et Alon, Cohen et Vinzant (2023) ont montré que toute somme d'exponentielles dont les zéros sont tous réels, comme le déterminant de la fleur, vient d'un polynôme de Lee–Yang, ceux des aimants (section « Copier les démonstrations ») : aimants, cristaux et graphes parlent ici de la même chose.
+
+Programme : [`calculs/fleur_de_fourier.py`](calculs/fleur_de_fourier.py).
+
+### La chimie : un gaz de nombres premiers
+
+Imaginons un gaz dont les particules sont les nombres premiers : une particule « p » a l'énergie ln p, et un état du gaz est un entier n = 2^a·3^b·5^c…, qui dit combien il y a de particules de chaque sorte. Sa fonction de partition, la somme qui sert à tout calculer en physique statistique, vaut Σ n^(−β) = ζ(β) : c'est le « gaz de primons » (Julia, Spector, 1990).
+
+- **Le produit d'Euler, c'est un mélange idéal.** Les espèces ne se parlent pas, donc la fonction de partition se factorise, une espèce par nombre premier : ζ(β) = Π 1/(1 − p^(−β)). C'est la définition d'un mélange idéal en chimie.
+- **Une température maximale.** Quand β descend vers 1, la somme explose : on ne peut pas chauffer ce gaz au-delà de la température 1, comme le gaz de cordes de la physique (température de Hagedorn).
+- **Les fermions et le casino.** Si chaque espèce ne peut être présente qu'une fois (des fermions), il ne reste que les entiers sans facteur carré, et le signe (−1)^(nombre de fermions) est exactement μ(n), la fonction de Möbius. La somme Σ μ(n) n^(−β) = 1/ζ(β) compare les états à nombre pair et à nombre impair de fermions. L'hypothèse de Riemann dit que, jusqu'à l'énergie ln x, les deux s'équilibrent à √x près (au facteur x^ε près) : c'est le casino de Möbius, vu par un physicien (Spector).
+- **Les zéros n'existent que pour un gaz infini.** En physique, les zéros de la fonction de partition aux températures complexes (les « zéros de Fisher ») annoncent les transitions de phase. Pour le gaz de primons, ce sont les zéros de ζ (au-delà de la température de Hagedorn, en prolongeant la somme), et l'hypothèse dit qu'ils sont tous sur la droite Re β = ½ : ce serait un « théorème de Lee–Yang » pour le gaz des nombres premiers. Or un mélange fini, avec les premiers jusqu'à P, n'a aucun zéro : un produit fini ne s'annule jamais. Comme les transitions de phase, qui n'apparaissent que pour un système infini (Lee et Yang, 1952), les zéros de ζ naissent seulement quand toutes les espèces sont là. On l'avait vu avec les premiers pairs et impairs : aucune partie finie ne porte l'hypothèse.
+
+### Russell et les ensembles : chaque zéro est-il son propre reflet ?
+
+Au cœur de Riemann, il y a une autoréférence qui ne tourne pas au paradoxe. La cloche de Gauss e^(−πx²) est sa propre transformée de Fourier. Les entiers aussi : la diffraction d'un peigne posé sur les entiers est le même peigne (formule de Poisson). L'ensemble des entiers est son propre dual. De cette autoréférence, Riemann a tiré la symétrie s ↔ 1 − s de ζ, par la fonction thêta : θ(1/t) = √t·θ(t).
+
+Cette symétrie range les zéros par paires de reflets, ρ et 1 − ρ̄, de part et d'autre de la droite critique. L'hypothèse de Riemann dit que chaque zéro est son propre reflet : ρ = 1 − ρ̄, c'est-à-dire Re ρ = ½. C'est la question de Russell, « x ∈ x ? », posée à chaque zéro (deuxième ligne du tableau de la section « Russell, les ensembles et les jeux »). Chez Russell, l'autoréférence sans limite fait tout casser ; chez Riemann, l'autoréférence de Poisson est encadrée, et elle donne une symétrie. Ce qui manque, c'est la raison pour laquelle aucun zéro n'aurait un reflet distinct de lui-même.
+
+### La théorie des jeux : l'attaque par paquets
+
+Le spectrogramme est un jeu. L'Attaquant cherche un zéro hors de la droite : à chaque coup, il choisit un paquet d'ondes, une position x et une fréquence γ, et il gagne s'il entend un crescendo. Le Défenseur, ce sont les nombres premiers. Le critère de Weil (le jeu de Weil, section « Six autres pistes ») dit que l'hypothèse équivaut à : « l'Attaquant ne gagne jamais, quel que soit son paquet ». Jusqu'à 10¹⁰, aucune attaque de la figure ne gagne : pas de note en trop, et les dix premières notes gardent leur volume (|β − ½| ≤ 0,006). C'est bien moins que ce qu'on sait vérifier autrement, mais c'est la même idée, en musique.
+
+Et la « résolution par paquets » marche, mais pour les paires. Un écart h seul, celui des jumeaux, n'entend rien ; la coalition des 30 écarts entend toute la musique. En théorie des jeux, une coalition peut gagner là où chaque joueur seul perd. Ici, c'est un fait de statistique : les bruits des écarts se compensent en partie, la musique s'additionne.
+
+### Ce qu'on retient du détour
+
+1. **Les nombres premiers jouent la musique des zéros** (c'est la formule explicite, connue). On en mesure le volume total (0,2145, pour 0,2149 prédit) et la partie réelle des dix premières notes (½ à 0,006 près).
+2. **Des zéros, on remonte au facteur des premiers jumeaux** : κ = 0,95 ± 0,01, pour 1 attendu. C'est l'équivalence de Keating et Smith, vue sur des nombres calculés ici.
+3. **En sens inverse, les paires de premiers rejouent la musique des zéros**, au volume 2S(h) (pente mesurée 0,96). Les jumeaux seuls, à 10¹⁰, sont encore trop bruyants pour qu'on l'entende.
+4. **Un graphe quantique fait de boucles ln p** reproduit la statistique des zéros avec un champ magnétique, mais pas leur diffraction : ses trajets se combinent, et le signe est inversé. L'instrument de Riemann, s'il existe, est d'un autre genre.
+5. **Le gaz de primons et le paradoxe de Russell** disent la même chose autrement : les zéros naissent de l'infinité des espèces, et l'hypothèse demande que chaque zéro soit son propre reflet.
+
+Rien de tout cela ne démontre l'hypothèse de Riemann, ni la conjecture des premiers jumeaux.
+
 ## Au final
 
 Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 
 **L'hypothèse n'est ni démontrée ni contredite.** Tous nos calculs sont compatibles avec elle, et aucun ne la démontre. Quelques petits résultats, eux, sont démontrés (section précédente). La plupart refont, avec nos propres programmes, des calculs connus ; nous l'avons signalé à chaque fois.
 
-**Ce qu'on a appris, en cinq points.**
+**Ce qu'on a appris, en six points.**
 
 1. **Le signe ne compte pas, la taille si.** Pólya demandait que L(x) reste négatif : c'est faux dès 906 150 257. L'hypothèse demande seulement que L(x) reste de l'ordre de √x : c'est ce qu'on observe (au plus 1,36·√x jusqu'au milliard).
 2. **Les zéros savent où les courbes repassent.** Leurs ondes retrouvent 906 millions, les régions de la course modulo 4 et le renversement de la course modulo 3 à 608 981 813 029. Deux prédictions restent à vérifier par un calcul exact : vers 2,3·10¹⁹ pour Pólya, vers 6,15·10¹² pour la course modulo 3.
 3. **La récurrence de Weil a la bonne forme.** « Vrai pour une fenêtre, donc pour une fenêtre un peu plus grande » : c'est l'énoncé P(x) de Weil. Le premier cas est un théorème (Connes et Consani), et la première marche, quand le nombre 2 entre, s'écrit comme une inégalité précise.
 4. **Mais son pas ne peut pas être une estimation.** À chaque nouveau nombre premier, la marge fond (3·10⁻⁸ à x = 3, 3·10⁻⁵⁷ à x = 64 avec 20 ondes, 7·10⁻⁷³ avec 28), et chaque poids se verrouille autour de sa vraie valeur. Un raisonnement par inégalités, qui garderait un peu de jeu d'une marche à la suivante, n'a guère de chance : le jeu tend vers zéro.
 5. **Le cas qui parle de lui-même est le seul qui résiste.** ζ ressemble à elle-même à des hauteurs proportionnelles : c'est démontré pour tout rapport irrationnel. S'imiter elle-même sans décalage proportionnel, c'est l'hypothèse (Bagchi). Comme chez Russell, toute la difficulté se concentre dans l'autoréférence.
+6. **Les zéros parlent aussi des premiers jumeaux.** Des zéros calculés ici, on retrouve le facteur de Hardy–Littlewood des jumeaux (κ = 0,95 ± 0,01) ; en sens inverse, chaque écart h entre premiers rejoue la musique des zéros au volume 2S(h). Ce sont des fluctuations autour de la conjecture, pas la conjecture : l'infinité des jumeaux reste ouverte.
 
 **Ce que cela dit de la preuve à trouver.** Pour l'onde la plus fragile, la positivité de Weil est une égalité presque parfaite entre la partie archimédienne et les nombres premiers, de plus en plus serrée à mesure que la fenêtre s'élargit. Une démonstration devra donc très probablement venir d'une structure exacte, qui rende la positivité automatique : une géométrie pour les courbes (Weil, Deligne), un opérateur autoadjoint pour les surfaces (Selberg), une récurrence algébrique exacte pour les aimants (Lee et Yang). Nos calculs ne disent pas laquelle ; ils expliquent pourquoi il en faut sans doute une.
 
 **La copie la plus avancée.** Parmi les démonstrations voisines, celle de Selberg, recopiée par Connes, Consani et Moscovici, est celle où il reste le moins à faire : deux étapes, que nos calculs voient à l'œuvre (l'onde la plus fragile est paire et seule à son niveau, et elle tend vers la fonction Φ de Riemann). D'après eux, les démontrer suffirait à démontrer l'hypothèse.
 
-**Ce qui est peut-être nouveau.** Trois constats, que nous n'avons pas trouvés écrits sous cette forme : le scénario « libre, nécessaire, verrouillé » pour chaque puissance de premier ; la loi de la marge ; l'ordre « plus tôt entré, plus verrouillé ». Ils découlent assez directement de ce qu'on sait sur l'onde la plus fragile (Connes, Consani, Moscovici) : quand une seule énergie est presque nulle, la moindre retouche se lit sur elle. Un spécialiste les trouverait sans doute attendus. Ce sont des observations numériques sur des familles finies d'ondes, pas des théorèmes, tout comme les deux prédictions ci-dessus.
+**Ce qui est peut-être nouveau.** Trois constats, que nous n'avons pas trouvés écrits sous cette forme : le scénario « libre, nécessaire, verrouillé » pour chaque puissance de premier ; la loi de la marge ; l'ordre « plus tôt entré, plus verrouillé ». Ils découlent assez directement de ce qu'on sait sur l'onde la plus fragile (Connes, Consani, Moscovici) : quand une seule énergie est presque nulle, la moindre retouche se lit sur elle. Un spécialiste les trouverait sans doute attendus. Ce sont des observations numériques sur des familles finies d'ondes, pas des théorèmes, tout comme les deux prédictions ci-dessus. Le grand détour par Fourier ajoute deux mesures du même genre : le facteur des jumeaux retrouvé dans les seuls zéros (κ = 0,95), et le volume 2S(h) de la musique des zéros dans chaque écart h (pente 0,96) ; la version moyennée de la seconde est due à Korevaar et te Riele (2010).
 
 **Et l'intuition de départ ?** « Si c'est vrai sur une partie, des harmoniques et une symétrie le rendent vrai partout. » Dans sa forme, l'intuition est juste : c'est ainsi qu'on a démontré l'hypothèse pour les courbes, et c'est la forme du critère de Weil. Ce qui manque pour ζ, c'est l'outil qui transporte une égalité exacte d'une fenêtre à la suivante. Personne ne l'a trouvé : c'est là qu'est toute la difficulté de l'hypothèse de Riemann.
 
@@ -428,13 +523,15 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 
 | Piste | L'idée | Où on en est | Ce qui bloque |
 |---|---|---|---|
-| Compter les zéros sur la droite | Une part toujours plus grande des notes est « accordée » | Plus des 2/3 (2026) | Une proportion, même 100 %, ne suffit pas |
+| Compter les zéros sur la droite | Une part toujours plus grande des notes est « accordée » | Plus des 2/3 (2026) | Une proportion, même 100 %, ne suffit pas |
 | Rétrécir la bande | Interdire aux zéros de trop s'éloigner | Bande 1/12–11/12 annoncée (2026) ; Guth et Maynard (2024) : les zéros hors de la droite, s'il y en a, sont plus rares qu'on ne savait le montrer | Réduire la bande à la droite elle-même |
 | Vérifier par calcul | Contrôler les notes une à une | Tous les zéros jusqu'à la hauteur 3·10¹² sont sur la droite, soit plus de 10 000 milliards | Il en restera toujours une infinité |
 | La « chaleur » (de Bruijn–Newman) | On fait diffuser la fonction comme de la chaleur ; ses zéros deviennent réels à partir d'un instant Λ | 0 ≤ Λ ≤ 0,2 ; l'hypothèse revient à Λ = 0 | Faire descendre 0,2 jusqu'à 0 |
 | La positivité (Weil) | Une énergie toujours positive | Équivalent exact ; vérifiée ici jusqu'à x = 64 avec 20 à 28 ondes ; chaque poids premier s'y verrouille | Il faut toutes les ondes, x → ∞ ; sans les nombres premiers, elle casse dès x ≈ 2,28 |
 | L'instrument caché (Hilbert–Pólya, Connes) | Les zéros comme fréquences propres | Écarts entre zéros semblables aux niveaux d'énergie des noyaux lourds (Montgomery, Odlyzko) | Personne n'a trouvé l'opérateur |
 | Les quasi-cristaux (Dyson) | Des zéros ordonnés sans être périodiques, dont la « diffraction » tombe sur les ln p | Programme proposé en 2009 ; « quasi-cristaux de Fourier » étudiés activement | Classer tous les quasi-cristaux à une dimension |
+| Les premiers jumeaux (Hardy–Littlewood) | Les paires de premiers et les corrélations des zéros, deux faces d'une même conjecture (Keating–Smith) | Vérifiée ici à 0,016 % près jusqu'à 10¹⁰ ; démontré : une infinité de paires à distance au plus 246 | La barrière de la parité |
+| Les graphes quantiques (Berry, Kottos–Smilansky, Kurasov–Sarnak) | Un instrument fait de boucles de longueur ln p | La statistique GUE des zéros, reproduite avec un champ magnétique | Les trajets se combinent (ln 6 = ln 2 + ln 3) et le signe est inversé |
 | Les courbes modulo p (Hasse, Weil, Deligne) | Le même énoncé dans un autre monde | **Démontré** | Aucun équivalent connu pour les entiers |
 
 ## Projets pour continuer
@@ -446,7 +543,9 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 5. **Là où l'hypothèse a failli tomber** : zoomer sur la paire de Lehmer, à la hauteur 7005.
 6. **Le jeu de Weil dans toutes les directions** : mesurer l'ensemble des poids gagnants dans toutes les directions, pas seulement un poids à la fois, et vérifier qu'il se resserre partout autour des vrais poids.
 7. **Démontrer l'étape 2 de la copie de Selberg** : montrer que les ondes propres de l'énergie de Weil alternent pair, impair, pair… comme celles d'une corde vibrante. Pour un problème voisin, Slepian l'a fait avec un opérateur différentiel qui commute (les fonctions « prolates ») ; Connes, Consani et Moscovici relient justement l'énergie de Weil à ces fonctions.
-8. **Lire** : *La Symphonie des nombres premiers* de Marcus du Sautoy, et *Prime Numbers and the Riemann Hypothesis* de Barry Mazur et William Stein (en anglais).
+8. **Entendre les jumeaux seuls.** À 10¹⁰, la musique des zéros est vingt fois plus faible que leur bruit propre. Monter vers 10¹³ ou 10¹⁴ (un crible segmenté en parallèle), ou trouver un meilleur filtre, pour l'entendre dans les seuls jumeaux.
+9. **Une fleur sans combinaisons.** Chercher des conditions au carrefour dont la diffraction n'ait que des creux en ln pᵏ, de profondeur ln p/p^(k/2). Ce serait un pas vers l'instrument de Hilbert et Pólya ; personne ne sait le faire, et c'est peut-être impossible avec un graphe.
+10. **Lire** : *La Symphonie des nombres premiers* de Marcus du Sautoy, et *Prime Numbers and the Riemann Hypothesis* de Barry Mazur et William Stein (en anglais).
 
 ## Sources
 
@@ -467,5 +566,10 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 - K. Matsumoto, [universalité de ζ, Voronin, Bagchi et récurrence forte](https://arxiv.org/abs/1407.4216) ; A. Yedidia, S. Aaronson, [une machine de Turing indépendante de ZF](https://arxiv.org/abs/1605.04343) ; [BB(5) démontré](https://arxiv.org/abs/2509.12337) ; [l'hypothèse de Riemann comme énoncé Π⁰₁](https://arxiv.org/abs/2311.09464)
 - J. Friedlander, H. Iwaniec, [X² + Y⁴ et le problème de la parité](https://arxiv.org/abs/math/9811185) ; [Sylver coinage](https://en.wikipedia.org/wiki/Sylver_coinage) ; J. Kaplan, vidéo *Russell's Paradox – a simple explanation of a profound problem*
 - A. Connes, C. Consani, H. Moscovici, [Zeta Spectral Triples](https://arxiv.org/abs/2511.22755) (2025) ; S. Gonek, [Finite Euler products and the Riemann Hypothesis](https://arxiv.org/abs/0704.3448) ; [les approximations symétriques et le résultat de Gonek et Montgomery](https://arxiv.org/abs/2411.08364)
+- E. Bogomolny, J. Keating, corrélations des zéros au-delà de la loi GUE : [Physical Review Letters 77 (1996)](https://research-information.bris.ac.uk/en/publications/gutzwillers-trace-formula-and-spectral-statistics-beyond-the-diag/) ; J. Keating, D. Smith, [premiers jumeaux et corrélation de paires des zéros](https://arxiv.org/abs/1903.07057) (2019)
+- H. Montgomery, K. Soundararajan, [premiers dans les petits intervalles](https://arxiv.org/abs/math/0409258) (2004) ; J. Korevaar, H. te Riele, [moyenne des paires de premiers](https://arxiv.org/abs/0902.4352) (2010)
+- T. Kottos, U. Smilansky, [graphes quantiques](https://link.aps.org/doi/10.1103/PhysRevLett.79.4794) (1997) ; P. Kurasov, P. Sarnak, [polynômes stables et quasi-cristaux](https://arxiv.org/abs/2004.05678) (2020) ; L. Alon, A. Cohen, C. Vinzant, [polynômes de Lee–Yang](https://arxiv.org/abs/2303.03201) (2023)
+- Y. Atas et al., [rapport de deux écarts successifs](https://arxiv.org/abs/1212.5611) (2013) ; E. Bogomolny et al., [les zéros à hauteur finie](https://arxiv.org/abs/math/0602270) (2006)
+- [Le gaz de primons](https://en.wikipedia.org/wiki/Primon_gas) (B. Julia ; D. Spector, *Communications in Mathematical Physics* 127, 1990)
 
 Réalisé avec l'aide de Claude (Anthropic).
