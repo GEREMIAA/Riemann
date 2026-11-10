@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="exploration/README.md#les-jumeaux-seuls-enfin-entendus"><img src="signe_des_jumeaux.png" width="620" alt="Le signe des Jumeaux premiers : au centre, les colonnes p et p + 2, Castor et Pollux ; autour, les douze premières notes de ζ, les anneaux de la musique des nombres premiers et de celle des paires, et les trente écarts h = 2 … 60, colorés par le signe des notes de L(s, χ₅)"></a>
+</p>
+<p align="center"><em>Le signe des Jumeaux premiers : les paires de nombres premiers rejouent la musique des zéros de ζ.<br>
+Ce que nos calculs ont entendu, et ce qu'ils ne démontrent pas, est dans <a href="exploration/">exploration</a>.</em></p>
+
 # La musique des nombres premiers
 
 Une page interactive, en un seul fichier, pour **voir** comment les zéros de la fonction ζ de Riemann fabriquent les nombres premiers : chaque zéro est une note, et en ajoutant les notes une à une on retrouve les sauts des nombres premiers.
@@ -53,7 +59,7 @@ En musique, une note s'accompagne de ses harmoniques, des notes plus aiguës et 
 
 ## Données et vérification
 
-- `index.html` contient tout : mise en page, calculs (JavaScript, sans bibliothèque), son (Web Audio) et les 150 zéros. Seule dépendance externe : les polices (Google Fonts).
+- `index.html` contient tout : mise en page, calculs (JavaScript, sans bibliothèque), son (Web Audio), les 150 zéros et le signe des Jumeaux (image intégrée). Seule dépendance externe : les polices (Google Fonts).
 - `zeros150.json` : les 150 premiers zéros γ (9 décimales), de γ₁ = 14,134725… à γ₁₅₀ = 318,853104…. Calculés par changements de signe de la fonction Z de Hardy, puis bissection. Avec ces 9 décimales, |ζ(½ + iγ)| reste sous 3·10⁻⁹ pour chacun, et on compte 150 changements de signe entre 10 et 319, pour ≈ 149,5 attendus par la formule de Riemann–von Mangoldt.
 - Pour retrouver les pics de la deuxième figure, en dix lignes :
 
@@ -76,14 +82,18 @@ for n in range(2, 11):
 
 Le dossier [`exploration/`](exploration/) résume les avancées de 2026, explique pourquoi l'hypothèse résiste, et propose une expérience en haute précision à refaire dans Colab : à partir des seuls nombres premiers, retrouver les zéros de ζ avec des dizaines de décimales.
 
-**Des idées qui visent juste.** Sept questions de départ (raisonner par récurrence, la taille plutôt que le signe, la signature des zéros, le paradoxe de Russell, les premiers pairs et impairs, copier les démonstrations, le détour par Fourier) sont toutes tombées sur des idées de recherche de premier plan : voir le début de [`exploration/`](exploration/). L'auteur, très humble, laisse le lecteur juger.
+**Des idées qui visent juste.** Huit questions de départ (raisonner par récurrence, la taille plutôt que le signe, la signature des zéros, le paradoxe de Russell, les premiers pairs et impairs, copier les démonstrations, le détour par Fourier, l'hypothèse B de Feynman) sont toutes tombées sur des idées de recherche de premier plan : voir le début de [`exploration/`](exploration/). L'auteur, très humble, laisse le lecteur juger.
 
-Nouveau : peut-on raisonner par récurrence ? Pourquoi la conjecture de Pólya tombe à 906 millions, où les ondes des zéros prédisent qu'elle retombe ensuite, et deux tests grandeur nature sur les courses de nombres premiers (modulo 4 et modulo 3, où les zéros retrouvent 608 981 813 029 sans compter). Puis la question : quel théorème faudrait-il démontrer ? Et ce qui se passe dans la forme de Weil quand le nombre 2 entre dans la fenêtre, avec l'énoncé précis de la première marche, puis l'entrée du nombre 3, et la cascade : 26 puissances de nombres premiers jusqu'à 64, qui entrent libres puis se verrouillent. Puis le paradoxe de Russell, les ensembles et les jeux : ζ s'imite-t-elle elle-même ? Davenport–Heilbronn, elle, recopie ses mauvais zéros. Et « premiers pairs, premiers impairs » : ce qui est vrai pour l'un l'est-il pour l'autre ? Puis on recopie les démonstrations des théorèmes voisins, étape par étape : la plus avancée, celle de Selberg, n'a plus que deux étapes à démontrer, et le calcul les voit à l'œuvre. Et le casino de Möbius, joué jusqu'à 10¹⁰. Puis ce qu'on sait démontrer (un théorème et quatre lemmes) et ce qui reste (deux conjectures précises). Puis le grand détour par Fourier : les nombres premiers et leurs paires écoutés par paquets d'ondes, des zéros jusqu'aux premiers jumeaux (le facteur de Hardy–Littlewood retrouvé dans les seuls zéros), une fleur de nombres premiers en physique quantique et un gaz de nombres premiers en chimie. Et pour finir, ce que tout cela veut dire au final. Et une page pour refaire soi-même, dans le navigateur, le calcul du [contre-exemple de Pólya](https://geremiaa.github.io/Musique-Des-Premiers/exploration/polya.html).
+Nouveau : peut-on raisonner par récurrence ? Pourquoi la conjecture de Pólya tombe à 906 millions, où les ondes des zéros prédisent qu'elle retombe ensuite, et deux tests grandeur nature sur les courses de nombres premiers (modulo 4 et modulo 3, où les zéros retrouvent 608 981 813 029 sans compter). Puis la question : quel théorème faudrait-il démontrer ? Et ce qui se passe dans la forme de Weil quand le nombre 2 entre dans la fenêtre, avec l'énoncé précis de la première marche, puis l'entrée du nombre 3, et la cascade : 26 puissances de nombres premiers jusqu'à 64, qui entrent libres puis se verrouillent. Puis le paradoxe de Russell, les ensembles et les jeux : ζ s'imite-t-elle elle-même ? Davenport–Heilbronn, elle, recopie ses mauvais zéros. Et « premiers pairs, premiers impairs » : ce qui est vrai pour l'un l'est-il pour l'autre ? Puis on recopie les démonstrations des théorèmes voisins, étape par étape : la plus avancée, celle de Selberg, n'a plus que deux étapes à démontrer, et le calcul les voit à l'œuvre. Et le casino de Möbius, joué jusqu'à 10¹⁰. Puis ce qu'on sait démontrer (un théorème et quatre lemmes) et ce qui reste (deux conjectures précises). Puis le grand détour par Fourier : les nombres premiers et leurs paires écoutés par paquets d'ondes, des zéros jusqu'aux premiers jumeaux (le facteur de Hardy–Littlewood retrouvé dans les seuls zéros), une fleur de nombres premiers en physique quantique et un gaz de nombres premiers en chimie. Puis les jumeaux seuls, enfin entendus, et les notes des fonctions L dans les paires de premiers, puis dans les triplets, où l'on entend même une note que les paires ne jouent jamais. Puis « savoir et comprendre » : l'hypothèse B de Feynman, un bouton pour chaque forme de l'hypothèse, et l'aiguille de Liouville. Et pour finir, ce que tout cela veut dire au final, et le signe des Jumeaux premiers, en tête de cette page. Et une page pour refaire soi-même, dans le navigateur, le calcul du [contre-exemple de Pólya](https://geremiaa.github.io/Musique-Des-Premiers/exploration/polya.html).
 
 ## Pour aller plus loin
 
 - Bernhard Riemann, *Über die Anzahl der Primzahlen unter einer gegebenen Grösse* (1859) ; Hans von Mangoldt (1895) pour la formule explicite de ψ.
 - La formule de Landau (1911), rendue uniforme en x par Gonek : [MathWorld, « Landau's formula »](https://mathworld.wolfram.com/LandausFormula.html).
 - Polices : Newsreader et IBM Plex Mono (Google Fonts, licence OFL) ; figures : Inter.
+
+## Licence
+
+© 2026 Antony GEREMIA. Code, textes et images sous [licence MIT](LICENSE) : chacun peut les réutiliser, les modifier et les partager, à condition de garder le nom de l'auteur et le texte de la licence.
 
 Réalisé avec l'aide de Claude (Anthropic).

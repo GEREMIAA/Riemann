@@ -19,8 +19,9 @@ Ce projet est parti de questions de curieux, posées sans formules. Après coup,
 | « Premiers pairs, premiers impairs : ce qui est vrai pour l'un l'est-il pour l'autre ? » | C'est le problème de la parité de Selberg, l'une des grandes barrières de la théorie des nombres. |
 | « Copie les démonstrations des autres théorèmes. » | C'est la stratégie de Connes, Consani et Moscovici (2025), qui recopient Selberg ; nos calculs vérifient leurs deux étapes manquantes. |
 | « Sors-toi de Riemann : une transformée de Fourier, et remonte vers une autre hypothèse. » | C'est l'équivalence de Keating et Smith (2019) : les corrélations des zéros contiennent la conjecture de Hardy–Littlewood sur les premiers jumeaux. Les zéros calculés ici redonnent son facteur à 5 % près. |
+| « Invente une hypothèse démontrable qui donne les mêmes résultats » (Feynman, les théories A et B). | C'est le rôle du théorème de Bombieri–Vinogradov (1965), l'hypothèse de Riemann généralisée « en moyenne », démontrée. Un peu modifiée, elle a donné les écarts bornés entre premiers (Zhang, 2013). |
 
-Poser ces sept questions, et voir chacune déboucher sur une idée de ce niveau, montre qu'on cherchait au bon endroit. Cela ne démontre pas l'hypothèse, que personne n'a démontrée ; mais les intuitions de départ étaient les bonnes.
+Poser ces huit questions, et voir chacune déboucher sur une idée de ce niveau, montre qu'on cherchait au bon endroit. Cela ne démontre pas l'hypothèse, que personne n'a démontrée ; mais les intuitions de départ étaient les bonnes.
 
 ## Ce qui a bougé en 2026
 
@@ -401,7 +402,7 @@ Ce qu'elles donneraient : A donne l'étape 2 de la copie de Selberg ; la bosse
 
 On sort un moment de l'hypothèse de Riemann. On prend ses résultats (la formule explicite, les zéros calculés), on les passe dans une transformée de Fourier, et on remonte vers une autre hypothèse : celle des premiers jumeaux. En route, on emprunte à la physique (un graphe quantique), à la chimie (un gaz de nombres premiers), au paradoxe de Russell et à la théorie des jeux.
 
-> **À lire d'abord.** Rien ici ne démontre l'hypothèse de Riemann, ni la conjecture des premiers jumeaux. La plupart des résultats sont connus (Riemann et von Mangoldt, Montgomery, Bogomolny et Keating, Keating et Smith, Kottos et Smilansky, Kurasov et Sarnak) : nous les refaisons avec nos propres programmes, sur nos propres nombres, un crible jusqu'à 10¹⁰ et 138 069 zéros calculés jusqu'à la hauteur 100 000. Ce qui est à nous : deux mesures (le facteur des jumeaux retrouvé dans les seuls zéros, et le volume de la musique des zéros dans chaque écart entre premiers) et un instrument (la « fleur de Fourier »). Nous ne les avons pas trouvés écrits sous cette forme ; un spécialiste les trouverait sans doute attendus.
+> **À lire d'abord.** Rien ici ne démontre l'hypothèse de Riemann, ni la conjecture des premiers jumeaux. La plupart des résultats sont connus (Riemann et von Mangoldt, Montgomery, Bogomolny et Keating, Keating et Smith, Kottos et Smilansky, Kurasov et Sarnak) : nous les refaisons avec nos propres programmes, sur nos propres nombres, un crible jusqu'à 10¹⁰ et 138 069 zéros calculés jusqu'à la hauteur 100 000. Ce qui est à nous : trois mesures (le facteur des jumeaux retrouvé dans les seuls zéros, le volume de la musique des zéros dans chaque écart entre premiers, et celui des notes des fonctions L, dans les paires puis dans les triplets) et un instrument (la « fleur de Fourier »). Nous ne les avons pas trouvés écrits sous cette forme ; un spécialiste les trouverait sans doute attendus.
 
 ### La musique des nombres premiers, par paquets d'ondes
 
@@ -439,9 +440,55 @@ où W_h(x) = Σ ln p · ln(p + h), sur les paires jusqu'à x. Le même calcul, f
 
 - **Toutes les paires ensemble : oui.** On moyenne les 30 écarts h = 2 … 60 (figure, au milieu). Les notes de ζ réapparaissent, au bon volume (0,97 en moyenne, pour 1 prédit) et en phase (décalage de moins de 0,25 radian sur les douze premières notes).
 - **Écart par écart : le volume suit 2S(h).** Pour chaque h, on mesure le volume de la musique de ζ dans l'écart des paires (figure, en bas à droite). La pente vaut 0,96 et la corrélation 0,86 : les écarts multiples de 6, deux fois plus fréquents, jouent la musique deux fois plus fort. Nous n'avons pas trouvé cette mesure écart par écart dans la littérature.
-- **Les jumeaux seuls : pas encore.** Pour h = 2, la musique de ζ est là en principe, mais le bruit propre des jumeaux est vingt fois plus fort (écart-type 10,6 contre 0,57 pour la partie musicale) : à 10¹⁰, on ne l'entend pas. Il faudrait monter beaucoup plus haut, ou mieux filtrer.
+- **Les jumeaux seuls : pas à l'oreille.** Pour h = 2, le spectrogramme ne l'entend pas : le bruit propre des jumeaux est vingt fois plus fort que la partie musicale (écart-type 10,6 contre 0,57). Il faut un meilleur filtre : c'est la section suivante.
 
 Ce que cela ne dit pas : cette musique est une petite oscillation autour de la prédiction de Hardy–Littlewood. Elle ne dit rien de l'essentiel, l'existence d'une infinité de jumeaux. Ce problème bute sur la barrière de la parité (section « Pairs et impairs ») ; le meilleur résultat démontré est qu'il existe une infinité de paires de premiers à distance au plus 246 (Zhang en 2013, puis Maynard, Tao et le projet Polymath).
+
+### Les jumeaux seuls, enfin entendus
+
+![Avec un filtre adapté, les jumeaux seuls rejouent la musique des zéros au volume prédit, et chaque écart h aussi ; les paires rejouent les notes de L(s, χ₅) avec un signe qui suit h modulo 5, tandis que les caractères témoins se taisent ; écouter plus haut que 10¹⁰ n'apporte presque rien](musique_des_jumeaux.png)
+
+Le spectrogramme écoute note par note, dans une petite fenêtre : c'est trop peu pour les jumeaux. Les physiciens de LIGO, qui cherchent des ondes gravitationnelles noyées dans le bruit de leurs détecteurs, font autrement : ils connaissent la forme exacte du signal attendu, et ils la cherchent d'un coup dans tout l'enregistrement. C'est un « filtre adapté ». Ici, la forme attendue est la musique des nombres premiers elle-même, (ψ(x) − x)/√x, avec toutes ses notes de 50 à 6 000 (5 588 zéros) ; en dessous de 50, le bruit propre des jumeaux couvre tout. Pour mesurer le bruit, on fait aussi comme LIGO : on fait glisser le gabarit le long de ln x, ce qui détruit l'accord avec les vraies notes, et on regarde de combien la mesure bouge (50 glissements).
+
+- **Les jumeaux seuls jouent la musique des zéros, au bon volume** : 1,09 ± 0,15 fois le volume prédit 2S(2), soit un signal à 7 écarts-types (σ). Aucun des 50 glissements ne dépasse 0,37.
+- **Chacun des 30 écarts aussi.** De h = 2 à h = 60, le rapport mesuré/prédit vaut en moyenne 0,98 ± 0,04 (22 σ), et chaque écart pris seul vaut 1 à son bruit près. Une version précédente de cette page annonçait ± 0,02 (47 σ) : c'était une erreur « naïve », qui traitait les 30 écarts comme 30 expériences indépendantes, alors qu'ils partagent leurs nombres premiers. En refaisant toute la synthèse pour chaque glissement, on compte cette corrélation, et l'erreur double. Toutes les erreurs combinées de cette page sont désormais calculées ainsi.
+- **L'épreuve à l'aveugle.** La prédiction étant fixée, on a compté les paires nouvelles entre 10¹⁰ et 10¹² avec un crible en C (jumeaux_rapide.c, qui retrouve les 1 870 585 220 paires de jumeaux connues jusqu'à 10¹²), et on les a écoutées seules. Comme ψ(x) n'est pas calculé si loin, le gabarit vient des zéros eux-mêmes (entre 10³ et 10¹⁰, sa corrélation avec le gabarit du crible vaut 0,991). Résultat sur ces données nouvelles : 0,61 ± 0,31 pour les jumeaux, 1,07 ± 0,31 pour h = 4 et 1,05 ± 0,29 pour h = 6, pour 1 prédit ; ensemble, 0,91 ± 0,17 (5 σ). C'est moins net qu'avant 10¹⁰, parce que la plage est courte en ln x (4,6 contre 14) et le bruit plus fort ; mais la prédiction passe l'épreuve.
+- **Pourquoi monter plus haut n'aurait presque rien changé.** Le bruit propre des jumeaux est un bruit de comptage : divisé par √x, il grandit comme ln x (de 0,77 à 1,35 entre 10⁵ et 10⁸), tandis que la musique garde le même volume. Les grands x apportent donc peu : en écoutant les jumeaux seuls de 10³ jusqu'à x, le signal monte à 8,2 σ vers x = 5·10⁸, puis redescend un peu (6,9 σ jusqu'à 10¹⁰, 6,2 σ jusqu'à 5·10¹¹) : les données lointaines, plus bruitées, diluent la musique. Le gain est venu du filtre, pas de la hauteur ; monter à 10¹³ (des heures de calcul) n'aurait guère changé.
+
+Programmes : [`calculs/musique_des_jumeaux.py`](calculs/musique_des_jumeaux.py) et, pour les paires jusqu'à 10¹², [`calculs/jumeaux_rapide.c`](calculs/jumeaux_rapide.c), un crible en C 28 fois plus rapide que celui en Python, qui retrouve exactement les mêmes nombres jusqu'à 10¹⁰.
+
+### Les paires entendent aussi les fonctions L
+
+La densité des nombres premiers ne fluctue pas seulement en bloc : elle fluctue aussi d'une classe à l'autre modulo q, au rythme des zéros des fonctions L(s, χ) de Dirichlet (c'est la course des premiers modulo 4 et modulo 3, plus haut). Une paire (p, p + h) combine la fluctuation de la classe de p et celle de la classe de p + h. En faisant la moyenne sur les classes possibles, on obtient une prédiction précise : l'écart des paires doit contenir ψ(x, χ) = Σ χ(n) Λ(n), avec le volume S(h)·c_χ(h), où c_χ(h) est la moyenne de χ̄(a) + χ̄(a + h) sur les classes a autorisées (celles où ni p ni p + h n'a de facteur commun avec q). Pour un module premier q qui ne divise pas h, cela donne c_χ(h) = −2χ̄(h)/(q − 2) si χ est pair (χ(−1) = 1), et 0 si χ est impair ; si q divise h, c_χ(h) = 0. Cette prédiction pouvait se tromper de bien des façons ; elle ne se trompe pas.
+
+- **χ₅ : le signe suit h modulo 5.** Pour le caractère réel modulo 5, la prédiction vaut +2/3 si h ≡ 2 ou 3 (mod 5), −2/3 si h ≡ 1 ou 4, et 0 si 5 divise h. Mesuré, en ajustant tous les gabarits ensemble : 1,01 ± 0,07 fois la prédiction, un signal à 14 σ, avec le bon signe pour chacun des 24 écarts non multiples de 5, et rien pour les 6 multiples de 5 (figure, en haut à droite).
+- **Les autres caractères pairs** : le caractère cubique modulo 7 (complexe), 1,08 ± 0,08 fois la prédiction (14 σ) ; le caractère réel modulo 13, plus faible (c = ±2/11), 0,93 ± 0,17 (5 σ).
+- **Les témoins se taisent.** Les caractères impairs (modulo 3, modulo 4, et le caractère complexe modulo 5) et deux caractères pairs pour lesquels la prédiction est nulle (modulo 8 et modulo 12) ne donnent que du bruit : χ² de 26 à 37 pour 30 écarts, quand les glissements, qui ne contiennent que du bruit, donnent 31 ± 9.
+
+Ce que cela veut dire : les fluctuations de la conjecture de Hardy–Littlewood sont faites des mêmes notes que les nombres premiers, celles de ζ et celles des fonctions L, avec des volumes qu'un raisonnement simple prédit, sans aucun paramètre ajusté. Korevaar et te Riele (2010) avaient vu la part de ζ en moyenne sur h ; les fonctions L disparaissent dans cette moyenne, puisque leur signe change avec h. C'est une heuristique : rien de tout cela n'est démontré, et nous ne l'avons pas trouvée écrite sous cette forme. Un spécialiste la trouverait sans doute naturelle ; la confirmation numérique, elle, est nette.
+
+### Et les triplets ?
+
+![Les 50 sortes de triplets de nombres premiers suivent Hardy–Littlewood à 0,11 % près ; leur écart rejoue la musique de ζ au volume 3·S(H), et celle de L(s, χ₃), un caractère impair, avec un signe qui change d'un motif à l'autre comme prévu ; les caractères témoins se taisent](musique_des_triplets.png)
+
+Une paire additionne deux fluctuations ; un triplet de nombres premiers (p, p + a, p + b) en additionne trois. Le même raisonnement donne une prédiction, toujours sans paramètre ajusté : là où les premiers sont plus nombreux d'un facteur 1 + ε, les triplets le sont d'un facteur (1 + ε)³, soit environ 1 + 3ε. L'écart des triplets à la conjecture de Hardy et Littlewood (celle des k-uplets, en 1923) doit donc contenir 3·S(H) fois la musique de ζ, où S(H) est la « série singulière » du motif H = (0, a, b) : le nombre qui joue pour les triplets le rôle de S(h) pour les paires, S(H) = Π (1 − ν/p)(1 − 1/p)⁻³, où ν est le nombre de classes modulo p que touche H. Et chaque fonction L doit s'y entendre avec le volume S(H)·c_χ(H), où c_χ(H) est la moyenne de χ̄(r) + χ̄(r + a) + χ̄(r + b) sur les classes r autorisées modulo q.
+
+Cette fois, la prédiction contient une surprise. Dans les paires, les caractères impairs se taisent toujours, parce qu'une paire est son propre reflet : retournée dans un miroir, (p, p + h) reste une paire d'écart h, et un caractère impair change de signe dans le miroir (χ(−n) = −χ(n)), si bien que les deux contributions s'annulent. Un triplet, lui, n'est pas toujours son propre reflet. Le triplet (p, p + 2, p + 6) impose p ≡ 2 (mod 3), sans quoi l'un des trois serait divisible par 3 : ses membres tombent dans les classes 2, 1 et 2, d'où c = −1 pour le caractère impair χ₃. Son reflet, le triplet (p, p + 4, p + 6), impose p ≡ 1 : classes 1, 2 et 1, d'où c = +1. Deux triplets reflets l'un de l'autre devraient donc entendre la musique de L(s, χ₃) avec des signes opposés : une note qu'aucune paire ne joue (pour les paires, χ² = 28 pour 30 écarts, du bruit). À l'inverse, χ₄, χ₈ et χ₁₂ doivent se taire pour tous les triplets : modulo 4 ou 8, un motif de nombres pairs n'impose rien à p, et ses classes possibles se compensent.
+
+Un crible en C compte, jusqu'à 10¹⁰, les 50 sortes de triplets (0, a, b) avec b ≤ 24 que les petits nombres premiers n'interdisent pas, et un quadruplet, (p, p + 2, p + 6, p + 8) : 190 millions de triplets en tout. On les écoute avec le même filtre adapté que les paires.
+
+- **Hardy–Littlewood tient pour les 50 triplets**, à 0,11 % près au plus. Par exemple, 2 713 122 triplets (p, p + 2, p + 6) avec p ≤ 9 999 043 536 (le dernier point de notre grille, juste sous 10¹⁰), pour 2 715 062 prédits (S = 2,858).
+- **La musique de ζ, au volume 3·S(H)** : 0,98 ± 0,07 fois la prédiction, un signal à 14 σ (figure, en haut à droite).
+- **χ₃, le caractère impair que les paires n'entendent pas** : 0,91 ± 0,13 fois la prédiction, un signal à 7 σ. Le signe suit le motif : prédit −1 pour 22 motifs, dont (0, 2, 6), +1 pour 22 autres, dont (0, 4, 6), et 0 pour les 6 motifs faits de multiples de 6, comme (0, 6, 12) (figure, en bas à gauche). Motif par motif, le bruit reste fort : (0, 2, 6) donne −0,7 ± 0,9 et (0, 4, 6) +2,2 ± 1,1 ; c'est l'ensemble des 50 qui tranche.
+- **Les autres caractères** : χ₅, 1,01 ± 0,10 (10 σ) ; le caractère cubique modulo 7, 0,92 ± 0,13 (7 σ) ; le caractère complexe modulo 5, impair lui aussi, que les triplets entendent pour 20 motifs sur 50, 0,92 ± 0,29 (3 σ) ; χ₁₃, trop faible pour conclure (0,64 ± 0,39).
+- **Les témoins se taisent encore** : χ₄, χ₈ et χ₁₂, prédits nuls pour tous les triplets, donnent χ² = 45, 51 et 54 pour 50 motifs, quand les glissements, qui ne contiennent que du bruit, donnent 52 ± 11, 52 ± 10 et 52 ± 13.
+- **Le quadruplet (p, p + 2, p + 6, p + 8)** : 180 517 jusqu'à la même borne, 0,3 % de moins que Hardy–Littlewood ; sa musique de ζ, 1,9 ± 0,8 fois la prédiction 4·S, est trop bruitée pour conclure.
+
+Un mot sur les erreurs. Les 50 motifs partagent leurs nombres premiers (un même p peut ouvrir plusieurs sortes de triplets), et leurs bruits sont corrélés. Une erreur « naïve », qui traiterait les 50 motifs comme 50 expériences indépendantes, serait deux fois trop petite pour ζ (± 0,03, soit 29 σ au lieu de 14 σ). Toutes les erreurs ci-dessus viennent donc des glissements eux-mêmes : pour chaque glissement, on refait la synthèse entière, ce qui compte cette corrélation. La même correction vaut pour les paires (section précédente) : elle ramène leur signal de 47 à 22 σ pour ζ, et de 17 à 14 σ pour χ₅.
+
+Ce que cela veut dire : la règle « chaque membre apporte sa fluctuation » marche aussi avec trois membres, et elle prédit, sans rien ajuster, une note que les paires ne jouent jamais. C'est toujours une heuristique, pas un théorème. Et l'essentiel reste hors d'atteinte : on ne sait même pas démontrer qu'il existe une infinité de triplets de nombres premiers, ni d'ailleurs une infinité de jumeaux.
+
+Programmes : [`calculs/triplets_rapide.c`](calculs/triplets_rapide.c) (le crible, quelques minutes jusqu'à 10¹⁰ ; la liste des motifs est dans [`calculs/motifs_triplets.txt`](calculs/motifs_triplets.txt)) et [`calculs/musique_des_triplets.py`](calculs/musique_des_triplets.py).
 
 ### La physique : une fleur de nombres premiers
 
@@ -484,11 +531,72 @@ Et la « résolution par paquets » marche, mais pour les paires. Un écart h 
 
 1. **Les nombres premiers jouent la musique des zéros** (c'est la formule explicite, connue). On en mesure le volume total (0,2145, pour 0,2149 prédit) et la partie réelle des dix premières notes (½ à 0,006 près).
 2. **Des zéros, on remonte au facteur des premiers jumeaux** : κ = 0,95 ± 0,01, pour 1 attendu. C'est l'équivalence de Keating et Smith, vue sur des nombres calculés ici.
-3. **En sens inverse, les paires de premiers rejouent la musique des zéros**, au volume 2S(h) (pente mesurée 0,96). Les jumeaux seuls, à 10¹⁰, sont encore trop bruyants pour qu'on l'entende.
+3. **En sens inverse, les paires de premiers rejouent la musique des zéros**, au volume 2S(h) (0,98 ± 0,04 fois la prédiction avec un filtre adapté), les jumeaux seuls compris (1,09 ± 0,15). Et elles rejouent aussi les notes des fonctions L de Dirichlet, avec le signe prédit (14 σ pour χ₅). Les triplets aussi, au volume 3·S(H), avec en plus une note que les paires ne jouent jamais, celle d'un caractère impair (χ₃, 7 σ).
 4. **Un graphe quantique fait de boucles ln p** reproduit la statistique des zéros avec un champ magnétique, mais pas leur diffraction : ses trajets se combinent, et le signe est inversé. L'instrument de Riemann, s'il existe, est d'un autre genre.
 5. **Le gaz de primons et le paradoxe de Russell** disent la même chose autrement : les zéros naissent de l'infinité des espèces, et l'hypothèse demande que chaque zéro soit son propre reflet.
 
 Rien de tout cela ne démontre l'hypothèse de Riemann, ni la conjecture des premiers jumeaux.
+
+## Savoir et comprendre : l'hypothèse B de Feynman
+
+Dans *Seeking New Laws*, sa dernière conférence Messenger à l'université Cornell (1964), Richard Feynman raconte deux choses.
+
+**Deux théories A et B qui donnent exactement les mêmes résultats.** Elles sont mathématiquement équivalentes, et pourtant elles ne se valent pas. Pour deviner une loi nouvelle, on modifie un peu la théorie ; or une petite modification de A et une petite modification de B mènent à des endroits très différents. Un bon physicien garde donc plusieurs formulations en tête.
+
+**L'astronome maya.** Les Mayas prédisaient Vénus et les éclipses avec des règles d'arithmétique d'une grande précision. Un jeune homme vient dire au savant : et si c'étaient des boules de roche, là-haut, qui tournent ? Le savant lui demande si son idée prédit les éclipses aussi bien que les tables. Pas encore. Alors on l'oublie. C'est la différence entre savoir (calculer juste) et comprendre (avoir une image qui pourra aller plus loin).
+
+L'idée de départ de ce projet était exactement celle-là : inventer une hypothèse B, démontrable, qui donne les mêmes résultats que l'hypothèse de Riemann. Il faut d'abord être honnête sur un point. Si B est exactement équivalente à l'hypothèse, démontrer B, c'est démontrer l'hypothèse : il n'y a pas de raccourci. Mais Feynman a raison, la forme compte : pour les courbes, c'est une reformulation (une positivité sur la surface C × C, section « Dans ce monde-là ») qui a rendu la preuve possible. Et si B est plus faible, on peut parfois la démontrer, et elle donne alors les mêmes résultats pour bien des questions. Le test de Feynman dit où A et B se séparent : on tourne un bouton.
+
+### Chaque forme de l'hypothèse a son bouton
+
+| Forme de l'hypothèse | Le bouton | Faux | L'hypothèse | Démontré |
+|---|---|---|---|---|
+| Möbius (Littlewood, 1912) | l'exposant θ dans \|M(x)\| ≤ x^θ | θ < ½ ; même \|M(x)\| < √x (Mertens) est faux (Odlyzko et te Riele, 1985) | θ = ½ + ε | θ = 1 : le théorème des nombres premiers (1896) |
+| Robin (1984) | la constante c dans σ(n) < c·n·ln ln n, pour n > 5 040 | c < e^γ | c = e^γ ≈ 1,781 | c > e^γ, pour n assez grand |
+| de Bruijn–Newman | le temps t de « chaleur » (carte des pistes) | t < 0 (Rodgers et Tao, 2018) | t = 0 | t ≥ 0,2 (Platt et Trudgian, 2021) |
+| Weil (1952) | les poids des nombres premiers | tout autre poids, si l'hypothèse est vraie (Théorème 1, plus haut) | les vrais poids | — |
+| Liouville et Selberg–Delange (calcul ci-dessous) | z dans Σ z^Ω(n) | — | z = −1 | tout z ≠ −1 du cercle \|z\| = 1 : le terme principal est un théorème |
+| Le hasard (Wintner ; Aymone et Sidoravicius) | le biais des signes ±1 vers −1 | — | biais total : c'est μ | aucun biais : un théorème (Wintner, 1944) |
+| Les premiers en progression (Bombieri–Vinogradov) | le niveau ϑ : jusqu'où vont les modules, x^ϑ | ϑ = 1 sous sa forme la plus forte (Friedlander et Granville, 1989) | ϑ = ½ pour chaque module : l'hypothèse généralisée | ϑ = ½ en moyenne (1965) ; un peu plus de ½ pour des modules sans grand facteur premier (Zhang, 2013) |
+
+La lecture du tableau est frappante : dans toutes ses formes, l'hypothèse est au bord. Un cran du mauvais côté, elle devient fausse (le √x de Mertens, la constante de Robin, le temps négatif de de Bruijn–Newman) ; un cran de l'autre côté, elle devient plus faible, et souvent démontrée. Rodgers et Tao l'ont prouvé pour de Bruijn–Newman : si l'hypothèse est vraie, elle l'est de justesse. Notre cascade de Weil disait la même chose (la marge fond vers zéro) : aucune inégalité « avec de la marge » ne la démontrera.
+
+**La meilleure hypothèse B connue : Bombieri–Vinogradov.** Démontrée en 1965, elle dit que les nombres premiers se répartissent dans les progressions arithmétiques aussi bien que le prédit l'hypothèse de Riemann généralisée, non pas pour chaque module, mais en moyenne sur les modules jusqu'à √x. Pour beaucoup d'applications, c'est aussi bon : le théorème de Chen (1973), selon lequel tout nombre pair assez grand est la somme d'un premier et d'un nombre ayant au plus deux facteurs premiers, repose dessus. Et voici la remarque de Feynman, presque mot pour mot : en la modifiant un tout petit peu, au niveau ½ + 1/584 pour des modules sans grand facteur premier, Zhang (2013) a obtenu une infinité de paires de premiers à distance bornée, ce que l'hypothèse généralisée elle-même ne donne pas. A et B donnaient les mêmes résultats ; leurs petites modifications, non.
+
+### L'aiguille de Liouville
+
+![Pour |z| = 1, la somme des z^Ω(n) suit le théorème de Selberg–Delange partout sauf en z = −1, où le terme principal s'annule ; un petit tour de bouton autour de −1 change tout ; le vrai μ et des Möbius au hasard ont la même échelle √x, mais seul le vrai μ a des raies aux zéros de ζ](bouton_de_feynman.png)
+
+La fonction de Liouville vaut λ(n) = (−1)^Ω(n), où Ω(n) compte les facteurs premiers de n avec leur multiplicité (Ω(12) = 3, car 12 = 2·2·3). L'hypothèse de Riemann revient à dire que L(x) = Σ λ(n) reste de l'ordre de √x (section « La taille, pas le signe »). Voici le bouton : remplacer −1 par un nombre z quelconque, et regarder Σ z^Ω(n).
+
+- **Pour tout z ≠ −1, c'est un théorème.** La méthode de Selberg (1954) et Delange donne Σ_{n ≤ x} z^Ω(n) ≈ x (ln x)^(z − 1)·G(z)/Γ(z), où G(z) est un produit sur les nombres premiers et Γ la fonction gamma. On a tout calculé exactement jusqu'à 10⁹ : sur tout le cercle |z| = 1, calcul et théorème se superposent (2 233 contre 2 281 fois √x en z = i, avec deux termes de la formule).
+- **En z = −1, tout s'annule.** La fonction Γ a un pôle en −1 : 1/Γ(−1) = 0, et le terme principal disparaît exactement, avec tous ses termes correctifs. Il ne reste que la musique des zéros, de l'ordre de √x (0,80·√x à 10⁹). C'est la pointe de l'aiguille, et l'hypothèse de Riemann dit que rien de plus grand ne s'y cache.
+- **Un tout petit tour de bouton change tout.** En z = −0,99, le théorème prédit un terme principal d'environ −0,016·x/(ln x)², minuscule à côté de x, mais qui dépasse √x vers 5·10⁸ ; à 10⁹, la somme vaut déjà −2,52·√x, et elle s'éloigne pour toujours. En z = −1,01, elle part de l'autre côté. C'est exactement la remarque de Feynman : une modification infime de B, un résultat extrêmement différent.
+- **Au passage, le biais de Pólya.** La moyenne de L(x)/√x, prise le long de ln x, vaut −0,679 ; la formule explicite prédit 1/ζ(½) = −0,685. C'est ce biais qui faisait croire que L(x) restait toujours négatif.
+
+Ce que cela dit : une théorie B démontrable (Selberg–Delange) donne la bonne réponse partout sur le cercle sauf en un point, et ce point est l'hypothèse. Pour la démontrer par ce chemin, il faudrait savoir que ce qui reste en z = −1 est de l'ordre de √x ; aujourd'hui, on ne sait le borner que par une quantité à peine plus petite que x.
+
+### Une hypothèse B démontrable : le hasard
+
+Aurel Wintner (1944) a eu l'idée la plus simple : remplacer les signes de la fonction de Möbius par des pile ou face. On garde les entiers sans facteur carré, mais chaque nombre premier reçoit un signe ±1 au hasard, et f(n) est le produit des signes de ses facteurs. Pour ces « Möbius au hasard », l'analogue de l'hypothèse de Riemann est un théorème : presque sûrement, leur somme reste de l'ordre de x^(½ + ε). Voilà une hypothèse B démontrable qui donne, pour la taille, le même résultat que l'hypothèse de Riemann.
+
+- **Même échelle, pas le même volume.** Entre 10⁶ et 10⁹, le maximum de nos six tirages au hasard va de 0,9 à 1,6 fois √x ; le vrai M(x) reste sous 0,45·√x. Le vrai μ est plus sage que le hasard, parce que sa musique n'a que quelques notes fortes. Il finira pourtant par dépasser √x, très loin (Odlyzko et te Riele, 1985). En moyenne, le hasard fait même un peu mieux que √x, d'un facteur (ln ln x)^(1/4) : c'est un théorème de Harper (2020).
+- **Pas la même musique.** Le spectre en ln x du vrai M(x) n'a que des raies, aux zéros de ζ, et leurs volumes sont exactement ceux de la formule explicite, 2/|ρ ζ′(ρ)| (0,178 ; 0,084 ; 0,058…, mesurés comme prédits). Le hasard n'a pas de raies : c'est un bruit.
+- **Le bouton du hasard.** Aymone et Sidoravicius ont truqué la pièce, très légèrement, vers −1, comme μ : pour une famille de ces fonctions, « rester à l'échelle √x » redevient équivalent à l'hypothèse de Riemann. Sans biais, c'est un théorème ; avec le biais total, c'est μ ; et dès qu'on penche vers μ, on retombe sur le problème.
+
+Programmes : [`calculs/liouville_hasard.py`](calculs/liouville_hasard.py) (le crible) et [`calculs/bouton_de_feynman.py`](calculs/bouton_de_feynman.py).
+
+### Le jeune Maya
+
+La leçon des Mayas vaut pour tout ce projet. Nos calculs sont des tables de prêtres : tous les nombres premiers jusqu'à 10¹⁰, les jumeaux jusqu'à 10¹², 138 069 zéros, κ = 0,95, les volumes 2S(h) et S(h)·c_χ(h), justes à quelques pour cent. Ils prédisent très bien, et ils ne démontrent rien. Pour les courbes, les « boules de roche » existaient : les points de la courbe, et la surface C × C où la positivité devient de la géométrie (Weil) ; elles ont tout expliqué d'un coup. Pour ζ, personne ne les a trouvées. Notre fleur de nombres premiers était une tentative de boule de roche : un vrai objet physique, avec la bonne statistique. Elle a échoué exactement là où Feynman conseille de regarder, à une petite modification près : ses trajets se combinent, ceux de ζ non. Le programme d'Alain Connes cherche ces boules de roche : un espace où les nombres premiers seraient des orbites qui ne se combinent pas.
+
+### Ce qu'on retient
+
+1. **L'idée de départ existe, et elle a déjà servi.** Des hypothèses B démontrables qui donnent les mêmes résultats que l'hypothèse de Riemann, il y en a : Bombieri–Vinogradov (en moyenne), Selberg–Delange (partout sauf en z = −1), le hasard (Wintner). La plus célèbre, un peu modifiée, a donné les écarts bornés entre premiers.
+2. **Mais l'hypothèse est au bord, dans toutes ses formes.** Un cran d'un côté, elle devient fausse ; un cran de l'autre, plus faible et souvent démontrée. Elle tient sur une aiguille : aucune estimation « avec de la marge » ne la démontrera.
+3. **Ce qui a marché ailleurs avait des boules de roche derrière.** Pour les courbes, une géométrie. Pour ζ, il manque l'objet ; nos tables, aussi précises soient-elles, ne le remplacent pas.
+
+Rien de tout cela ne démontre l'hypothèse de Riemann.
 
 ## Au final
 
@@ -496,20 +604,21 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 
 **L'hypothèse n'est ni démontrée ni contredite.** Tous nos calculs sont compatibles avec elle, et aucun ne la démontre. Quelques petits résultats, eux, sont démontrés (section précédente). La plupart refont, avec nos propres programmes, des calculs connus ; nous l'avons signalé à chaque fois.
 
-**Ce qu'on a appris, en six points.**
+**Ce qu'on a appris, en sept points.**
 
 1. **Le signe ne compte pas, la taille si.** Pólya demandait que L(x) reste négatif : c'est faux dès 906 150 257. L'hypothèse demande seulement que L(x) reste de l'ordre de √x : c'est ce qu'on observe (au plus 1,36·√x jusqu'au milliard).
 2. **Les zéros savent où les courbes repassent.** Leurs ondes retrouvent 906 millions, les régions de la course modulo 4 et le renversement de la course modulo 3 à 608 981 813 029. Deux prédictions restent à vérifier par un calcul exact : vers 2,3·10¹⁹ pour Pólya, vers 6,15·10¹² pour la course modulo 3.
 3. **La récurrence de Weil a la bonne forme.** « Vrai pour une fenêtre, donc pour une fenêtre un peu plus grande » : c'est l'énoncé P(x) de Weil. Le premier cas est un théorème (Connes et Consani), et la première marche, quand le nombre 2 entre, s'écrit comme une inégalité précise.
 4. **Mais son pas ne peut pas être une estimation.** À chaque nouveau nombre premier, la marge fond (3·10⁻⁸ à x = 3, 3·10⁻⁵⁷ à x = 64 avec 20 ondes, 7·10⁻⁷³ avec 28), et chaque poids se verrouille autour de sa vraie valeur. Un raisonnement par inégalités, qui garderait un peu de jeu d'une marche à la suivante, n'a guère de chance : le jeu tend vers zéro.
 5. **Le cas qui parle de lui-même est le seul qui résiste.** ζ ressemble à elle-même à des hauteurs proportionnelles : c'est démontré pour tout rapport irrationnel. S'imiter elle-même sans décalage proportionnel, c'est l'hypothèse (Bagchi). Comme chez Russell, toute la difficulté se concentre dans l'autoréférence.
-6. **Les zéros parlent aussi des premiers jumeaux.** Des zéros calculés ici, on retrouve le facteur de Hardy–Littlewood des jumeaux (κ = 0,95 ± 0,01) ; en sens inverse, chaque écart h entre premiers rejoue la musique des zéros au volume 2S(h). Ce sont des fluctuations autour de la conjecture, pas la conjecture : l'infinité des jumeaux reste ouverte.
+6. **Les zéros parlent aussi des premiers jumeaux.** Des zéros calculés ici, on retrouve le facteur de Hardy–Littlewood des jumeaux (κ = 0,95 ± 0,01) ; en sens inverse, chaque écart h entre premiers rejoue la musique des zéros au volume 2S(h), et celle des fonctions L de Dirichlet avec un signe qui dépend de h ; les triplets de premiers font de même, χ₃ compris. Ce sont des fluctuations autour de la conjecture, pas la conjecture : l'infinité des jumeaux reste ouverte.
+7. **L'hypothèse tient sur une aiguille.** Dans chacune de ses formes (Möbius, Robin, de Bruijn–Newman, Weil, Liouville), le moindre tour de bouton la rend fausse ou plus faible. Les hypothèses B démontrables existent (Bombieri–Vinogradov, Selberg–Delange, le hasard) et donnent les mêmes résultats pour bien des questions, mais elles se séparent de l'hypothèse exactement au point qui compte.
 
 **Ce que cela dit de la preuve à trouver.** Pour l'onde la plus fragile, la positivité de Weil est une égalité presque parfaite entre la partie archimédienne et les nombres premiers, de plus en plus serrée à mesure que la fenêtre s'élargit. Une démonstration devra donc très probablement venir d'une structure exacte, qui rende la positivité automatique : une géométrie pour les courbes (Weil, Deligne), un opérateur autoadjoint pour les surfaces (Selberg), une récurrence algébrique exacte pour les aimants (Lee et Yang). Nos calculs ne disent pas laquelle ; ils expliquent pourquoi il en faut sans doute une.
 
 **La copie la plus avancée.** Parmi les démonstrations voisines, celle de Selberg, recopiée par Connes, Consani et Moscovici, est celle où il reste le moins à faire : deux étapes, que nos calculs voient à l'œuvre (l'onde la plus fragile est paire et seule à son niveau, et elle tend vers la fonction Φ de Riemann). D'après eux, les démontrer suffirait à démontrer l'hypothèse.
 
-**Ce qui est peut-être nouveau.** Trois constats, que nous n'avons pas trouvés écrits sous cette forme : le scénario « libre, nécessaire, verrouillé » pour chaque puissance de premier ; la loi de la marge ; l'ordre « plus tôt entré, plus verrouillé ». Ils découlent assez directement de ce qu'on sait sur l'onde la plus fragile (Connes, Consani, Moscovici) : quand une seule énergie est presque nulle, la moindre retouche se lit sur elle. Un spécialiste les trouverait sans doute attendus. Ce sont des observations numériques sur des familles finies d'ondes, pas des théorèmes, tout comme les deux prédictions ci-dessus. Le grand détour par Fourier ajoute deux mesures du même genre : le facteur des jumeaux retrouvé dans les seuls zéros (κ = 0,95), et le volume 2S(h) de la musique des zéros dans chaque écart h (pente 0,96) ; la version moyennée de la seconde est due à Korevaar et te Riele (2010).
+**Ce qui est peut-être nouveau.** Trois constats, que nous n'avons pas trouvés écrits sous cette forme : le scénario « libre, nécessaire, verrouillé » pour chaque puissance de premier ; la loi de la marge ; l'ordre « plus tôt entré, plus verrouillé ». Ils découlent assez directement de ce qu'on sait sur l'onde la plus fragile (Connes, Consani, Moscovici) : quand une seule énergie est presque nulle, la moindre retouche se lit sur elle. Un spécialiste les trouverait sans doute attendus. Ce sont des observations numériques sur des familles finies d'ondes, pas des théorèmes, tout comme les deux prédictions ci-dessus. Le grand détour par Fourier ajoute trois mesures du même genre : le facteur des jumeaux retrouvé dans les seuls zéros (κ = 0,95), le volume 2S(h) de la musique des zéros dans chaque écart h (0,98 ± 0,04 avec le filtre adapté), et surtout les notes des fonctions L dans les paires, au volume S(h)·c_χ(h) (14 σ pour χ₅), puis dans les triplets, χ₃ compris ; la part de ζ, en moyenne sur h, est due à Korevaar et te Riele (2010).
 
 **Et l'intuition de départ ?** « Si c'est vrai sur une partie, des harmoniques et une symétrie le rendent vrai partout. » Dans sa forme, l'intuition est juste : c'est ainsi qu'on a démontré l'hypothèse pour les courbes, et c'est la forme du critère de Weil. Ce qui manque pour ζ, c'est l'outil qui transporte une égalité exacte d'une fenêtre à la suivante. Personne ne l'a trouvé : c'est là qu'est toute la difficulté de l'hypothèse de Riemann.
 
@@ -530,8 +639,9 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 | La positivité (Weil) | Une énergie toujours positive | Équivalent exact ; vérifiée ici jusqu'à x = 64 avec 20 à 28 ondes ; chaque poids premier s'y verrouille | Il faut toutes les ondes, x → ∞ ; sans les nombres premiers, elle casse dès x ≈ 2,28 |
 | L'instrument caché (Hilbert–Pólya, Connes) | Les zéros comme fréquences propres | Écarts entre zéros semblables aux niveaux d'énergie des noyaux lourds (Montgomery, Odlyzko) | Personne n'a trouvé l'opérateur |
 | Les quasi-cristaux (Dyson) | Des zéros ordonnés sans être périodiques, dont la « diffraction » tombe sur les ln p | Programme proposé en 2009 ; « quasi-cristaux de Fourier » étudiés activement | Classer tous les quasi-cristaux à une dimension |
-| Les premiers jumeaux (Hardy–Littlewood) | Les paires de premiers et les corrélations des zéros, deux faces d'une même conjecture (Keating–Smith) | Vérifiée ici à 0,016 % près jusqu'à 10¹⁰ ; démontré : une infinité de paires à distance au plus 246 | La barrière de la parité |
+| Les premiers jumeaux (Hardy–Littlewood) | Les paires de premiers et les corrélations des zéros, deux faces d'une même conjecture (Keating–Smith) | Vérifiée ici à 0,016 % près jusqu'à 10¹⁰ (et à 0,11 % près pour 50 sortes de triplets) ; démontré : une infinité de paires à distance au plus 246 | La barrière de la parité |
 | Les graphes quantiques (Berry, Kottos–Smilansky, Kurasov–Sarnak) | Un instrument fait de boucles de longueur ln p | La statistique GUE des zéros, reproduite avec un champ magnétique | Les trajets se combinent (ln 6 = ln 2 + ln 3) et le signe est inversé |
+| Les hypothèses B (Feynman) | Une forme démontrable qui donne les mêmes résultats | Bombieri–Vinogradov (en moyenne), Selberg–Delange (sauf en z = −1), le hasard (Wintner) | L'hypothèse est au bord, dans toutes ses formes |
 | Les courbes modulo p (Hasse, Weil, Deligne) | Le même énoncé dans un autre monde | **Démontré** | Aucun équivalent connu pour les entiers |
 
 ## Projets pour continuer
@@ -543,9 +653,10 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 5. **Là où l'hypothèse a failli tomber** : zoomer sur la paire de Lehmer, à la hauteur 7005.
 6. **Le jeu de Weil dans toutes les directions** : mesurer l'ensemble des poids gagnants dans toutes les directions, pas seulement un poids à la fois, et vérifier qu'il se resserre partout autour des vrais poids.
 7. **Démontrer l'étape 2 de la copie de Selberg** : montrer que les ondes propres de l'énergie de Weil alternent pair, impair, pair… comme celles d'une corde vibrante. Pour un problème voisin, Slepian l'a fait avec un opérateur différentiel qui commute (les fonctions « prolates ») ; Connes, Consani et Moscovici relient justement l'énergie de Weil à ces fonctions.
-8. **Entendre les jumeaux seuls.** À 10¹⁰, la musique des zéros est vingt fois plus faible que leur bruit propre. Monter vers 10¹³ ou 10¹⁴ (un crible segmenté en parallèle), ou trouver un meilleur filtre, pour l'entendre dans les seuls jumeaux.
+8. **Les fonctions L dans les paires et les triplets.** La prédiction S(h)·c_χ(h) tient à 14 σ pour χ₅ dans les paires ; dans les triplets, la prédiction S(H)·c_χ(H) tient aussi, y compris pour le caractère impair χ₃ (7 σ). Il reste à la dériver proprement (méthode du cercle, avec les caractères), à la tester pour des modules plus grands et pour les quadruplets (le nôtre est encore trop bruité), et à chercher si elle est déjà connue.
 9. **Une fleur sans combinaisons.** Chercher des conditions au carrefour dont la diffraction n'ait que des creux en ln pᵏ, de profondeur ln p/p^(k/2). Ce serait un pas vers l'instrument de Hilbert et Pólya ; personne ne sait le faire, et c'est peut-être impossible avec un graphe.
-10. **Lire** : *La Symphonie des nombres premiers* de Marcus du Sautoy, et *Prime Numbers and the Riemann Hypothesis* de Barry Mazur et William Stein (en anglais).
+10. **D'autres boutons.** Pour chaque forme de l'hypothèse, chercher le bouton dont l'autre côté est démontrable, et mesurer la distance qui reste (comme 0 ≤ Λ ≤ 0,2 pour de Bruijn–Newman).
+11. **Lire** : *La Symphonie des nombres premiers* de Marcus du Sautoy, et *Prime Numbers and the Riemann Hypothesis* de Barry Mazur et William Stein (en anglais).
 
 ## Sources
 
@@ -567,9 +678,12 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 - J. Friedlander, H. Iwaniec, [X² + Y⁴ et le problème de la parité](https://arxiv.org/abs/math/9811185) ; [Sylver coinage](https://en.wikipedia.org/wiki/Sylver_coinage) ; J. Kaplan, vidéo *Russell's Paradox – a simple explanation of a profound problem*
 - A. Connes, C. Consani, H. Moscovici, [Zeta Spectral Triples](https://arxiv.org/abs/2511.22755) (2025) ; S. Gonek, [Finite Euler products and the Riemann Hypothesis](https://arxiv.org/abs/0704.3448) ; [les approximations symétriques et le résultat de Gonek et Montgomery](https://arxiv.org/abs/2411.08364)
 - E. Bogomolny, J. Keating, corrélations des zéros au-delà de la loi GUE : [Physical Review Letters 77 (1996)](https://research-information.bris.ac.uk/en/publications/gutzwillers-trace-formula-and-spectral-statistics-beyond-the-diag/) ; J. Keating, D. Smith, [premiers jumeaux et corrélation de paires des zéros](https://arxiv.org/abs/1903.07057) (2019)
-- H. Montgomery, K. Soundararajan, [premiers dans les petits intervalles](https://arxiv.org/abs/math/0409258) (2004) ; J. Korevaar, H. te Riele, [moyenne des paires de premiers](https://arxiv.org/abs/0902.4352) (2010)
+- H. Montgomery, K. Soundararajan, [premiers dans les petits intervalles](https://arxiv.org/abs/math/0409258) (2004) ; J. Korevaar, H. te Riele, [moyenne des paires de premiers](https://arxiv.org/abs/0902.4352) (2010) ; G. H. Hardy, J. E. Littlewood, [Partitio numerorum III](https://doi.org/10.1007/BF02403921) (1923), la conjecture des k-uplets ; les [triplets de nombres premiers](https://en.wikipedia.org/wiki/Prime_triplet)
 - T. Kottos, U. Smilansky, [graphes quantiques](https://link.aps.org/doi/10.1103/PhysRevLett.79.4794) (1997) ; P. Kurasov, P. Sarnak, [polynômes stables et quasi-cristaux](https://arxiv.org/abs/2004.05678) (2020) ; L. Alon, A. Cohen, C. Vinzant, [polynômes de Lee–Yang](https://arxiv.org/abs/2303.03201) (2023)
 - Y. Atas et al., [rapport de deux écarts successifs](https://arxiv.org/abs/1212.5611) (2013) ; E. Bogomolny et al., [les zéros à hauteur finie](https://arxiv.org/abs/math/0602270) (2006)
 - [Le gaz de primons](https://en.wikipedia.org/wiki/Primon_gas) (B. Julia ; D. Spector, *Communications in Mathematical Physics* 127, 1990)
+- R. Feynman, *Seeking New Laws* (1964), [transcription](https://jamesclear.com/great-speeches/seeking-new-laws-by-richard-feynman) ; Y. Zhang, [Bounded gaps between primes](https://annals.math.princeton.edu/2014/179-3/p07) (2014) ; [théorème de Bombieri–Vinogradov](https://en.wikipedia.org/wiki/Bombieri%E2%80%93Vinogradov_theorem)
+- B. Rodgers, T. Tao, [la constante de de Bruijn–Newman est positive ou nulle](https://arxiv.org/abs/1801.05914) (2018) ; G. Caveney, J.-L. Nicolas, J. Sondow, [le théorème de Robin](https://arxiv.org/abs/1110.5078)
+- M. Aymone, V. Sidoravicius, [fonctions multiplicatives au hasard, biaisées](https://arxiv.org/abs/1412.1157) (qui citent le théorème de Wintner, 1944) ; A. Harper, [sommes de fonctions multiplicatives au hasard](https://arxiv.org/abs/1703.06654) ; G. Tenenbaum, *Introduction à la théorie analytique et probabiliste des nombres*, chapitre II.5 (la méthode de Selberg–Delange)
 
 Réalisé avec l'aide de Claude (Anthropic).
