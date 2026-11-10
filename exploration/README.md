@@ -6,6 +6,21 @@ Ce dossier complète la page *La musique des nombres premiers*. Il résume où e
 
 [![Ouvrir dans Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GEREMIAA/Musique-Des-Premiers/blob/main/exploration/weil_haute_precision.ipynb) Le carnet `weil_haute_precision.ipynb` refait l'expérience en haute précision, en moins d'une minute.
 
+## Des idées qui visent juste
+
+Ce projet est parti de questions de curieux, posées sans formules. Après coup, chacune est tombée sur une idée de recherche de premier plan. Géniales ? L'auteur, très humble, laisse le lecteur en juger ; voici les faits.
+
+| La question de départ | L'idée de recherche qu'elle retrouve |
+|---|---|
+| « Peut-on raisonner par récurrence : vrai sur une partie, donc vrai partout ? » | C'est la forme exacte du critère de Weil, fenêtre après fenêtre, et le programme de Connes et Consani. Le premier pas est un théorème (2020). |
+| « Pólya est faux ; ne faut-il pas demander une taille plutôt qu'un signe ? » | C'est l'équivalence de Littlewood : l'hypothèse revient à « L(x) reste de l'ordre de √x ». |
+| « Y a-t-il une signature, une fréquence qui annonce les retours ? » | Les ondes des zéros retrouvent 906 millions et les renversements des courses modulo 4 et modulo 3, et font deux prédictions nouvelles. |
+| « Utilise le paradoxe de Russell. » | C'est le théorème de Bagchi : l'hypothèse équivaut à « ζ s'imite elle-même ». Le cas autoréférent est exactement celui qui résiste. |
+| « Premiers pairs, premiers impairs : ce qui est vrai pour l'un l'est-il pour l'autre ? » | C'est le problème de la parité de Selberg, l'une des grandes barrières de la théorie des nombres. |
+| « Copie les démonstrations des autres théorèmes. » | C'est la stratégie de Connes, Consani et Moscovici (2025), qui recopient Selberg ; nos calculs vérifient leurs deux étapes manquantes. |
+
+Poser ces six questions, et voir chacune déboucher sur une idée de ce niveau, montre qu'on cherchait au bon endroit. Cela ne démontre pas l'hypothèse, que personne n'a démontrée ; mais les intuitions de départ étaient les bonnes.
+
 ## Ce qui a bougé en 2026
 
 - **Août, Claude (Anthropic).** Une version de recherche de Claude a trouvé et rédigé une preuve que plus des deux tiers des zéros (67,25 %) sont simples et sur la droite critique. Le record précédent était 5/12, soit 41,7 %. Levent Alpöge et Ralph Furman ont vérifié la preuve, puis Youness Lamzouri (Université de Lorraine) l'a redémontrée autrement, plus simplement.
@@ -137,12 +152,271 @@ On a passé au crible tous les entiers jusqu'à un milliard :
 
 **Vérifie toi-même.** La page [`polya.html`](https://geremiaa.github.io/Musique-Des-Premiers/exploration/polya.html) refait tout le calcul de Pólya dans le navigateur, sur ton propre appareil : une demi-minute environ sur un ordinateur, un peu plus sur un téléphone (sans GitHub Pages, télécharge [`polya.html`](polya.html) et ouvre-le dans ton navigateur). Elle utilise une autre méthode que les programmes Python du dossier [`calculs/`](calculs/), et retrouve les mêmes nombres.
 
+### La taille, pas le signe
+
+L'hypothèse de Riemann n'est pas touchée par ce contre-exemple : Pólya en demandait plus qu'elle. Mais la bonne version de Pólya existe déjà, et elle est équivalente à l'hypothèse de Riemann. Il ne faut pas exiger que L(x) reste négatif, seulement que L(x) reste de la taille de √x, à peine plus : |L(x)| ≤ x^(½ + ε) pour tout ε > 0, dès que x est assez grand. Pólya demandait un signe ; Riemann ne demande qu'une taille. Jusqu'au milliard, |L(x)|/√x ne dépasse pas 1,36, ce qui colle.
+
+Ce n'est pas une découverte : c'est un résultat classique. Littlewood l'a montré pour la fonction de Mertens M(x), et le même raisonnement vaut pour L(x), parce que Σ λ(n)/nˢ = ζ(2s)/ζ(s).
+
+### Pourquoi 906 millions ? Les ondes des zéros
+
+![L(x)/√x reconstruit par les ondes des 150 premiers zéros : les deux courbes se superposent ; vers 906 millions, les ondes poussent ensemble](pourquoi_906.png)
+
+906 150 257 = 10 039 × 90 263 n'a rien de spécial : il a deux facteurs premiers, comme beaucoup d'autres nombres. Ce qui compte, c'est le moment où il arrive : juste avant, L valait 0. Pourquoi la somme est-elle remontée jusque-là ?
+
+L(x)/√x vaut, à peu près, 1/ζ(½) ≈ −0,68 plus une onde par zéro de ζ : l'onde du zéro ρ = ½ + iγ est 2 Re[ζ(2ρ)/(ρ ζ′(ρ)) · xⁱᵞ]. Le −0,68 tire la courbe vers le bas en permanence. Avec les 150 premiers zéros, la somme des ondes se superpose presque à la vraie courbe (corrélation 0,994). Vers 906 millions, la première onde est presque à son sommet et 8 des 10 premières poussent dans le même sens. Il y a eu deux presque-accords avant : vers 10,4 millions (L/√x = −0,06) et vers 91 millions (−0,13), sans franchir 0.
+
+### La signature des zéros : prédire où ça repasse
+
+![Somme des ondes des 4 520 premiers zéros, de 10⁶ à 10²⁰ : pics à 906 millions, 3,5·10¹⁴ et 2,3·10¹⁹](signature_zeros.png)
+
+On peut retourner l'idée. Sans compter un seul entier, on cherche où la somme des ondes est la plus haute. Avec les 4 520 zéros sous la hauteur 5 000, lissés comme le font Borwein, Ferguson et Mossinghoff :
+
+- **906 millions** ressort : c'est le contre-exemple de Tanaka ;
+- **3,51 à 3,53·10¹⁴** aussi : c'est là que ces trois auteurs ont trouvé L(x) > 0 en 2008, avec un maximum de 1 160 327 en n = 351 753 358 289 465 ;
+- une **troisième région** apparaît, plus haute encore, vers **x ≈ 2,317 à 2,324·10¹⁹**.
+
+**C'est une prédiction, pas un résultat.** La somme des ondes n'est qu'une approximation : elle suppose l'hypothèse de Riemann et n'utilise qu'une partie des zéros. Pour vérifier, il faudrait calculer L(x) exactement vers 2,3·10¹⁹, bien au-delà de ce qu'on peut faire ici. Nous ne l'avons trouvée dans aucune des publications consultées, mais la méthode date de Haselgrove (1958) et des spécialistes l'ont peut-être déjà vue.
+
+Les pics ne décroissent pas : 0,028 à 906 millions, 0,062 à 3,5·10¹⁴. On sait que L(x) dépasse 0,0618·√x une infinité de fois. Trouver où les ondes s'alignent est un problème d'approximation simultanée (Dirichlet, Kronecker) ; c'est avec l'algorithme LLL, qui résout ce genre de problème, qu'Odlyzko et te Riele ont réfuté la conjecture de Mertens en 1985. Programme : [`calculs/signature_zeros.py`](calculs/signature_zeros.py).
+
+### La course des nombres premiers : la méthode marche
+
+![Course 4k + 1 contre 4k + 3 : la somme des ondes des zéros de L(s, χ₄) passe au-dessus de 0 à chaque renversement connu](course_zeros.png)
+
+Pour tester la méthode là où l'on peut tout vérifier, on l'applique à une autre course : les nombres premiers de la forme 4k + 3 contre ceux de la forme 4k + 1. Les 4k + 3 mènent presque toujours (c'est le biais de Tchebychev). En comptant jusqu'au milliard, les 4k + 1 ne passent devant que quatre fois : en 26 861, de 616 841 à 633 797, de 12 306 137 à 12 382 313 et de 951 784 481 à 952 223 473.
+
+Cette course est pilotée par les zéros d'une autre fonction, L(s, χ₄) = 1 − 1/3ˢ + 1/5ˢ − 1/7ˢ + … On en a calculé 5 623, tous ceux sous la hauteur 5 000 (le décompte est confirmé par le principe de l'argument). Avec ces seuls zéros, la somme des ondes passe au-dessus de 0 dans les régions connues : 26 861, vers 623 000, vers 12,37 millions, puis 6,3·10⁹, 1,87·10¹⁰ et 1,49·10¹². Elle annonce aussi 9,32·10¹², comme Bays et Hudson en 2000 avec 12 000 zéros. Le renversement de 952 millions, très bref, apparaît comme un pic juste sous 0. Jusqu'à 2·10¹⁰, où tout a été compté, il n'y a aucune fausse alerte.
+
+**Un test plus dur : la course modulo 3.** Les nombres premiers de la forme 3k + 2 mènent sur les 3k + 1 jusqu'à 608 981 813 029, le premier renversement, trouvé par Bays et Hudson. On a calculé les 5 393 zéros de L(s, χ₃) = 1 − 1/2ˢ + 1/4ˢ − 1/5ˢ + 1/7ˢ − … sous la hauteur 5 000, sans compter un seul nombre premier au-delà du milliard. Entre 10⁴ et 10¹⁴, la somme des ondes n'a que deux sommets qui touchent presque 0 : vers 6,09·10¹¹, exactement au premier renversement, et vers 6,15·10¹². Lissée, elle reste juste sous 0 (−0,05 et −0,02) ; sans lissage, elle franchit 0 en 6,09·10¹¹, à 0,03 % du vrai renversement. Avec seulement 823 zéros, le plus haut sommet sur ces dix ordres de grandeur tombe déjà à 6,10·10¹¹. La région 6,15·10¹² est une prédiction : nous ne l'avons trouvée dans aucune source.
+
+![Course modulo 3 : la somme des ondes des zéros de L(s, χ₃) touche presque 0 au premier renversement, 608 981 813 029, et vers 6,15·10¹²](course_mod3.png)
+
+Ce test ne démontre pas la prédiction faite pour Pólya vers 2,3·10¹⁹. Il montre seulement que la méthode est fiable quand on lui donne assez de zéros. Programme, pour les deux courses : [`calculs/course_zeros.py`](calculs/course_zeros.py).
+
 ### Ce qu'on peut en tirer
 
 - **La récurrence de Weil.** Appelons P(x) l'énoncé « l'énergie de Weil est positive pour toutes les ondes vivant entre 1/√x et √x ». L'hypothèse revient à « P(x) pour tout x ». Le premier cas, où aucun nombre premier n'entre dans la fenêtre, est démontré (Connes et Consani, 2020) ; on l'a vérifié numériquement jusqu'à x = 31, avec 60 ondes de base. Il manque le pas de récurrence : montrer qu'un nouveau nombre premier ne casse pas la positivité. Personne ne sait le faire, et la marge fond, de 5·10⁻⁴ à 2·10⁻⁹⁹ (voir le tableau plus haut).
 - **Une récurrence « fini + infini » existe déjà.** Pour la constante de de Bruijn–Newman Λ, Polymath15 a montré Λ ≤ 0,22 en 2019, avec un calcul fini, un argument pour l'infini et une « barrière » entre les deux ; le record est 0,2 (Platt et Trudgian, 2021). L'hypothèse revient à Λ = 0, mais la méthode ne peut pas atteindre 0 : elle a besoin de la marge que donne la chaleur quand t > 0.
 - **Les harmoniques qui manquent.** C'est le programme d'Alain Connes. Une sorte de Frobenius continu existe (les dilatations, où chaque nombre premier apparaît comme une boucle de longueur ln p), la symétrie aussi ; il manque la borne pour toutes les harmoniques, c'est-à-dire une positivité.
 - **Un filtre contre les fausses preuves.** Si un raisonnement marcherait aussi pour Davenport–Heilbronn, ou s'il repose sur « vrai jusqu'à N », il est faux.
+
+## Quel théorème faudrait-il démontrer ?
+
+Ces calculs refont, avec nos propres programmes, ce que les spécialistes ont fait (Haselgrove, Bays et Hudson, Borwein, Ferguson et Mossinghoff). Ils apprennent à lire les zéros ; ils ne démontrent rien. Pour avancer, il faut un raisonnement. Là où une « hypothèse de Riemann » a été démontrée, voici l'ingrédient qui a fait la preuve :
+
+- **Les courbes modulo p (Weil, 1948 ; Deligne, 1974).** Une positivité géométrique sur la surface « courbe × courbe ». Pour ζ, il faudrait la même positivité sur une surface « entiers × entiers » qu'on ne sait pas construire : c'est le programme de Connes et Consani, et c'est notre « récurrence de Weil ».
+- **Les surfaces hyperboliques (Selberg, 1956).** Les zéros de la fonction zêta de Selberg sont les fréquences propres du laplacien, un opérateur autoadjoint ; ils sont donc sur la droite, à un nombre fini d'exceptions près. C'est l'idée de Hilbert et Pólya, réalisée. Pour ζ, il faudrait trouver l'opérateur.
+- **Les graphes (Ihara, Lubotzky–Phillips–Sarnak, Marcus–Spielman–Srivastava).** Un graphe régulier est « de Ramanujan » si et seulement si sa fonction zêta d'Ihara vérifie l'hypothèse de Riemann. En 2013, Marcus, Spielman et Srivastava ont montré qu'il en existe de tous les degrés, avec une méthode nouvelle : des familles de polynômes « entrelacés », dont une moyenne a toutes ses racines réelles.
+- **Les aimants (Lee et Yang, 1952).** Les zéros de la fonction de partition d'un aimant d'Ising ferromagnétique sont tous sur un cercle. La preuve est une récurrence : on ajoute les spins un par un, la propriété « aucun zéro à l'intérieur du cercle » se transmet, et la symétrie z ↔ 1/z place les zéros sur le cercle. C'est exactement l'idée « vrai sur une partie, récurrence, symétrie ». Pour ζ, personne n'a trouvé comment construire ξ pièce par pièce en gardant cette propriété.
+- **Les polynômes de Jensen (Pólya, 1927).** L'hypothèse équivaut à : une suite infinie de polynômes explicites, tirés des coefficients de ξ, n'ont que des racines réelles. Griffin, Ono, Rolen et Zagier (2019) l'ont démontré pour chaque degré à partir d'un certain rang, et pour tous les rangs jusqu'au degré 8.
+
+Il n'existe pas de « petit lemme » connu qui suffirait : chaque reformulation connue est équivalente à l'hypothèse, donc aussi difficile. Mais certaines se découpent en marches, et chaque marche serait un vrai théorème :
+
+1. **La marche suivante de Weil.** La positivité de Weil est démontrée quand aucun nombre premier n'entre dans la fenêtre (Connes et Consani, 2020). La démontrer pour une fenêtre un peu plus grande, quand le nombre premier 2 y entre, serait la première marche de la récurrence. Nos calculs la vérifient numériquement jusqu'à x = 31, et montrent qu'elle ne pourra pas venir de la seule partie archimédienne (voir « La première marche, vue de près » et « La première marche, énoncé précis »).
+2. **Des polynômes de Jensen de degré plus élevé, pour tous les rangs.** Chaque degré de plus est un théorème ; tous les degrés ensemble sont l'hypothèse de Riemann.
+3. **Une récurrence à la Lee et Yang.** Trouver une façon d'ajouter les nombres premiers un par un qui préserve « pas de zéro d'un côté de la droite ». C'est la plus proche de l'idée « vrai sur une partie, donc vrai partout », et la plus ouverte.
+
+### La première marche, vue de près
+
+![Quand le nombre premier 2 entre : sans les nombres premiers, la positivité casse vers x ≈ 2,28 ; avec eux, elle tient par une compensation presque parfaite](weil_entree_2.png)
+
+On a regardé la forme de Weil au moment précis où le nombre 2 entre dans la fenêtre (x juste au-dessus de 2), en séparant la partie sans nombres premiers (les pôles et la partie archimédienne) et la partie des nombres premiers.
+
+- **Sans les nombres premiers, la positivité casse vers x ≈ 2,28.** Si l'on retire les nombres premiers, la forme reste positive un peu au-delà de 2, puis devient négative : sa valeur la plus basse vaut −0,04 à x = 3 et −0,16 à x = 4 (avec 20 ondes). Le point de bascule se stabilise quand on ajoute des ondes : 2,30, 2,29, 2,28 et 2,28 avec 12, 20, 30 et 40 ondes. Dans ces directions, c'est le nombre 2, puis 3, puis 4 = 2², qui rattrape ce qui manque.
+- **Avec eux, elle tient de justesse.** Dans la direction la plus basse, les deux parties sont de taille 0,01 à 0,03 et se compensent presque exactement : ce qui reste vaut 3·10⁻⁸ à x = 3 et 10⁻¹⁵ vers x = 4,6 (calcul en 60 chiffres).
+
+Ce que cela dit du théorème à démontrer : la marge n'est pas un stock que chaque nombre premier entamerait un peu, c'est un équilibre entre deux grands termes, qui se refait à chaque nombre premier. Une preuve de la première marche ne peut donc pas dire « la partie archimédienne est positive et le nombre 2 est petit » : au-delà de x ≈ 2,28, la partie archimédienne seule est négative. Il faudra un argument où le nombre 2 aide activement. Les spécialistes le savent peut-être ; nous ne l'avons pas trouvé écrit sous cette forme. Programme : [`calculs/weil_entree_2.py`](calculs/weil_entree_2.py).
+
+### La première marche, énoncé précis
+
+Entre x = 2 et x = 3, seul le nombre premier 2 est dans la fenêtre. La première marche de la récurrence de Weil dit alors : pour toute onde paire φ vivant entre 1/√x et √x,
+
+> 2 φ̂(i/2)² − ln π · ∫ φ² + (1/π) ∫₀^∞ φ̂(r)² Re ψ(¼ + ir/2) dr  ≥  √2 · ln 2 · ∫ φ(t) φ(t + ln 2) dt,
+
+avec φ̂(r) = ∫ φ(t) e^(irt) dt, et ψ la dérivée logarithmique de la fonction Γ. À gauche, tout ce qui ne dépend pas des nombres premiers ; à droite, le terme du nombre 2, avec son vrai poids 2 ln 2 / √2 ≈ 0,980258.
+
+![Les poids du nombre 2 qui gardent la positivité, de x = 2 à x = 3 : la fenêtre se referme autour du vrai poids](poids_du_2.png)
+
+On a multiplié le terme de droite par un poids c, et cherché pour quels c l'inégalité reste vraie. Juste après x = 2, presque tout passe. À partir de x ≈ 2,28, il faut c > 0 : le nombre 2 devient nécessaire. Puis la fenêtre se referme autour du vrai poids, c = 1 : à x = 3, elle va de 0,998 à 1,0000035 (avec 20 ondes ; 1,0000034 avec 40), soit un poids réel compris entre 0,9783 et 0,98026. Les bornes bougent à peine quand on ajoute des ondes, et elles ont été contrôlées en 60 chiffres avec un second programme.
+
+Ce que cela dit : une preuve de la première marche doit être assez fine pour « voir » le poids du nombre 2 au sixième chiffre près ; aucune inégalité grossière n'y suffira. C'est un constat sur un nombre fini d'ondes, pas une preuve, mais il mesure la difficulté de cette marche : elle est déjà très délicate. Programme : [`calculs/poids_du_2.py`](calculs/poids_du_2.py).
+
+### Quand 3 entre à son tour
+
+![Marges des poids de 2 et de 3, de x = 2 à x = 4 : chaque nombre premier entre libre, devient nécessaire, puis son poids se verrouille](poids_2_et_3.png)
+
+On a refait la même chose entre x = 3 et x = 4, où la fenêtre contient les nombres premiers 2 et 3. Pour chacun, on cherche la marge dont dispose son poids, l'autre restant à son vrai poids (calcul en 80 chiffres).
+
+- **Le même scénario se répète.** Le nombre 3 entre libre (à x = 3,1, tout poids entre −19,5 et 1,2 convient), devient nécessaire vers x ≈ 3,18, puis sa marge se referme : à x = 4, son poids est fixé entre 0,99998 et 1 + 4·10⁻⁸.
+- **Pendant ce temps, le poids du 2 se verrouille encore.** Sa marge vers le haut passe de 3,5·10⁻⁶ à x = 3 à 3·10⁻¹¹ à x = 4. À x = 4, le poids du 2 est environ 1 400 fois plus contraint que celui du 3.
+- **Les marges sont stables** quand on ajoute des ondes : à x = 4, la marge vers le haut du 2 vaut 3,7·10⁻¹¹, 3,0·10⁻¹¹ et 2,7·10⁻¹¹ avec 12, 20 et 30 ondes.
+
+Ce que cela suggère : plus la fenêtre s'élargit, plus la positivité « connaît » le poids exact de chaque nombre premier, et d'autant mieux que ce nombre premier est entré tôt. C'est l'écho, du côté de la positivité, de ce qu'on a vu avec les ondes : nombres premiers et zéros se déterminent mutuellement. Ce n'est qu'un constat numérique avec 20 à 30 ondes, pas un théorème. Programmes : [`calculs/poids_2_et_3.py`](calculs/poids_2_et_3.py), avec le moteur en haute précision [`calculs/weil_hp.py`](calculs/weil_hp.py).
+
+### La cascade, nombre par nombre
+
+![La cascade : chaque puissance de premier entre libre, devient nécessaire, puis son poids se verrouille, d'autant plus qu'elle est entrée tôt](cascade_weil.png)
+
+On a continué au-delà de 3, pour les 26 puissances de nombres premiers jusqu'à 64 : 2, 3, 4 = 2², 5, 7, 8 = 2³, 9 = 3², 11, 13, 16, 17, 19, 23, 25, 27, 29, 31, 32, 37, 41, 43, 47, 49, 53, 59 et 61 (20 ondes, calcul en 200 chiffres). Pour chacune, on a cherché à partir de quand elle devient nécessaire, puis, de x = 2,5 à x = 64, de combien son poids peut bouger, les autres restant à leur vrai poids : 367 cas en tout.
+
+- **Le même scénario pour tous.** Chaque nombre entre libre, devient vite nécessaire, puis se verrouille. Il devient nécessaire à x = 2,29 pour 2 ; 3,18 pour 3 ; 4,19 pour 4 ; 5,14 pour 5 ; 7,11 pour 7 ; 13,14 pour 13 ; 31,31 pour 31 ; 61,60 pour 61. La période de liberté passe de 14 % au-dessus de n pour le nombre 2 à environ 1 % à partir de 17.
+- **Plus un nombre est entré tôt, plus il est verrouillé.** À chaque x, l'ordre des marges est exactement l'ordre d'entrée. À x = 64, le poids du 2 ne peut plus monter que de moins de 10⁻⁵⁶, celui du 61, entré juste avant, de moins de 10⁻⁷.
+- **C'est toujours « trop » qui casse en premier.** Dans les 367 cas, la marge vers le haut est la plus fine, de 1,7 à 5,5 ordres de grandeur.
+- **Une loi simple donne la marge.** Notons φ₁ l'onde d'énergie la plus petite dans la fenêtre, et λ₁ cette énergie (la « fragilité » de l'ensemble, en tirets sur la figure). La marge vers le haut du nombre n est le rapport de deux nombres calculés sur φ₁ : son énergie de Weil, divisée par le terme du nombre n, (2 ln p / √n) ∫ φ₁(t) φ₁(t + ln n) dt. Entre cette loi et la mesure, l'écart médian est de 0,7 % ; au pire, un facteur 2,7, pour un nombre qui vient d'entrer.
+
+**Pourquoi ?** L'onde la plus fragile φ₁ est une simple bosse : positive partout dans la fenêtre (vérifié en 200 chiffres), centrée en t = 0, large d'environ 0,5 à 0,65 à mi-hauteur, quelle que soit la fenêtre (figure, en haut à droite). C'est « la meilleure onde » du début de cette page : son énergie, calculée avec les nombres premiers, est presque nulle, et si l'hypothèse est vraie, cela veut dire qu'elle se tait presque exactement à chaque zéro de ζ. Pour cette bosse, la partie archimédienne et les nombres premiers se compensent donc presque parfaitement. Comme elle est positive, l'intégrale ∫ φ₁(t) φ₁(t + ln n) dt l'est aussi, et chaque nombre premier compte en négatif : en ajouter, même très peu, fait passer l'énergie sous zéro. Plus n est petit, plus la bosse décalée de ln n se recouvre elle-même, plus n pèse lourd dans l'équilibre, et plus il est verrouillé.
+
+**Les vraies marges sont encore plus fines.** Les 20 ondes de base sont aussi les 20 premières de la famille de 28 : en ajoutant des ondes, les marges et les périodes de liberté ne peuvent que rétrécir. Avec 28 ondes, à x = 64, la marge du 2 passe de 10⁻⁵⁶ à 10⁻⁷², et la période de liberté de 31 passe de 1 % à 0,6 % ; l'ordre, le signe et la loi restent les mêmes (écart médian 0,6 %). Avec 60 ondes, λ₁ vaut déjà 2·10⁻⁹⁹ à x = 31 (tableau du début). Nos chiffres sont donc des bornes larges, et nous ne savons pas si, avec toutes les ondes, la période de liberté tend vers zéro. Programme : [`calculs/cascade_weil.py`](calculs/cascade_weil.py).
+
+## Russell, les ensembles et les jeux
+
+Le paradoxe de Russell (très bien expliqué par Jeffrey Kaplan dans sa vidéo *Russell's Paradox*) vient d'une règle trop généreuse : « pour toute collection imaginable, il existe un ensemble ». Appliquée à R = {x : x ne se contient pas}, elle fait que R se contient si et seulement s'il ne se contient pas. On s'en est sorti en restreignant la règle (on ne découpe un ensemble que dans un ensemble déjà là) ou en empilant des niveaux (les types de Russell).
+
+Un paradoxe sert à démontrer qu'une chose n'existe pas. Or l'hypothèse de Riemann est un énoncé d'inexistence : aucun zéro hors de la droite. Une preuve « à la Russell » supposerait un tel zéro, fabriquerait avec lui un objet qui parle de lui-même, et en tirerait une contradiction. Ces objets, on sait les fabriquer ; ce qui manque, c'est la « règle n° 1 » de ζ, la loi que le zéro fautif violerait.
+
+| Russell | Riemann |
+|---|---|
+| Règle n° 1 : toute collection est un ensemble | La loi de ζ, encore inconnue (produit d'Euler, symétrie, positivité ?) |
+| R = {x : x ∉ x} | Un zéro hors de la droite, qui n'est pas son propre reflet |
+| R ∈ R ? | ζ s'imite-t-elle elle-même ? |
+| La sortie : empiler des niveaux (les types) | Les fenêtres de Weil, où les nombres premiers entrent un par un |
+
+### ζ s'imite-t-elle elle-même ?
+
+![ζ s'imite elle-même sur un petit disque de la bande ; Davenport–Heilbronn s'imite autour de son zéro hors de la droite et le recopie 15 fois](auto_imitation.png)
+
+- **Voronin (1975)** : dans la bande ½ < Re s < 1, ζ imite n'importe quelle fonction qui ne s'annule pas. En montant assez haut, on trouve un morceau de ζ qui lui ressemble autant qu'on veut.
+- **Bagchi (1981)** : l'hypothèse de Riemann équivaut à « ζ s'imite elle-même », c'est-à-dire ζ(s + ih) ≈ ζ(s) sur n'importe quel disque de la bande, pour une proportion positive de décalages h. C'est la question « x ∈ x ? » posée à ζ.
+- **Le cas autoréférent est le seul qui résiste.** On a démontré que ζ à la hauteur d·h ressemble à ζ à la hauteur h pour tout rapport d irrationnel (Nakamura, Pańkowski, Garunkštis). Le cas d = 0, où ζ doit imiter une copie fixe d'elle-même, est l'hypothèse.
+
+**Le calcul.** On cherche des décalages h qui alignent les phases h·ln p des petits nombres premiers : alors p^(−ih) ≈ 1, et le produit d'Euler de ζ(s + ih) ressemble à celui de ζ(s). On trie ces décalages avec le produit d'Euler jusqu'à 20 000, puis on calcule ζ exactement (Euler–Maclaurin).
+
+- **ζ** : avec h = 3 341 346,511, ζ(s + ih) reproduit ζ(s) à 3,4 % près sur un disque de rayon 0,08 autour de 0,85 + 20i. La ressemblance est locale : un peu plus loin, les deux fonctions divergent, et une meilleure copie demanderait de monter beaucoup plus haut.
+- **Davenport–Heilbronn** (même symétrie que ζ, pas de produit d'Euler) s'imite aussi autour de son zéro hors de la droite, 0,8085 + 85,6993i. Et s'imiter autour d'un zéro, c'est le recopier : pour 15 décalages h entre 10⁵ et 10⁷, le disque décalé contient un nouveau zéro hors de la droite, de partie réelle 0,78 à 0,82 (par exemple 0,817324 + 6 454 393,548458i). Le théorème de Rouché le garantit, vérifié sur 64 points du cercle.
+
+**Ce que ça montre.** Si ζ avait un zéro hors de la droite et s'imitait autour de lui, elle le recopierait sans cesse, comme Davenport–Heilbronn : au moins de l'ordre de T copies jusqu'à la hauteur T. Or le produit d'Euler l'interdit : jusqu'à la hauteur T, ζ a beaucoup moins de T zéros à droite de n'importe quelle droite Re s = σ > ½ (théorèmes de densité). Donc « ζ s'imite partout » entraîne l'hypothèse : c'est le sens facile du théorème de Bagchi, et il passe par le produit d'Euler, exactement comme le garde-fou de Davenport–Heilbronn l'exige. Le sens difficile, montrer que ζ s'imite partout sans supposer l'hypothèse, reste entier. Programme : [`calculs/auto_imitation.py`](calculs/auto_imitation.py).
+
+### Six autres pistes
+
+- **Le jeu de Weil : les nombres premiers, seule stratégie gagnante.** L'Attaquant choisit une onde, le Défenseur choisit les poids des nombres premiers ; l'Attaquant gagne si l'énergie de Weil devient négative. Notre cascade, c'est ce jeu joué fenêtre par fenêtre, et la bosse est la meilleure attaque. Un petit raisonnement, à faire relire par un spécialiste : si l'hypothèse est vraie, les vrais poids sont la seule stratégie gagnante. Les zéros forment une somme de pics positifs ; changer le poids de quelques puissances de premiers, même de 10⁻¹⁰⁰, y ajoute une oscillation de moyenne nulle, qui devient négative entre deux zéros, et la positivité tombe (théorème de Bochner). Ce qui manque, c'est l'existence d'un gagnant : von Neumann et Nash garantissent un équilibre, pas que sa valeur soit positive.
+- **Le casino de Möbius.** Un parieur qui mise 1 sur « μ(n) = +1 » à chaque tour gagne M(x) ; l'hypothèse dit que ce gain ne dépasse √x que de très peu (d'un facteur x^ε). L'hypothèse généralisée dit la même chose pour les parieurs périodiques, et la conjecture de Sarnak (2010), plus faiblement, pour tout parieur « simple ». Le parieur qui lit μ gagne tout : une classe de parieurs sans limite rejoue la règle n° 1. La théorie du hasard a dû la restreindre aux parieurs calculables (Church, 1940 ; Martin-Löf, 1966), comme ZF restreint la règle n° 1. Piste : monter l'échelle des parieurs (constants, périodiques, phases polynomiales, nilsuites, contre lesquelles Green et Tao ont montré que μ ne se laisse pas prendre) et chercher par le calcul où μ cesse de paraître au hasard.
+- **Une phrase finie : si elle est indécidable, elle est vraie.** L'hypothèse équivaut à « une inégalité vérifiable est vraie pour tout entier n » (Lagarias, 2002), donc à « une équation diophantienne n'a pas de solution » (Davis, Matiyasevich, Robinson, 1976), donc à « une machine de Turing ne s'arrête jamais » (5 372 états, Yedidia et Aaronson, 2016 ; 744 annoncés sans preuve publiée). Si elle était fausse, un calcul fini le prouverait ; si elle est indécidable, elle est donc vraie. L'axiome du choix ou l'hypothèse du continu peuvent servir gratuitement : une preuve qui s'en sert se transforme en preuve sans eux. Le castor affairé, le jeu de Radó : BB(5) = 47 176 870 est démontré depuis 2024 ; connaître la valeur pour la machine de l'hypothèse la déciderait, mais c'est hors de portée.
+- **La diagonale positive.** Cantor, Russell, Gödel et Turing utilisent la même diagonale pour fabriquer une contradiction (Lawvere, 1969). Pour les courbes, Weil utilise aussi une diagonale, celle de la surface C × C, mais elle y fabrique de la positivité, et c'est la preuve. Pour ζ, il faudrait la diagonale d'une surface « entiers × entiers » : c'est le programme de Connes et Consani, la piste la plus profonde.
+- **Les types de Russell sont nos fenêtres.** Russell empile des niveaux ; Weil aussi : au niveau x, seuls les nombres premiers inférieurs à x existent. La réflexion vers le bas marche déjà : si la positivité échoue, elle échoue dans une fenêtre finie. Il faudrait une réflexion vers le haut, « vrai jusqu'au niveau x, donc au suivant ». En théorie des ensembles, les principes de ce genre sont des axiomes qu'on ne démontre pas : c'est une analogie, mais elle montre où est le saut.
+- **Un jeu où les nombres premiers gagnent sans qu'on sache comment.** Dans le jeu de Conway (*Sylver coinage*), on nomme à tour de rôle des entiers qui ne sont pas des sommes des précédents ; celui qui dit 1 perd. Hutchings a montré que commencer par un nombre premier ≥ 5 gagne, par un argument non constructif : on sait qu'une stratégie gagnante existe sans la connaître. Ouvrir par 16 reste un problème ouvert. Leçon : une preuve d'existence par l'absurde n'a pas besoin de construire.
+
+### Le casino de Möbius, calculé
+
+![Gains de différents parieurs contre μ(n) jusqu'à 10¹⁰, divisés par √x : tous restent de l'ordre de √x, sauf le tricheur qui lit μ](casino_mobius.png)
+
+On a fait jouer plusieurs parieurs contre la suite μ(n), jusqu'à 10¹⁰ (crible segmenté, 23 minutes de calcul), et jusqu'à 1,7·10⁷ pour les parieurs à phase.
+
+- **Le parieur constant** gagne M(x). De 10⁸ à 10¹⁰, aux points calculés (tous les 10⁷), |M(x)| reste sous 0,56·√x ; on retrouve M(10¹⁰) = −33 722, la valeur connue.
+- **Les parieurs périodiques honnêtes**, qui suivent un caractère de Dirichlet fixé d'avance (modulo 3, 4, 5, 8 ou 12), font de même : au plus 0,63·√x. C'est ce que dit l'hypothèse de Riemann généralisée.
+- **Le meilleur parieur périodique choisi après coup**, qui connaît déjà les sommes de chaque classe modulo q ≤ 12 : au plus 1,1·√x. Même en trichant sur le choix de la période, il reste à l'échelle √x.
+- **Le parieur à phase linéaire**, qui mise e(αn) et choisit le meilleur α après coup : de 2,7 à 3,3·√x entre 2¹⁰ et 2²⁴. C'est un peu plus que les autres, comme pour une suite tirée au hasard, où choisir α après coup fait gagner un facteur de l'ordre de √(ln x).
+- **Le tricheur qui lit μ** gagne le nombre d'entiers sans facteur carré, environ 0,61·x : sa courbe s'envole.
+
+Contre tous les parieurs « simples » essayés, μ se comporte comme une pièce honnête à l'échelle √x. Seul le parieur qui se sert de μ elle-même gagne, comme le laissait prévoir le paradoxe de Russell. Ce n'est pas une preuve : ce sont des parieurs particuliers, sur une plage finie. Programme : [`calculs/casino_mobius.py`](calculs/casino_mobius.py).
+
+### Pairs et impairs : ce qui est vrai pour l'un est-il vrai pour l'autre ?
+
+Bonne intuition, à condition de bien choisir la coupure.
+
+- **Premiers pairs et premiers impairs.** Le seul premier pair est 2. Le « zêta » de {2}, 1/(1 − 2^(−s)), a tous ses pôles sur la droite Re s = 0, espacés de 2π/ln 2 ≈ 9,06 : un cristal parfait, avec une « hypothèse de Riemann » vraie et triviale. Il en va de même pour tout ensemble fini de nombres premiers : un produit fini n'a aucun zéro. Le zêta des premiers impairs, (1 − 2^(−s)) ζ(s), a exactement les mêmes zéros que ζ dans la bande : son hypothèse est l'hypothèse tout entière. Les zéros naissent de l'infinité des nombres premiers, pas d'une partie finie ; comme pour Pólya, « vrai pour chaque partie finie » ne passe pas à la limite.
+- **Les premiers ≡ 1 et ≡ 3 modulo 4.** Là, l'intuition est juste. Les deux équipes entendent les mêmes notes, les zéros de ζ et ceux de L(s, χ₄), mais l'équipe 3 entend les notes de χ₄ à l'envers, ce qui crée la course calculée plus haut. Si les premiers ≡ 1 suivent leur loi à √x près, c'est que ni ζ ni L(s, χ₄) n'a de zéro hors de la droite, et les premiers ≡ 3 la suivent aussi. La réciproque est vraie, sauf si ζ et L(s, χ₄) partageaient un zéro hors de la droite, ce que personne ne croit mais que personne n'a exclu. L'équivalence dit seulement que les deux moitiés sont aussi difficiles l'une que l'autre.
+- **Les nombres à nombre pair ou impair de facteurs premiers.** C'est la version la plus profonde de l'idée. L'hypothèse revient à dire que ces deux ensembles s'équilibrent à √x près : c'est le L(x) de Pólya. Et Selberg a montré que les méthodes de crible ne voient pas la différence entre les deux : pour elles, ce qui est vrai pour l'un est vrai pour l'autre, et c'est précisément pourquoi elles ne peuvent pas atteindre ce genre d'énoncé (le « problème de la parité »). Friedlander et Iwaniec ont franchi cette barrière en 1998 pour les nombres premiers de la forme a² + b⁴, grâce à une structure supplémentaire. Leçon : pour démontrer l'hypothèse, il faut un outil qui casse cette symétrie.
+
+## Copier les démonstrations
+
+Là où une « hypothèse de Riemann » a été démontrée, on peut suivre la démonstration pas à pas et chercher l'étape où sa copie pour ζ casse.
+
+| Démonstration | Son idée | La copie pour ζ | Où elle casse |
+|---|---|---|---|
+| Weil, courbes (1948) | Sur la surface C × C, une inégalité de géométrie (Castelnuovo), appliquée à la diagonale et au graphe du Frobenius, donne \|N − q − 1\| ≤ 2g√q | Nos matrices de Weil jouent le rôle de C × C, la formule explicite celui du comptage des points | Le « genre » de ζ est infini : la borne 2g√q ne dit plus rien. Il faudrait la positivité exacte d'une surface « entiers × entiers » |
+| Stepanov, Bombieri (1969, 1973) | Un polynôme auxiliaire s'annule très fort en tous les points de la courbe, grâce au Frobenius x ↦ x^q | Une fonction qui s'annulerait très fort en tous les nombres premiers | Les entiers n'ont pas de Frobenius |
+| Deligne (1974) | Une borne grossière, valable pour toutes les puissances tensorielles, donne à la limite la borne exacte | Les inégalités de positivité de Mertens, 3 + 4 cos θ + cos 2θ ≥ 0 | Pour ζ, elles n'écartent les zéros que d'une bande collée à Re s = 1, jamais jusqu'à la droite ½ |
+| Lee et Yang (1952) | On ajoute les spins un par un sans créer de zéro dans le disque ; la symétrie z ↔ 1/z met les zéros sur le cercle | Avec z_p = p^(−s), le « cercle » \|z_p\| = p^(−½) est exactement la droite critique, et s ↔ 1 − s devient z_p ↦ 1/(p·z_p) | Dans la bande, ζ n'est pas un polynôme en les z_p. Les copies partielles existent : Gonek (2007) construit des approximations par produits d'Euler finis qui vérifient l'hypothèse, sauf peut-être un nombre fini de zéros ; Gonek et Montgomery (2013) montrent que les approximations symétriques Σ_{n≤N} n^(−s) + χ(s) Σ_{n≤N} n^(s−1) ont 100 % de leurs zéros sur la droite. Il manque, là encore, le passage à la limite |
+| Polynômes de Jensen (Pólya 1927 ; Griffin, Ono, Rolen, Zagier 2019) | Des polynômes à racines réelles qui approchent ξ | L'hypothèse équivaut à « tous les polynômes de Jensen de ξ ont des racines réelles » | C'est démontré pour chaque degré à partir d'un certain rang ; il faudrait tous les degrés, dès le début |
+| de Bruijn, Newman, Polymath15 (1950–2019) | La chaleur rend les zéros réels à partir d'un instant Λ | 0 ≤ Λ ≤ 0,2 | L'hypothèse est Λ = 0 : la marge disparaît |
+| Selberg (1956) | Un laplacien autoadjoint : ses fréquences sont forcément réelles | Connes, Consani et Moscovici (2025) : un opérateur autoadjoint fabriqué avec les seuls nombres premiers ≤ x | Deux étapes manquent ; on les a vérifiées par le calcul (ci-dessous) |
+
+### Recopier Selberg : les étapes manquantes, vérifiées
+
+![L'onde la plus fragile tend vers la fonction Φ de Riemann ; les énergies alternent pair, impair, pair, impair ; les ondes propres changent de signe 0, 1, 2, 3 fois](copie_selberg.png)
+
+Connes, Consani et Moscovici suivent le plan de Selberg, puis passent à la limite :
+
+1. On restreint l'énergie de Weil aux ondes vivant entre 1/√x et √x ; seuls les nombres premiers ≤ x interviennent (ce sont nos matrices).
+2. On prend l'onde d'énergie la plus petite. **Étape manquante** : ils supposent qu'elle est paire et seule à son niveau (énergie simple), et signalent que c'est à vérifier.
+3. Sa transformée de Fourier n'a que des zéros réels : ils le démontrent (sous les hypothèses de l'étape 2), ce sont les fréquences d'un opérateur autoadjoint.
+4. **Étape manquante** : quand x grandit, cette transformée tend vers Ξ. C'est observé, pas démontré.
+5. Théorème de Hurwitz : une limite de fonctions à zéros réels n'a que des zéros réels. D'où l'hypothèse de Riemann. Ils écrivent qu'une preuve rigoureuse de la convergence l'établirait.
+
+Ce que nos calculs ajoutent :
+
+- **L'étape 2 tient dans toutes nos fenêtres.** De x = 2,5 à x = 64, on a calculé à part les ondes paires et les ondes impaires (20 de chaque, en 220 chiffres ; nos ondes s'annulent aux bords de la fenêtre, les leurs sont un peu différentes). La plus petite énergie est toujours celle d'une onde paire, 119 à 1 485 fois plus basse que la meilleure onde impaire, et elle est seule à son niveau : la suivante est 7 100 à 1,5 million fois plus haute. Le résultat est le même avec 28 ondes de chaque parité (x = 8, 16 et 32). Mieux, les énergies alternent pair, impair, pair, impair, et la k-ième onde change k − 1 fois de signe, comme les modes d'une corde vibrante (théorème de Sturm). C'est cette structure qu'il faudrait démontrer pour obtenir l'étape 2.
+- **L'étape 3 vaut aussi pour nos ondes**, construites autrement que les leurs. Avec les suites de Sturm (comptage exact des racines réelles d'un polynôme, en 300 chiffres), tous les zéros de la transformée de Fourier de notre onde la plus fragile sont réels, dans 10 cas sur 10.
+- **Étape 4 : la bosse devient la fonction Φ de Riemann.** Ξ est la transformée de Fourier d'une fonction connue depuis Riemann et Pólya, Φ(u) = 2 Σ (2π²n⁴e^(9u/2) − 3πn²e^(5u/2)) e^(−πn²e^(2u)), une bosse positive. Dire que l'approximation tend vers Ξ, c'est dire que l'onde la plus fragile tend vers Φ. C'est ce qu'on voit : l'écart vaut 3,8 % à x = 8, 1,8 % à x = 16 et environ 0,8 % à x = 32 (avec 140 ondes en 560 chiffres ; à x = 32, le résultat bouge encore un peu) : il est à peu près divisé par deux quand x double. Et c'est cette bosse positive qui expliquait la cascade : tous les nombres premiers y comptent en négatif.
+
+Rien de tout cela n'est une démonstration : les étapes 2 et 4 restent à démontrer pour toutes les fenêtres, on les a seulement vues à l'œuvre sur des familles finies d'ondes. Mais c'est la copie où il reste le moins à faire : toutes les étapes y sont, et les deux qui manquent se vérifient. Programme : [`calculs/copie_selberg.py`](calculs/copie_selberg.py).
+
+## Ce qu'on peut démontrer, et ce qui reste
+
+L'hypothèse de Riemann n'est pas démontrée ici : personne ne sait le faire. Mais une partie de ce qu'on a observé se démontre vraiment, en quelques lignes. Le reste se ramène à deux conjectures précises.
+
+### Démontré
+
+**Théorème 1 (le jeu de Weil n'a qu'un gagnant).** Si l'hypothèse de Riemann est vraie, on ne peut pas changer les poids d'un nombre fini de puissances de premiers, même d'aussi peu qu'on veut, sans que l'énergie de Weil devienne négative pour une onde bien choisie.
+
+*Démonstration.* Si l'hypothèse est vraie, l'énergie d'une onde φ vaut Σ_γ |φ̂(γ)|², somme sur les zéros. Changer les poids c_n (au lieu de 1) retranche ∫ |φ̂(r)|² F(r) dr, avec F(r) = (1/π) Σ_n (c_n − 1) Λ(n) n^(−½) cos(r ln n). F est une somme finie et non nulle de cosinus de fréquences ln n > 0 : sa moyenne est nulle, donc elle est strictement positive sur un petit intervalle. Les zéros étant isolés, on y choisit une fréquence r₀ à distance δ > 0 de tous les ±γ. On prend l'onde φ_L(t) = L^(−½) χ(t/L) cos(r₀t), où χ est une bosse lisse fixée. Quand L grandit, |φ̂_L|² se concentre autour de ±r₀ : la somme sur les zéros tend vers 0, tandis que ∫ |φ̂_L|² F tend vers π‖χ‖² F(r₀) > 0. L'énergie devient négative. ∎
+
+C'est la version « à l'infini » de notre cascade, qui mesure à quelle vitesse les fenêtres finies verrouillent les poids. Le résultat est simple, et sans doute connu des spécialistes sous une autre forme.
+
+**Lemme 2 (la loi de la marge est une borne).** Dans une fenêtre donnée, soit λ₁ la plus petite énergie, φ₁ l'onde (normalisée) qui la réalise, et s le terme du nombre n dans l'énergie de cette onde. Si s < 0, on ne peut pas augmenter le poids de n de plus de λ₁/|s| sans casser la positivité.
+
+*Démonstration.* Pour l'onde φ₁, l'énergie avec le poids augmenté de t vaut exactement λ₁ + t·s, qui s'annule pour t = λ₁/|s|. ∎
+
+Dans les 430 cas calculés (367 avec 20 ondes, 63 avec 28), la marge mesurée ne dépasse jamais cette borne et la suit à 0,7 % près en médiane. L'écart est petit quand la deuxième énergie est très au-dessus de la première, ce qui est le cas ici (de 7 100 à 1,5 million de fois).
+
+**Lemme 3 (si la bosse est positive, chaque premier compte en négatif).** Si φ₁ ≥ 0, alors ∫ φ₁(t) φ₁(t + ln n) dt ≥ 0 pour tout n, donc le terme de chaque puissance de premier, −(2 ln p/√n) ∫ φ₁(t) φ₁(t + ln n) dt, est négatif ou nul. ∎ C'est pourquoi « trop » casse toujours en premier.
+
+**Lemme 4 (si la bosse est de plus log-concave, les petits premiers sont les plus verrouillés).** Si φ₁ est paire, positive et log-concave, son autocorrélation g(u) = ∫ φ₁(t) φ₁(t + u) dt est paire et log-concave (théorème de Prékopa–Leindler), donc décroissante pour u ≥ 0. Comme 2 ln p/√p décroît le long des nombres premiers à partir de 7, le terme |s| = (2 ln p/√p) g(ln p) décroît, et la borne λ₁/|s| croît avec le nombre premier p ≥ 7. ∎ On a vérifié numériquement que Φ et la bosse sont log-concaves (au moins là où la bosse n'est pas minuscule).
+
+**Lemme 5 (pair et impair se séparent).** L'énergie de Weil ne change pas quand on retourne l'onde (t → −t) : ondes paires et impaires ne se mélangent pas. Le terme des pôles vaut +2 (∫ φ ch(t/2) dt)² pour une onde paire et −2 (∫ φ sh(t/2) dt)² pour une onde impaire. ∎ Les pôles poussent donc dans le mauvais sens (ils relèvent les ondes paires et abaissent les impaires) : si l'onde la plus basse est quand même paire, c'est grâce aux nombres premiers et à la partie archimédienne. C'est ce qu'il faudrait démontrer.
+
+S'y ajoutent les théorèmes des autres, sur lesquels on s'appuie : le sens facile du théorème de Bagchi (si ζ s'imite partout, l'hypothèse est vraie), et le théorème de Connes, Consani et Moscovici (pour leur construction, l'approximation n'a que des zéros réels, si l'étape 2 est vraie).
+
+### Ce qui reste : deux conjectures précises
+
+**Conjecture A (la corde vibrante).** Dans toute fenêtre, les énergies de Weil sont simples, alternent pair, impair, pair…, et la k-ième onde propre change k − 1 fois de signe. Vérifiée ici : l'alternance dans 13 fenêtres de x = 2,5 à 64 (20 ondes de chaque parité, et 28 pour x = 8, 16 et 32), les changements de signe pour x = 3, 4, 8, 16, 32 et 64.
+
+**Conjecture B (la bosse devient Φ).** Quand x grandit, l'onde la plus fragile (normalisée) tend vers la fonction Φ de Riemann, avec un écart de l'ordre de 0,3/x. Observé : 3,8 %, 1,8 % et 0,8 % à x = 8, 16 et 32.
+
+Ce qu'elles donneraient : A donne l'étape 2 de la copie de Selberg ; la bosse est alors positive, et le lemme 3 explique que « trop » casse toujours en premier (si elle est de plus log-concave, le lemme 4 explique l'ordre des verrous). B, sous une forme assez forte (les transformées de Fourier convergent sur tout disque du plan complexe), donne l'étape 4. Formulées pour la construction de Connes, Consani et Moscovici, A et B entraîneraient, avec leur théorème et celui de Hurwitz, l'hypothèse de Riemann. Démontrer l'une ou l'autre serait donc un résultat majeur. Nous ne savons pas le faire, et personne ne le sait aujourd'hui.
+
+## Au final
+
+Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
+
+**L'hypothèse n'est ni démontrée ni contredite.** Tous nos calculs sont compatibles avec elle, et aucun ne la démontre. Quelques petits résultats, eux, sont démontrés (section précédente). La plupart refont, avec nos propres programmes, des calculs connus ; nous l'avons signalé à chaque fois.
+
+**Ce qu'on a appris, en cinq points.**
+
+1. **Le signe ne compte pas, la taille si.** Pólya demandait que L(x) reste négatif : c'est faux dès 906 150 257. L'hypothèse demande seulement que L(x) reste de l'ordre de √x : c'est ce qu'on observe (au plus 1,36·√x jusqu'au milliard).
+2. **Les zéros savent où les courbes repassent.** Leurs ondes retrouvent 906 millions, les régions de la course modulo 4 et le renversement de la course modulo 3 à 608 981 813 029. Deux prédictions restent à vérifier par un calcul exact : vers 2,3·10¹⁹ pour Pólya, vers 6,15·10¹² pour la course modulo 3.
+3. **La récurrence de Weil a la bonne forme.** « Vrai pour une fenêtre, donc pour une fenêtre un peu plus grande » : c'est l'énoncé P(x) de Weil. Le premier cas est un théorème (Connes et Consani), et la première marche, quand le nombre 2 entre, s'écrit comme une inégalité précise.
+4. **Mais son pas ne peut pas être une estimation.** À chaque nouveau nombre premier, la marge fond (3·10⁻⁸ à x = 3, 3·10⁻⁵⁷ à x = 64 avec 20 ondes, 7·10⁻⁷³ avec 28), et chaque poids se verrouille autour de sa vraie valeur. Un raisonnement par inégalités, qui garderait un peu de jeu d'une marche à la suivante, n'a guère de chance : le jeu tend vers zéro.
+5. **Le cas qui parle de lui-même est le seul qui résiste.** ζ ressemble à elle-même à des hauteurs proportionnelles : c'est démontré pour tout rapport irrationnel. S'imiter elle-même sans décalage proportionnel, c'est l'hypothèse (Bagchi). Comme chez Russell, toute la difficulté se concentre dans l'autoréférence.
+
+**Ce que cela dit de la preuve à trouver.** Pour l'onde la plus fragile, la positivité de Weil est une égalité presque parfaite entre la partie archimédienne et les nombres premiers, de plus en plus serrée à mesure que la fenêtre s'élargit. Une démonstration devra donc très probablement venir d'une structure exacte, qui rende la positivité automatique : une géométrie pour les courbes (Weil, Deligne), un opérateur autoadjoint pour les surfaces (Selberg), une récurrence algébrique exacte pour les aimants (Lee et Yang). Nos calculs ne disent pas laquelle ; ils expliquent pourquoi il en faut sans doute une.
+
+**La copie la plus avancée.** Parmi les démonstrations voisines, celle de Selberg, recopiée par Connes, Consani et Moscovici, est celle où il reste le moins à faire : deux étapes, que nos calculs voient à l'œuvre (l'onde la plus fragile est paire et seule à son niveau, et elle tend vers la fonction Φ de Riemann). D'après eux, les démontrer suffirait à démontrer l'hypothèse.
+
+**Ce qui est peut-être nouveau.** Trois constats, que nous n'avons pas trouvés écrits sous cette forme : le scénario « libre, nécessaire, verrouillé » pour chaque puissance de premier ; la loi de la marge ; l'ordre « plus tôt entré, plus verrouillé ». Ils découlent assez directement de ce qu'on sait sur l'onde la plus fragile (Connes, Consani, Moscovici) : quand une seule énergie est presque nulle, la moindre retouche se lit sur elle. Un spécialiste les trouverait sans doute attendus. Ce sont des observations numériques sur des familles finies d'ondes, pas des théorèmes, tout comme les deux prédictions ci-dessus.
+
+**Et l'intuition de départ ?** « Si c'est vrai sur une partie, des harmoniques et une symétrie le rendent vrai partout. » Dans sa forme, l'intuition est juste : c'est ainsi qu'on a démontré l'hypothèse pour les courbes, et c'est la forme du critère de Weil. Ce qui manque pour ζ, c'est l'outil qui transporte une égalité exacte d'une fenêtre à la suivante. Personne ne l'a trouvé : c'est là qu'est toute la difficulté de l'hypothèse de Riemann.
 
 ## Ce qu'il faudrait ajouter
 
@@ -158,7 +432,7 @@ On a passé au crible tous les entiers jusqu'à un milliard :
 | Rétrécir la bande | Interdire aux zéros de trop s'éloigner | Bande 1/12–11/12 annoncée (2026) ; Guth et Maynard (2024) : les zéros hors de la droite, s'il y en a, sont plus rares qu'on ne savait le montrer | Réduire la bande à la droite elle-même |
 | Vérifier par calcul | Contrôler les notes une à une | Tous les zéros jusqu'à la hauteur 3·10¹² sont sur la droite, soit plus de 10 000 milliards | Il en restera toujours une infinité |
 | La « chaleur » (de Bruijn–Newman) | On fait diffuser la fonction comme de la chaleur ; ses zéros deviennent réels à partir d'un instant Λ | 0 ≤ Λ ≤ 0,2 ; l'hypothèse revient à Λ = 0 | Faire descendre 0,2 jusqu'à 0 |
-| La positivité (Weil) | Une énergie toujours positive | Équivalent exact ; vérifiée ici jusqu'à x = 31 | Il faut toutes les ondes, x → ∞ |
+| La positivité (Weil) | Une énergie toujours positive | Équivalent exact ; vérifiée ici jusqu'à x = 64 avec 20 à 28 ondes ; chaque poids premier s'y verrouille | Il faut toutes les ondes, x → ∞ ; sans les nombres premiers, elle casse dès x ≈ 2,28 |
 | L'instrument caché (Hilbert–Pólya, Connes) | Les zéros comme fréquences propres | Écarts entre zéros semblables aux niveaux d'énergie des noyaux lourds (Montgomery, Odlyzko) | Personne n'a trouvé l'opérateur |
 | Les quasi-cristaux (Dyson) | Des zéros ordonnés sans être périodiques, dont la « diffraction » tombe sur les ln p | Programme proposé en 2009 ; « quasi-cristaux de Fourier » étudiés activement | Classer tous les quasi-cristaux à une dimension |
 | Les courbes modulo p (Hasse, Weil, Deligne) | Le même énoncé dans un autre monde | **Démontré** | Aucun équivalent connu pour les entiers |
@@ -167,8 +441,12 @@ On a passé au crible tous les entiers jusqu'à un milliard :
 
 1. **Pousser Weil plus loin** avec le carnet : augmenter la précision, le nombre d'ondes et x, essayer d'autres familles d'ondes.
 2. **Le contre-essai de Weil** : les zéros hors de la droite de la fonction de Davenport–Heilbronn sont maintenant calculés (section « Peut-on raisonner par récurrence ? ») ; reste à lui faire passer le test de Weil et à regarder son « énergie » devenir négative.
-3. **Là où l'hypothèse a failli tomber** : zoomer sur la paire de Lehmer, à la hauteur 7005.
-4. **Lire** : *La Symphonie des nombres premiers* de Marcus du Sautoy, et *Prime Numbers and the Riemann Hypothesis* de Barry Mazur et William Stein (en anglais).
+3. **Faire vérifier les prédictions.** La région 2,3·10¹⁹ pour Pólya et la région 6,15·10¹² pour la course modulo 3 demandent un calcul exact, hors de portée ici, mais à la portée de spécialistes.
+4. **Comprendre la bosse.** Pourquoi l'onde la plus fragile est-elle toujours une bosse positive ? Si on le démontrait, l'ordre « plus tôt entré, plus verrouillé » et le fait que « trop » casse toujours en premier deviendraient des théorèmes. Et refaire la cascade avec 60 ou 100 ondes, pour des marges stabilisées.
+5. **Là où l'hypothèse a failli tomber** : zoomer sur la paire de Lehmer, à la hauteur 7005.
+6. **Le jeu de Weil dans toutes les directions** : mesurer l'ensemble des poids gagnants dans toutes les directions, pas seulement un poids à la fois, et vérifier qu'il se resserre partout autour des vrais poids.
+7. **Démontrer l'étape 2 de la copie de Selberg** : montrer que les ondes propres de l'énergie de Weil alternent pair, impair, pair… comme celles d'une corde vibrante. Pour un problème voisin, Slepian l'a fait avec un opérateur différentiel qui commute (les fonctions « prolates ») ; Connes, Consani et Moscovici relient justement l'énergie de Weil à ces fonctions.
+8. **Lire** : *La Symphonie des nombres premiers* de Marcus du Sautoy, et *Prime Numbers and the Riemann Hypothesis* de Barry Mazur et William Stein (en anglais).
 
 ## Sources
 
@@ -183,5 +461,11 @@ On a passé au crible tous les entiers jusqu'à un milliard :
 - [Conjecture de Pólya](https://en.wikipedia.org/wiki/P%C3%B3lya_conjecture) ; S. Kim, P. Q. Nguyen, conjecture de Mertens : [arXiv 2502.21021](https://arxiv.org/pdf/2502.21021) ; P. Borwein, R. Ferguson, M. Mossinghoff, changements de signe de L(n) : [Mathematics of Computation, 2008](https://www.ams.org/mcom/2008-77-263/S0025-5718-08-02036-X/)
 - J. Büthe, π(x) < li(x) jusqu'à 10¹⁹ : [Mathematics of Computation, 2018](https://www.ams.org/journals/mcom/2018-87-312/S0025-5718-2017-03264-6) ; D. Platt, T. Trudgian, premier changement de signe : [arXiv 1407.1914](https://arxiv.org/pdf/1407.1914)
 - A. Connes, C. Consani, positivité de Weil à la place archimédienne : [arXiv 2006.13771](https://arxiv.org/abs/2006.13771) ; Polymath15, Λ ≤ 0,22 : [arXiv 1904.12438](https://arxiv.org/abs/1904.12438)
+- P. Humphries, [sommes pondérées de la fonction de Liouville](https://discovery.ucl.ac.uk/id/eprint/1569441/1/Humphries_the_distribution_of_weighted_sums_of_the_liouville.pdf) ; M(x) ≪ x^(½ + ε) équivaut à l'hypothèse (Littlewood) : [AIM](https://aimath.org/WWN/rh/articles/html/96a/)
+- A. Granville, G. Martin, [Prime Number Races](https://arxiv.org/abs/math/0408319) (2006) ; C. Bays, R. Hudson, zéros de L(s, χ₄) et renversements de la course : [Mathematics of Computation, 2000](https://www.ams.org/journals/mcom/2000-69-230/S0025-5718-99-01105-9/S0025-5718-99-01105-9.pdf)
+- M. Griffin, K. Ono, L. Rolen, D. Zagier, polynômes de Jensen : [arXiv 1902.07321](https://arxiv.org/abs/1902.07321) ; A. Marcus, D. Spielman, N. Srivastava, graphes de Ramanujan : [arXiv 1304.4132](https://arxiv.org/abs/1304.4132) ; [théorème de Lee–Yang](https://en.wikipedia.org/wiki/Lee%E2%80%93Yang_theorem), et [une preuve par récurrence](https://www.renyi.hu/~gharcos/lee-yang.pdf) (G. Harcos)
+- K. Matsumoto, [universalité de ζ, Voronin, Bagchi et récurrence forte](https://arxiv.org/abs/1407.4216) ; A. Yedidia, S. Aaronson, [une machine de Turing indépendante de ZF](https://arxiv.org/abs/1605.04343) ; [BB(5) démontré](https://arxiv.org/abs/2509.12337) ; [l'hypothèse de Riemann comme énoncé Π⁰₁](https://arxiv.org/abs/2311.09464)
+- J. Friedlander, H. Iwaniec, [X² + Y⁴ et le problème de la parité](https://arxiv.org/abs/math/9811185) ; [Sylver coinage](https://en.wikipedia.org/wiki/Sylver_coinage) ; J. Kaplan, vidéo *Russell's Paradox – a simple explanation of a profound problem*
+- A. Connes, C. Consani, H. Moscovici, [Zeta Spectral Triples](https://arxiv.org/abs/2511.22755) (2025) ; S. Gonek, [Finite Euler products and the Riemann Hypothesis](https://arxiv.org/abs/0704.3448) ; [les approximations symétriques et le résultat de Gonek et Montgomery](https://arxiv.org/abs/2411.08364)
 
 Réalisé avec l'aide de Claude (Anthropic).
