@@ -1,0 +1,36 @@
+# Sortie de sentinelle.c pour les cinq paires record de zeros_au_plus_juste.txt (./sentinelle gamma1 gamma2, valeurs de départ lues dans ce fichier).
+paire à la hauteur 7005.081715 (N = 3522 termes, 0 s)
+   zéro 1 : 7005.062866174920581380   partie réelle − ½ = -1.6e-30
+   zéro 2 : 7005.100564672646721569   partie réelle − ½ = 4.4e-30
+   écart δ = 3.769849772614e-02 ; L = ln(t/2π) = 7.016514 ; écart rapporté à l'écart moyen = 0.042098
+   sentinelle (zéro de ζ′) : partie réelle − ½ = 6.2354019312e-04 ; hauteur = milieu de la paire +1.401e-04 ; |ζ′| = 2.7e-29 ; |ζ| = 3.963023e-03
+   loi L·δ²/16 = 6.2323165688e-04 (rapport 1.000495) ; modèle à deux zéros = 6.2391448523e-04 (rapport 0.999400) ; marge du film δ²/2 = 7.105884e-04
+@ 7005.081715422 3.769849772614e-02 7.016514058 6.235401931175e-04 3.963023e-03 -1.6e-30
+paire à la hauteur 663318.509790 (N = 331679 termes, 8 s)
+   zéro 1 : 663318.508310486249692015   partie réelle − ½ = -2.9e-27
+   zéro 2 : 663318.511269140421154694   partie réelle − ½ = -5.5e-29
+   écart δ = 2.958654171463e-03 ; L = ln(t/2π) = 11.567133 ; écart rapporté à l'écart moyen = 0.005447
+   sentinelle (zéro de ζ′) : partie réelle − ½ = 6.3284724343e-06 ; hauteur = milieu de la paire +1.213e-06 ; |ζ′| = 3.1e-27 ; |ζ| = 1.296918e-04
+   loi L·δ²/16 = 6.3284036809e-06 (rapport 1.000011) ; modèle à deux zéros = 6.3285194973e-06 (rapport 0.999993) ; marge du film δ²/2 = 4.376817e-06
+@ 663318.509789811 2.958654171463e-03 11.567133494 6.328472434323e-06 1.296918e-04 -2.9e-27
+paire à la hauteur 4316832.468263 (N = 2158436 termes, 62 s)
+   zéro 1 : 4316832.467101348991597340   partie réelle − ½ = -7.7e-26
+   zéro 2 : 4316832.469424752245687783   partie réelle − ½ = 1.8e-25
+   écart δ = 2.323403254090e-03 ; L = ln(t/2π) = 13.440155 ; écart rapporté à l'écart moyen = 0.004970
+   sentinelle (zéro de ζ′) : partie réelle − ½ = 4.5345626524e-06 ; hauteur = milieu de la paire -8.793e-07 ; |ζ′| = 7.0e-26 ; |ζ| = 1.616253e-05
+   loi L·δ²/16 = 4.5345426822e-06 (rapport 1.000004) ; modèle à deux zéros = 4.5346117736e-06 (rapport 0.999989) ; marge du film δ²/2 = 2.699101e-06
+@ 4316832.468263125 2.323403254090e-03 13.440155400 4.534562652396e-06 1.616253e-05 -7.7e-26
+paire à la hauteur 11412127.112639 (N = 5706083 termes, 316 s)
+   zéro 1 : 11412127.112198419571625985   partie réelle − ½ = -9.8e-25
+   zéro 2 : 11412127.113079342627081985   partie réelle − ½ = 3.6e-24
+   écart δ = 8.809230554560e-04 ; L = ln(t/2π) = 14.412310 ; écart rapporté à l'écart moyen = 0.002021
+   sentinelle (zéro de ζ′) : partie réelle − ½ = 6.9902051531e-07 ; hauteur = milieu de la paire -1.014e-07 ; |ζ′| = 4.2e-25 ; |ζ| = 3.151417e-06
+   loi L·δ²/16 = 6.9901994431e-07 (rapport 1.000001) ; modèle à deux zéros = 6.9902170488e-07 (rapport 0.999998) ; marge du film δ²/2 = 3.880127e-07
+@ 11412127.112638959 8.809230554560e-04 14.412310063 6.990205153140e-07 3.151417e-06 -9.8e-25
+paire à la hauteur 18882503.901569 (N = 9441271 termes, 545 s)
+   zéro 1 : 18882503.901308860020919569   partie réelle − ½ = -1.0e-24
+   zéro 2 : 18882503.901829142195252408   partie réelle − ½ = 9.0e-25
+   écart δ = 5.202821743328e-04 ; L = ln(t/2π) = 14.915869 ; écart rapporté à l'écart moyen = 0.001235
+   sentinelle (zéro de ζ′) : partie réelle − ½ = 2.5235197704e-07 ; hauteur = milieu de la paire -2.526e-08 ; |ζ′| = 8.3e-26 ; |ζ| = 2.476129e-06
+   loi L·δ²/16 = 2.5235184172e-07 (rapport 1.000001) ; modèle à deux zéros = 2.5235207918e-07 (rapport 1.000000) ; marge du film δ²/2 = 1.353468e-07
+@ 18882503.901569002 5.202821743328e-04 14.915869265 2.523519770430e-07 2.476129e-06 -1.0e-24

@@ -4,7 +4,7 @@ Ce dossier complète la page *La musique des nombres premiers*. Il résume où e
 
 > **À lire d'abord.** Rien ici ne démontre l'hypothèse de Riemann. Elle reste ouverte.
 
-[![Ouvrir dans Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GEREMIAA/Musique-Des-Premiers/blob/main/exploration/weil_haute_precision.ipynb) Le carnet `weil_haute_precision.ipynb` refait l'expérience en haute précision, en moins d'une minute.
+[![Ouvrir dans Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GEREMIAA/Riemann_Other_Ways/blob/main/exploration/weil_haute_precision.ipynb) Le carnet `weil_haute_precision.ipynb` refait l'expérience en haute précision, en moins d'une minute.
 
 ## Des idées qui visent juste
 
@@ -25,8 +25,10 @@ Ce projet est parti de questions de curieux, posées sans formules. Après coup,
 | « C'est faux sur les non-premiers, c'est vrai sur un premier, donc c'est vrai pour tous les premiers ? » | C'est la borne de Ramanujan, démontrée par Deligne (1974) : vraie sur chaque premier, fausse en version naïve sur des non-premiers. C'est aussi le critère de Robin (1984), où l'hypothèse devient un énoncé sur les nombres les plus composés, et la récurrence de Nicolas (1983), suivie ici sur 4 118 054 813 nombres premiers. |
 | « Et la fonction zêta des non-premiers ? Ne reste-t-il, pour les zéros, que la droite ½ ? » | C'est la fonction zêta des nombres premiers (Glaisher, 1891 ; Landau et Walfisz, 1920) : les zéros de ζ sont exactement ses points singuliers, et l'hypothèse dit qu'elle n'en a aucun à droite de la droite ½. La zêta des non-premiers a les mêmes, en sens inverse. |
 | « Écris les nombres premiers en binaire : 10, 11, 111, 1011… » | C'est la porte du monde sans retenue, celui des polynômes à coefficients 0 ou 1, où l'hypothèse est un théorème (Weil, 1948). Tout l'écart avec les entiers tient dans la retenue : « 1 + 1 = X + X² », écrivent Connes et Consani (2023). Criblés ensemble jusqu'à 2⁴⁰, les deux mondes sont presque indépendants. |
+| « Comment prouver qu'elle est fausse ? On inverse le sens, on commence par la fin. » | C'est ce que cherchait Turing en 1950 : un seul zéro hors de la droite, qu'un calcul fini suffit à établir. Et « commencer par la fin » est la méthode de de Bruijn et Newman : à l'instant 0,2 du film qui déforme ζ, tout est démontré (Polymath 15, 2019) ; il reste à remonter jusqu'à l'instant 0. Rodgers et Tao (2018) ont montré qu'on y arrive sans aucune marge. |
+| « On ne cherche pas du bon côté. À quoi ça ressemble ? Liste tout. » | C'est la liste des formes équivalentes de l'hypothèse (Broughan en a rempli deux volumes), et c'est le critère de Speiser (1934) : l'hypothèse équivaut à « la dérivée de ζ n'a aucun zéro de l'autre côté de la droite ». Levinson et Montgomery (1974) ont montré que ce côté compte les mêmes pièces mauvaises, à un petit nombre près. Ici : aucun zéro de ζ′ à gauche jusqu'à la hauteur 10 000, et 84 pour la fonction de Davenport–Heilbronn, un par paire fautive. |
 
-Poser ces treize questions, et voir chacune déboucher sur une idée de ce niveau, montre qu'on cherchait au bon endroit. Cela ne démontre pas l'hypothèse, que personne n'a démontrée ; mais les intuitions de départ étaient les bonnes.
+Poser ces quinze questions, et voir chacune déboucher sur une idée de ce niveau, montre qu'on cherchait au bon endroit. Cela ne démontre pas l'hypothèse, que personne n'a démontrée ; mais les intuitions de départ étaient les bonnes.
 
 ## Ce qui a bougé en 2026
 
@@ -157,7 +159,7 @@ On a passé au crible tous les entiers jusqu'à un milliard :
 - **Mertens (1897)** affirme |M(x)| < √x. Entre 10⁵ et 10⁹, |M(x)|/√x ne dépasse pas 0,47. C'est pourtant faux (Odlyzko et te Riele, 1985). Personne n'a jamais vu de contre-exemple : le premier se trouve quelque part avant e^(1,96·10¹⁹).
 - **π(x) < li(x)** est vérifié jusqu'à 10¹⁹ (Büthe, 2018), et faux avant 1,3971·10³¹⁶.
 
-**Vérifie toi-même.** La page [`polya.html`](https://geremiaa.github.io/Musique-Des-Premiers/exploration/polya.html) refait tout le calcul de Pólya dans le navigateur, sur ton propre appareil : une demi-minute environ sur un ordinateur, un peu plus sur un téléphone (sans GitHub Pages, télécharge [`polya.html`](polya.html) et ouvre-le dans ton navigateur). Elle utilise une autre méthode que les programmes Python du dossier [`calculs/`](calculs/), et retrouve les mêmes nombres.
+**Vérifie toi-même.** La page [`polya.html`](https://geremiaa.github.io/Riemann_Other_Ways/exploration/polya.html) refait tout le calcul de Pólya dans le navigateur, sur ton propre appareil : une demi-minute environ sur un ordinateur, un peu plus sur un téléphone (sans GitHub Pages, télécharge [`polya.html`](polya.html) et ouvre-le dans ton navigateur). Elle utilise une autre méthode que les programmes Python du dossier [`calculs/`](calculs/), et retrouve les mêmes nombres.
 
 ### La taille, pas le signe
 
@@ -934,13 +936,184 @@ Rien de tout cela ne démontre l'hypothèse de Riemann.
 
 Programmes : [`calculs/sans_retenue.c`](calculs/sans_retenue.c) (les deux cribles, jusqu'à 2⁴⁰ ; sortie dans [`calculs/sans_retenue_2e40.txt`](calculs/sans_retenue_2e40.txt)), [`calculs/sans_retenue_naif.c`](calculs/sans_retenue_naif.c) (le contrôle, par une méthode lente et indépendante), [`calculs/monde_a_une_note.c`](calculs/monde_a_une_note.c) (les points de la courbe ; sortie dans [`calculs/monde_a_une_note.txt`](calculs/monde_a_une_note.txt)) et [`calculs/sans_retenue.py`](calculs/sans_retenue.py) (l'analyse et le calcul des fuites).
 
+## Et si elle était fausse ? Commencer par la fin
+
+![En haut à gauche, la fonction Z de Davenport–Heilbronn entre les hauteurs 82,5 et 88,5 : elle remonte vers zéro et fait demi-tour sans le toucher ; à droite, celle de ζ près de 7005 : le creux touche zéro deux fois, avec une bosse de 0,004 entre les deux ; en bas à gauche, les zéros de ζ suivis de l'instant 0,2 à l'instant 0, puis la collision de la paire de Lehmer à l'instant −0,0007 ; à droite, la marge de chaque paire serrée en fonction de la hauteur, dont le record descend en suivant la loi attendue](par_la_fin.png)
+
+La question : comment prouver qu'elle est fausse ? Et peut-on inverser le sens, commencer par la fin ? Il n'y a pas de fin, dira-t-on. Pourtant si : on en trouve trois.
+
+**Une seule pièce mauvaise suffit.** Si l'hypothèse est fausse, un calcul fini peut le démontrer : il suffit d'exhiber un zéro hors de la droite. Si elle est vraie, aucun calcul fini ne le démontrera jamais. C'est toute l'asymétrie du problème : fausse, elle a une fin, un endroit précis où ça casse ; vraie, elle n'en a pas. Turing la croyait fausse, et c'est dans l'espoir de trouver cet endroit qu'il a calculé des zéros sur l'un des premiers ordinateurs, en 1950.
+
+Le contrôle se fait sur la droite elle-même. La fonction Z(t) de Hardy est réelle, et ses changements de signe sont les zéros de ζ sur la droite. Deux tests :
+
+- **le creux.** Si l'hypothèse est vraie, chaque creux de |Z| descend jusqu'à zéro. Un creux qui s'arrêterait avant signifierait que deux zéros ont quitté la droite ;
+- **l'appel.** On sait combien de zéros il doit y avoir jusqu'à chaque hauteur. S'il en manque deux sur la droite, ils sont ailleurs.
+
+**À quoi ressemble une pièce mauvaise.** La fonction de Davenport et Heilbronn a la symétrie de ζ, mais pas son produit d'Euler (voir « Pourquoi on ne peut pas aller plus loin »). Entre les hauteurs 82,5 et 88,5, l'appel en attend 4 zéros ; il n'y en a que 2 sur la droite. Entre les deux, Z remonte vers zéro, s'arrête à 0,36 et fait demi-tour (figure, A). Les deux absents sont hors de la droite : 0,808517 + 85,699348 i, et son symétrique 0,191483 + 85,699348 i. Voilà exactement ce qu'il faudrait trouver pour ζ.
+
+**La pièce bonne, creux par creux.** On a passé ζ au même contrôle jusqu'à la hauteur 10⁸ :
+
+| Jusqu'à la hauteur 10⁸ | |
+|---|---|
+| Zéros trouvés sur la droite | 248 008 025 |
+| Zéros attendus par la formule (l'appel) | 248 008 024 |
+| Creux douteux, examinés de plus près | 178 624 |
+| Creux douteux qui cachaient deux zéros | 178 624 |
+| Creux qui ne descendent pas jusqu'à zéro | 0 |
+
+Les zéros bien séparés se voient tout de suite : Z change de signe. Restent les creux douteux, où Z s'approche de zéro sans changer de signe sur la grille de calcul : on les examine de plus en plus finement, et tous cachaient deux zéros très proches. L'écart S(t) entre le compte et la formule reste entre −2,16 et +2,17, avec une moyenne nulle. L'appel a d'ailleurs servi : une première version du programme avait manqué trois paires de zéros avant la hauteur 1,3·10⁷, et c'est lui qui l'a signalé. Regardées de plus près, elles étaient sur la droite. Un manque à l'appel n'est donc pas encore un contre-exemple : c'est un endroit où regarder.
+
+Certains creux passent de justesse. Vers la hauteur 7005 (la « paire de Lehmer »), le creux touche zéro deux fois, à 0,0377 d'écart, et entre les deux Z ne remonte qu'à 0,0040, alors que |Z| atteint 4,3 tout près (figure, B). La paire la plus serrée qu'on ait trouvée, à la hauteur 18 882 503, n'est écartée que de 0,00052 : entre ses deux zéros, Z ne remonte qu'à 0,0000025. Ce contrôle refait en petit un travail connu : tous les zéros sont sur la droite jusqu'à la hauteur 3·10¹² (Platt et Trudgian, 2021).
+
+**Première fin : le film à l'envers.** On sait déformer ζ comme un film, avec un temps t (de Bruijn, 1950 ; Newman, 1976). L'instant 0 est la vraie fonction ζ. En avançant, les zéros se repoussent et s'écartent ; en reculant, ils se rapprochent, et deux zéros qui se percutent quittent la droite. Or il existe un instant où tout est démontré : à t = 0,2, tous les zéros sont sur la droite (Polymath 15, 2019 ; Platt et Trudgian, 2021). C'est la fin du film, et on peut le repasser à l'envers, de 0,2 vers 0. **L'hypothèse de Riemann dit qu'aucune collision n'a lieu avant d'arriver à l'instant 0. Elle est fausse si une seule paire se percute trop tôt.**
+
+Chaque zéro se déplace à la vitesse 2 Σ 1/(x_k − x_j), où x = 2γ et où la somme porte sur tous les autres zéros. Deux zéros voisins, écartés de Δγ à l'instant 0, se percutent donc vers l'instant −Δγ²/2. On a simulé le film pour 602 zéros autour de la paire de Lehmer (figure, C) : la collision a lieu à t = −7,112·10⁻⁴, et la formule donne −7,106·10⁻⁴. C'est après ζ quand on remonte le temps : trop tard pour faire tomber l'hypothèse. La marge de cette paire est de 7 dix-millièmes.
+
+Voici les marges record, parmi les 30 836 paires serrées relevées jusqu'à 10⁸ (figure, D) :
+
+| Hauteur | Zéros n° | Écart Δγ | Marge Δγ²/2 |
+|---|---|---|---|
+| 7 005 | 6 709 et 6 710 | 0,0377 | 7,11·10⁻⁴ |
+| 663 318 | 1 115 578 et 1 115 579 | 0,002959 | 4,38·10⁻⁶ |
+| 4 316 832 | 8 546 950 et 8 546 951 | 0,002323 | 2,70·10⁻⁶ |
+| 11 412 127 | 24 360 732 et 24 360 733 | 0,000881 | 3,88·10⁻⁷ |
+| 18 882 503 | 41 820 581 et 41 820 582 | 0,000520 | 1,35·10⁻⁷ |
+
+Pour la paire de la hauteur 663 318, notre marge vaut 4,377·10⁻⁶ ; la borne démontrée par Csordas, Smith et Varga en 1994, Λ > −4,379·10⁻⁶, vient visiblement de la même paire. (Λ est l'instant de la première collision quand on remonte le film : l'hypothèse dit Λ ≤ 0.) Les bornes publiées vont plus loin, avec des zéros bien plus hauts : −5,9·10⁻⁹ (1993), puis −1,15·10⁻¹¹ (2011). Et le record suit la loi attendue, celle des petits écarts entre zéros : il descend comme la puissance −2/3 du nombre de zéros.
+
+Aucune marge n'est négative. Mais elles fondent, et c'est un théorème : ou bien l'hypothèse est fausse, ou bien il existe des paires de marge aussi petite qu'on veut (Rodgers et Tao, 2018). Vue depuis la fin, l'hypothèse dit qu'une infinité de collisions, de plus en plus proches de l'instant 0, restent toutes du bon côté. Aucune approximation ne peut garantir cela : il n'y a pas de jeu. C'est la même leçon que la marge de Weil et celle de Nicolas, lue cette fois sur les zéros eux-mêmes. Nos marges sont des estimations (la formule Δγ²/2 néglige les voisins, à moins d'un millième près ici) ; les bornes publiées, elles, sont démontrées.
+
+**Deuxième fin : la fin des nombres.** Un zéro hors de la droite, de partie réelle β à la hauteur γ, ajouterait au compte des nombres premiers une onde d'amplitude 2x^β/γ. Elle grandit plus vite que √x, la taille de toutes les autres, et finit donc par les couvrir : à la fin, la fausse note s'entend seule. Mais où ? Pour un zéro juste au-dessus de la zone vérifiée (γ = 3·10¹²) :
+
+| Partie réelle β du zéro | 7/8 | 3/4 | 0,6 | 0,51 |
+|---|---|---|---|---|
+| La fausse note couvre les autres à partir de x ≈ | 10³² | 10⁴⁹ | 10¹²² | 10¹²¹⁸ |
+
+Plus la fausse note est près de la droite, plus sa fin recule. Les comptes exacts de nombres premiers s'arrêtent vers 10²⁹ : bien trop tôt pour l'entendre.
+
+**Troisième fin : le raisonnement à l'envers.** On peut aussi partir de la conclusion : supposer un zéro hors de la droite, et chercher la contradiction. C'est ainsi qu'on a démontré le théorème des nombres premiers (Hadamard, de la Vallée Poussin, 1896) : un zéro sur le bord, en 1 + iγ, obligerait ζ à être infinie en 1 + 2iγ, ce qu'elle n'est pas. L'argument s'appuie sur le seul point où ζ est infinie, s = 1, et il s'affaiblit dès qu'on s'en éloigne. En cent trente ans, le mur est passé de 1 à 7/8, si l'annonce de 2026 est confirmée. Il reste à le pousser jusqu'à ½.
+
+**Où chercher une pièce mauvaise.** Là où la contrainte est la plus forte : aux hauteurs où les ondes des petits nombres premiers s'alignent, comme pour la conjecture de Pólya. Bober et Hiary (2018) y sont allés directement, sans monter l'escalier : ils ont aligné une centaine de nombres premiers et calculé ζ jusqu'à la hauteur 8·10³⁴, dans plus de 200 fenêtres. Ils y ont trouvé des valeurs record, |Z| ≈ 16 245, et plus de 50 000 zéros, tous sur la droite.
+
+**Ce qu'on en retient.**
+
+1. **Fausse, l'hypothèse a une fin ; vraie, elle n'en a pas.** Un seul creux qui ne descend pas jusqu'à zéro, et c'est fini. On sait à quoi il ressemblerait : on l'a sous les yeux pour Davenport–Heilbronn.
+2. **Pour ζ, 248 008 025 zéros jusqu'à la hauteur 10⁸, et aucune pièce mauvaise** : les 178 624 creux douteux cachaient tous deux zéros, et l'appel tombe juste.
+3. **Le film à l'envers part d'un théorème.** À l'instant 0,2 tout est sur la droite ; en remontant, chaque paire a son instant de collision. Tous ceux qu'on a mesurés tombent après ζ, le plus proche à 1,4·10⁻⁷ près, et l'on sait qu'il n'y a aucune marge de sécurité.
+4. **Une fausse note ne s'entendrait dans les nombres premiers qu'au-delà de 10³²**, et bien plus loin si elle est près de la droite.
+
+Rien de tout cela ne démontre que l'hypothèse de Riemann est vraie, ni qu'elle est fausse.
+
+Programmes : [`calculs/zeros_au_plus_juste.c`](calculs/zeros_au_plus_juste.c) (tous les zéros jusqu'à la hauteur 10⁸, creux par creux ; sortie dans [`calculs/zeros_au_plus_juste.txt`](calculs/zeros_au_plus_juste.txt)) et [`calculs/par_la_fin.py`](calculs/par_la_fin.py) (la pièce mauvaise, le film, les marges).
+
+## Cherche-t-on du bon côté ? La liste, et l'autre côté de la droite
+
+![En haut, la carte des zéros de ζ et de sa dérivée jusqu'à la hauteur 205 : 82 zéros sur la droite, et les 61 zéros de la dérivée tous à droite ; en dessous, la même carte pour la fonction de Davenport–Heilbronn : huit zéros hors de la droite, et quatre zéros de la dérivée passés à gauche, un à la hauteur de chaque paire fautive ; en bas à gauche, la position de la sentinelle en fonction du carré de l'écart de la paire : une seule courbe, à droite pour les paires restées sur la droite, à gauche pour celles qui l'ont quittée ; en bas à droite, les cinq paires record de ζ, dont la sentinelle la plus proche est à 2,5·10⁻⁷ de la droite](de_l_autre_cote.png)
+
+La question : et si l'on ne cherchait pas du bon côté ? À quoi ressemblerait une hypothèse fausse, vue de partout ? La section précédente regardait sur la droite. Mais l'hypothèse se lit de bien d'autres côtés : on lui connaît des dizaines de formes équivalentes (Broughan en a rempli deux volumes). Voici les principales, avec chaque fois les questions du contrôleur : à quoi ressemble la pièce mauvaise ? Une seule suffit-elle ? Et à partir d'où la verrait-on ?
+
+**Le portrait de la pièce mauvaise.** Si un zéro fautif existe, on sait déjà ceci de lui :
+
+- **il ne vient pas seul.** Les zéros hors de la droite vont par deux, à la même hauteur, de part et d'autre de la droite (et autant sous l'axe réel). À cet endroit, il manque donc deux zéros sur la droite ;
+- **il est haut** : au-dessus de la hauteur 3·10¹², donc après les 12 000 premiers milliards de zéros (Platt et Trudgian, 2021) ;
+- **il n'est pas au bord** : sa partie réelle est comprise entre 1/8 et 7/8, si l'annonce de 2026 est confirmée ;
+- **il est rare** : plus des deux tiers des zéros sont sur la droite (2026), et les zéros hors de la droite, s'il y en a, sont plus rares qu'on ne savait le montrer (Guth et Maynard, 2024).
+
+Pour comparer les côtés, on prend partout la même pièce mauvaise : **un zéro de partie réelle ¾, à la hauteur 3·10¹²**, juste au-dessus de la zone vérifiée.
+
+**La liste.**
+
+| Côté | Ce que dit l'hypothèse | La pièce mauvaise | Une seule suffit ? | Le zéro de référence se verrait… | Où on en est |
+|---|---|---|---|---|---|
+| **Sur la droite** (Riemann ; Turing) | Chaque creux de \|Z\| touche zéro ; l'appel tombe juste | Un creux qui s'arrête avant zéro ; deux absents à l'appel | Oui | à son rang, vers le 12 000 milliardième zéro | Aucun jusqu'à la hauteur 3·10¹² ; ici, jusqu'à 10⁸ |
+| **De l'autre côté de la droite** (Speiser, 1934) | La dérivée ζ′ n'a aucun zéro à gauche de la droite | Un zéro de ζ′ à gauche | Oui | à la même hauteur | Ici : aucun jusqu'à la hauteur 10 000 |
+| **Le film** (de Bruijn, Newman) | En remontant le film, aucune collision avant l'instant 0 | Une paire qui se percute trop tôt, à un instant positif | Oui | à la même hauteur ; collision vers l'instant 0,03 | L'instant Λ de la première collision est entre 0 et 0,2 |
+| **Les nombres premiers** (von Koch, 1901 ; Schoenfeld, 1976) | \|π(x) − li(x)\| < √x·ln x/8π dès x = 2 657 | Un seul x où l'écart dépasse la borne | Oui | vers x ≈ 10⁶⁰ | π(x) est connu jusque vers 10²⁹ ; ici, à x = 2⁴⁰, l'écart vaut 41 645, soit 3,6 % de la borne |
+| **Les trous entre nombres premiers** (Cramér, 1920 ; Carneiro, Milinovich et Soundararajan, 2019) | Toujours un nombre premier entre x et x + (22/25)·√x·ln x | Un trou plus long | Oui | pas forcément : un zéro fautif ne creuse pas un trou à coup sûr | Avant 4·10¹⁸, le plus long trou mesure 1 476 : trente millions de fois moins que la borne |
+| **Les diviseurs** (Robin, 1984 ; Nicolas ; Lagarias) | σ(n) < e^γ·n·ln ln n pour n > 5 040 | Un seul n qui a trop de diviseurs | Oui | pour un nombre d'environ 10⁹⁸ chiffres | Vérifié jusqu'aux nombres de 10¹³ chiffres (Morrill et Platt) |
+| **Les sommes de signes** (Littlewood, 1912) | M(x) et L(x) grandissent moins vite que x^(½ + ε), pour tout ε | Une croissance plus rapide | **Non** : aucun x ne suffit, il faut l'infini | jamais, sur un calcul fini | \|M(x)\| < √x (Mertens) est faux, et personne n'a vu le contre-exemple |
+| **Les coefficients de Li** (Keiper, 1992 ; Li, 1997) | Une suite de nombres λ₁, λ₂, λ₃… tous positifs | Un seul λₙ négatif | Oui | vers n ≈ 2·10²⁷ | Calculés jusqu'à n = 100 000 (Johansson, 2013) |
+| **Une intégrale** (Balazard, Saias et Yor, 1999) | ∫ ln\|ζ(½ + it)\| dt/(¼ + t²) = 0 | Une valeur positive | Oui, mais il faut l'intégrale entière | à la 25ᵉ décimale : elle vaudrait 3,5·10⁻²⁵ | Ici : +0,00002 pour \|t\| < 100, 0,00000 pour \|t\| < 1 000 |
+| **La positivité** (Weil, 1952 ; Pólya, 1927) | Une énergie positive pour chaque onde ; des polynômes, ceux de Jensen, aux racines toutes réelles | Une seule onde d'énergie négative ; un seul polynôme avec une racine non réelle | Oui | non estimé ici | Jensen : démontré jusqu'au degré 8 (2019) ; Weil : suivi ici jusqu'à x = 64 |
+| **La machine** (Yedidia et Aaronson, 2016) | Une machine de Turing à 5 372 états ne s'arrête jamais | Elle s'arrête | Oui | au bout d'un temps hors de portée | — |
+
+**Trois sortes de côtés.** Presque partout, une seule pièce mauvaise suffit : l'hypothèse est une infinité de contrôles, dont chacun est fini. C'est ce qui la rend réfutable par un calcul. Les sommes de signes font exception : là, aucun x ne condamne l'hypothèse, il faut toute la courbe, jusqu'à l'infini. (La version « un seul x suffit », celle de Mertens, demande plus que l'hypothèse, et elle est fausse.) L'intégrale, enfin, tient en un seul nombre, mais ce nombre demande toute la droite.
+
+Deux de ces contrôles ont été refaits ici avec nos propres zéros. L'intégrale, limitée aux hauteurs inférieures à 1 000, vaut zéro à cinq décimales près. Les coefficients de Li retrouvent λ₁ = 0,023096 et sont tous positifs jusqu'à n = 2 000 ; mais c'est automatique : calculés à partir de zéros placés sur la droite, ce sont des sommes de termes positifs. Le vrai test les calcule sans passer par les zéros (Johansson).
+
+**Tous les côtés voient la même pièce, mais pas d'aussi loin.** Pour le zéro de référence :
+
+| Côté | La pièce mauvaise apparaît… |
+|---|---|
+| Les zéros, sur la droite ou de l'autre côté | au 12 000 milliardième zéro : à peine plus haut que la zone déjà vérifiée |
+| Les coefficients de Li | vers n ≈ 2·10²⁷ |
+| Les nombres premiers | son onde dépasse √x vers x ≈ 5·10⁴⁸, et la borne de Schoenfeld vers x ≈ 10⁶⁰ |
+| Les diviseurs | pour un nombre d'environ 10⁹⁸ chiffres : plus de chiffres qu'il n'y a d'atomes dans l'univers observable |
+| L'intégrale | à la 25ᵉ décimale |
+
+Ce classement n'est pas un hasard. Des autres côtés, on ne voit pas les zéros un par un, mais leur somme, où un zéro de hauteur γ pèse 1/γ (les nombres premiers) ou 1/γ² (les diviseurs, les coefficients de Li, l'intégrale). Plus la pièce mauvaise est haute, moins elle pèse. Sur la droite, au contraire, chaque zéro est contrôlé pour lui-même. **Pour chercher une pièce mauvaise, on cherche donc du bon côté.** Ces seuils sont nos estimations, pour ce zéro-là ; un zéro plus haut, ou plus proche de la droite, se verrait encore plus tard partout ailleurs. Pour une démonstration, c'est une autre affaire : là, personne ne sait quel est le bon côté.
+
+**L'autre côté de la droite, pour de bon.** Il existe un côté où l'on regarde vraiment ailleurs : à gauche de la droite. Speiser a montré en 1934 que l'hypothèse équivaut à ceci : la dérivée ζ′ n'a aucun zéro à gauche de la droite, en dehors de l'axe réel. On a donc cherché les zéros des dérivées, pour la pièce bonne et pour la pièce mauvaise (figure, A et B).
+
+| Jusqu'à la hauteur 205 | ζ | Davenport–Heilbronn |
+|---|---|---|
+| Zéros sur la droite | 82 | 125 |
+| Zéros hors de la droite | 0 | 8 (quatre paires) |
+| Zéros de la dérivée | 61 | 111 |
+| dont à gauche de la droite | 0 | 4 |
+
+Pour ζ, les 61 zéros de la dérivée sont tous à droite ; le plus proche de la droite a pour partie réelle 0,616. Plus haut, on compte sans localiser : on fait le tour d'un rectangle et l'on compte les tours de la phase (le principe de l'argument). Résultat : aucun zéro de ζ′ à gauche de la droite jusqu'à la hauteur 10 000, où ζ a déjà 10 143 zéros.
+
+Pour la pièce mauvaise, quatre zéros de la dérivée sont passés à gauche, un à la hauteur de chaque paire fautive :
+
+| Paire fautive (le zéro de droite) | Zéro de la dérivée, à gauche |
+|---|---|
+| 0,8085 + 85,699 i | 0,4054 + 85,705 i |
+| 0,6508 + 114,163 i | 0,4748 + 114,161 i |
+| 0,5744 + 166,479 i | 0,4933 + 166,480 i |
+| 0,7243 + 176,702 i | 0,4403 + 176,708 i |
+
+Plus haut, c'est pareil. Jusqu'à la hauteur 2 000, la fonction de Davenport–Heilbronn a 1 861 zéros sur la droite et 84 paires hors de la droite, soit 8 % de zéros fautifs ; l'appel tombe juste (2 029 zéros attendus, 1 861 + 2 × 84 trouvés). Et sa dérivée a exactement 84 zéros à gauche de la droite : autant que de paires fautives.
+
+**Chaque paire a sa sentinelle.** Entre deux zéros voisins et serrés, la dérivée a un zéro tout près, juste à droite de la droite. Appelons-le la sentinelle de la paire. Plus la paire est serrée, plus la sentinelle est près de la droite : pour deux zéros écartés de δ à la hauteur t,
+
+> distance de la sentinelle à la droite ≈ L·δ²/16, avec L = ln(t/2π).
+
+Si les deux zéros se rejoignent, la sentinelle arrive sur la droite. S'ils la quittent, l'un à gauche et l'autre à droite, à la distance a, elle passe à gauche, à la distance L·a²/4 : c'est la même formule, où le carré de l'écart a changé de signe. On l'a vérifié directement sur les 3 513 paires serrées (écart inférieur à 0,6 fois l'écart moyen) que comptent les 22 491 premiers zéros de ζ, et sur 265 paires de la pièce mauvaise (181 serrées sur la droite, 84 hors de la droite). Toutes se rangent le long d'une même courbe, qui passe par zéro au moment exact où une paire quitte la droite (figure, C) ; elles s'en écartent un peu quand la paire est moins serrée, parce que les zéros voisins comptent alors aussi. La loi est connue (Dueñez, Farmer et leurs coauteurs, 2010).
+
+Pour les paires record de la section précédente, on a calculé la sentinelle directement, en additionnant jusqu'à neuf millions de termes en quadruple précision (figure, D) :
+
+| Hauteur | Écart δ | Sentinelle : distance à la droite | Loi L·δ²/16 | Marge du film δ²/2 |
+|---|---|---|---|---|
+| 7 005 | 0,037698 | 6,2354·10⁻⁴ | 6,2323·10⁻⁴ | 7,11·10⁻⁴ |
+| 663 318 | 0,0029587 | 6,3285·10⁻⁶ | 6,3284·10⁻⁶ | 4,38·10⁻⁶ |
+| 4 316 832 | 0,0023234 | 4,5346·10⁻⁶ | 4,5345·10⁻⁶ | 2,70·10⁻⁶ |
+| 11 412 127 | 0,00088092 | 6,9902·10⁻⁷ | 6,9902·10⁻⁷ | 3,88·10⁻⁷ |
+| 18 882 503 | 0,00052028 | 2,5235·10⁻⁷ | 2,5235·10⁻⁷ | 1,35·10⁻⁷ |
+
+La sentinelle de notre paire la plus serrée est à 2,5 dix-millionièmes de la droite : du bon côté. Au passage, la méthode de Newton, lancée dans le plan complexe, ramène les dix zéros de ces paires sur la droite à mieux que 10⁻²³ près. La marge du film et la distance de la sentinelle sont deux jauges du même jeu : l'une et l'autre valent le carré de l'écart, à un facteur près. (La quadruple précision corrige aussi le troisième chiffre de l'écart de la paire record : 0,000520, et non 0,000521 comme le donnait le premier relevé, en double précision.)
+
+**Ce côté voit-il plus loin ? Non.** Levinson et Montgomery ont démontré en 1974 qu'à gauche de la droite, ζ′ a autant de zéros que ζ, à un petit nombre près (de l'ordre de ln T jusqu'à la hauteur T). L'autre côté voit donc les mêmes pièces mauvaises, à la même hauteur : ce n'est pas un raccourci. Ce qu'il apporte, c'est une jauge : avant qu'une paire ne quitte la droite, on verrait sa sentinelle s'en approcher.
+
+**Ce qu'on en retient.**
+
+1. **On connaît le portrait de la pièce mauvaise**, et l'on sait à quoi elle ressemblerait de chaque côté. Presque partout, une seule suffit.
+2. **Pour la chercher, la droite est le bon côté.** Le zéro de référence s'y verrait à son rang, vers le 12 000 milliardième zéro ; ailleurs, bien plus tard : n ≈ 2·10²⁷ pour les coefficients de Li, x ≈ 10⁶⁰ pour les nombres premiers, un nombre de 10⁹⁸ chiffres pour les diviseurs.
+3. **De l'autre côté de la droite, la pièce bonne et la pièce mauvaise se distinguent d'un coup d'œil** : aucun zéro de ζ′ à gauche jusqu'à la hauteur 10 000 ; 84 pour Davenport–Heilbronn jusqu'à 2 000, un par paire fautive.
+4. **Chaque paire serrée a sa sentinelle**, à la distance L·δ²/16 de la droite : 2,5·10⁻⁷ pour la plus serrée de nos 248 millions de zéros. Elle passerait à gauche à l'instant où la paire quitterait la droite.
+5. **Mais ce côté ne voit rien de plus que les zéros eux-mêmes** (Levinson et Montgomery).
+
+Rien de tout cela ne démontre que l'hypothèse de Riemann est vraie, ni qu'elle est fausse.
+
+Programmes : [`calculs/de_l_autre_cote.py`](calculs/de_l_autre_cote.py) (les zéros des dérivées jusqu'à la hauteur 205, les coefficients de Li, l'intégrale, les seuils), [`calculs/sentinelles.py`](calculs/sentinelles.py) (les sentinelles de ζ et de Davenport–Heilbronn, les comptes à gauche de la droite) et [`calculs/sentinelle.c`](calculs/sentinelle.c) (les paires record en quadruple précision ; sortie dans [`calculs/sentinelle.txt`](calculs/sentinelle.txt)).
+
 ## Au final
 
 Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 
 **L'hypothèse n'est ni démontrée ni contredite.** Tous nos calculs sont compatibles avec elle, et aucun ne la démontre. Quelques petits résultats, eux, sont démontrés (section précédente). La plupart refont, avec nos propres programmes, des calculs connus ; nous l'avons signalé à chaque fois.
 
-**Ce qu'on a appris, en treize points.**
+**Ce qu'on a appris, en quinze points.**
 
 1. **Le signe ne compte pas, la taille si.** Pólya demandait que L(x) reste négatif : c'est faux dès 906 150 257. L'hypothèse demande seulement que L(x) reste de l'ordre de √x : c'est ce qu'on observe (au plus 1,36·√x jusqu'au milliard).
 2. **Les zéros savent où les courbes repassent.** Leurs ondes retrouvent 906 millions, les régions de la course modulo 4 et le renversement de la course modulo 3 à 608 981 813 029. Deux prédictions restent à vérifier par un calcul exact : vers 2,3·10¹⁹ pour Pólya, vers 6,15·10¹² pour la course modulo 3.
@@ -955,6 +1128,8 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 11. **Une tentative de démonstration s'arrête au même mur.** Sans les pôles, l'onde la plus basse d'une fenêtre est une bosse positive : c'est un théorème (Perron–Frobenius). Avec les pôles, la positivité de Weil devient une égalité à 4·10⁻⁵⁸ près, et « la plus basse est paire » découle de l'hypothèse elle-même, pas l'inverse. De même, la marge de Nicolas baisse à chaque nombre premier jusqu'à 10¹⁹ (théorème), puis remonte une infinité de fois. Ce qui se démontre est réel, et ce n'est pas l'hypothèse.
 12. **Les non-premiers portent la même information, en miroir.** On coupe ζ en trois : 1, les nombres premiers, les non-premiers. Les zéros de ζ sont les puits de la zêta des premiers et les pics de celle des non-premiers ; « aucun accident à droite de la droite ½ » est l'hypothèse elle-même. Chaque famille de non-premiers s'emballe aux mêmes endroits, et c'est leur somme qui s'annule.
 13. **La musique est le bruit de la retenue.** Écrits en binaire et multipliés sans retenue, les nombres ont d'autres nombres premiers, qu'on compte exactement (la formule de Gauss, retrouvée jusqu'à 2⁴⁰) : leur zêta n'a aucun zéro. Avec retenue, il y a 1/ln 2 fois plus de nombres premiers, et une erreur de l'ordre de √N : la musique. Les deux mondes sont presque indépendants (2 187 712 867 doubles premiers jusqu'à 2⁴⁰, 0,6 % de plus que le compte idéal), et leurs seules corrélations mesurées sont celles de la preuve par neuf, calculées exactement. Ce qui sépare le monde démontré du nôtre tient dans une règle : 1 + 1 = 0, ou 1 + 1 = X + X².
+14. **Fausse, elle aurait une fin.** Un seul zéro hors de la droite suffirait, et il se verrait sur la droite : un creux de |Z| qui ne descend pas jusqu'à zéro, comme celui de la fonction de Davenport–Heilbronn. Pour ζ, 248 008 025 zéros contrôlés jusqu'à la hauteur 10⁸, aucun creux de ce genre. Et le film qui déforme ζ, repassé à l'envers depuis l'instant où tout est démontré, donne à chaque paire de zéros un instant de collision : toujours après ζ, mais à 1,4·10⁻⁷ près pour la plus serrée, et sans aucune marge de sécurité (Rodgers et Tao).
+15. **Pour chercher une pièce mauvaise, on cherche du bon côté.** On sait à quoi elle ressemblerait de chaque côté : un creux qui s'arrête, un zéro de la dérivée passé à gauche de la droite (Speiser), une collision trop tôt dans le film, un écart trop grand dans le compte des nombres premiers, un nombre qui a trop de diviseurs. Mais un zéro fautif juste au-dessus de la zone vérifiée se verrait sur la droite à son rang, vers le 12 000 milliardième zéro, et partout ailleurs bien plus tard : vers x ≈ 10⁶⁰ dans les nombres premiers, pour un nombre de 10⁹⁸ chiffres chez Robin. De l'autre côté de la droite, chaque paire de zéros a sa sentinelle, un zéro de la dérivée : à droite pour ζ (aucune à gauche jusqu'à la hauteur 10 000, la plus proche à 2,5·10⁻⁷ de la droite), passée à gauche pour chacune des 84 paires fautives de Davenport–Heilbronn. Ce côté voit les mêmes pièces mauvaises que les zéros (Levinson et Montgomery) : ce n'est pas un raccourci.
 
 **Ce que cela dit de la preuve à trouver.** Pour l'onde la plus fragile, la positivité de Weil est une égalité presque parfaite entre la partie archimédienne et les nombres premiers, de plus en plus serrée à mesure que la fenêtre s'élargit. Une démonstration devra donc très probablement venir d'une structure exacte, qui rende la positivité automatique : une géométrie pour les courbes (Weil, Deligne), un opérateur autoadjoint pour les surfaces (Selberg), une récurrence algébrique exacte pour les aimants (Lee et Yang). Nos calculs ne disent pas laquelle ; ils expliquent pourquoi il en faut sans doute une.
 
@@ -988,6 +1163,7 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 | Les autres mondes de premiers (Selberg, Ruelle, Beurling) | Des « nombres premiers » qui ne sont pas des entiers : géodésiques, orbites du papillon, nombres choisis | **Démontré** pour les géodésiques (Selberg) ; faux pour le papillon ; au choix chez Beurling | Il faut un instrument symétrique, et on n'en connaît pas pour les entiers |
 | Les non-premiers et la récurrence (Robin, Nicolas) | L'hypothèse comme inégalité sur les plus composés, ou comme marge qui reste positive premier après premier | Robin vérifié jusqu'à 10^(10^13) (Morrill et Platt) ; Nicolas suivi ici jusqu'à 10¹¹ | Chaque marche fait perdre de la marge : la vérité au rang k se décide à l'infini |
 | Le monde sans retenue (Artin, Weil ; Connes et Consani ; Scholze) | Les entiers comme polynômes en 0 et 1, plus une règle de retenue | Sans retenue : **démontré**, et le compte est exact ; les deux mondes criblés ensemble jusqu'à 2⁴⁰ | La retenue détruit le Frobenius ; les ponts connus ne valent qu'autour d'un nombre premier à la fois |
+| L'autre côté de la droite (Speiser ; Levinson et Montgomery) | La dérivée ζ′ ne doit avoir aucun zéro à gauche de la droite ; chaque paire de zéros a sa sentinelle, un zéro de ζ′ | Aucun à gauche jusqu'à la hauteur 10 000 ici ; la sentinelle la plus proche, pour nos 248 millions de zéros, est à 2,5·10⁻⁷ de la droite | Ce côté voit les mêmes pièces mauvaises que les zéros, à la même hauteur : pas de raccourci |
 
 ## Projets pour continuer
 
@@ -995,7 +1171,7 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 2. **Le contre-essai de Weil** : les zéros hors de la droite de la fonction de Davenport–Heilbronn sont maintenant calculés (section « Peut-on raisonner par récurrence ? ») ; reste à lui faire passer le test de Weil et à regarder son « énergie » devenir négative.
 3. **Faire vérifier les prédictions.** La région 2,3·10¹⁹ pour Pólya et la région 6,15·10¹² pour la course modulo 3 demandent un calcul exact, hors de portée ici, mais à la portée de spécialistes.
 4. **Comprendre la bosse.** Pourquoi l'onde la plus fragile est-elle toujours une bosse positive ? Si on le démontrait, l'ordre « plus tôt entré, plus verrouillé » et le fait que « trop » casse toujours en premier deviendraient des théorèmes. Et refaire la cascade avec 60 ou 100 ondes, pour des marges stabilisées.
-5. **Là où l'hypothèse a failli tomber** : zoomer sur la paire de Lehmer, à la hauteur 7005.
+5. **Là où l'hypothèse a failli tomber** : c'est fait pour la paire de Lehmer et pour tous les zéros jusqu'à la hauteur 10⁸ (section « Et si elle était fausse ? »). Reste à simuler le film pour les paires record, voisins compris, et à comparer aux bornes démontrées de Csordas, Smith et Varga.
 6. **Le jeu de Weil dans toutes les directions** : mesurer l'ensemble des poids gagnants dans toutes les directions, pas seulement un poids à la fois, et vérifier qu'il se resserre partout autour des vrais poids.
 7. **Démontrer l'étape 2 de la copie de Selberg** : montrer que les ondes propres de l'énergie de Weil alternent pair, impair, pair… comme celles d'une corde vibrante. Pour un problème voisin, Slepian l'a fait avec un opérateur différentiel qui commute (les fonctions « prolates ») ; Connes, Consani et Moscovici relient justement l'énergie de Weil à ces fonctions.
 8. **Les fonctions L dans les paires et les triplets.** La prédiction S(h)·c_χ(h) tient à 14 σ pour χ₅ dans les paires ; dans les triplets, la prédiction S(H)·c_χ(H) tient aussi, y compris pour le caractère impair χ₃ (7 σ). Il reste à la dériver proprement (méthode du cercle, avec les caractères), à la tester pour des modules plus grands et pour les quadruplets (le nôtre est encore trop bruité), et à chercher si elle est déjà connue.
@@ -1008,6 +1184,8 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 15. **« La plus basse est paire », sans l'hypothèse.** C'est la conjecture de parité de la note `demontre.pdf`. Une piste, non vérifiée : l'hypothèse est vérifiée jusqu'à la hauteur 3·10¹² ; pour une petite fenêtre, la contribution des zéros plus hauts à l'énergie d'une onde lisse se majore sans hypothèse, et l'argument de la primitive pourrait alors devenir une vraie démonstration, fenêtre par fenêtre. Et faire relire la note par un spécialiste.
 16. **La musique des produits de deux premiers.** Compter les nombres à deux facteurs premiers jusqu'à 10¹⁰ et y écouter les zéros, comme on l'a fait pour les jumeaux : leur zêta, (P(s)² + P(2s))/2, prédit le volume de chaque note.
 17. **Les doubles premiers plus loin, et d'autres règles de retenue.** Pousser les deux cribles jusqu'à 2⁴⁴ (quelques heures) pour voir les fuites continuer de s'éteindre ; refaire l'expérience en base 3 ; et essayer d'autres règles, comme 1 + 1 = X² + X³, qui donne les entiers de Gauss écrits en base −1 + i.
+18. **Aller voir là où ça force.** Chercher, avec l'algorithme LLL, des hauteurs où les ondes des premiers nombres premiers s'alignent, et y calculer ζ directement, comme Odlyzko puis Bober et Hiary : c'est là que |Z| est le plus grand et que les zéros sont le plus bousculés. Vers 10¹⁵, une fenêtre demande quelques minutes.
+19. **Les sentinelles plus haut.** Calculer la sentinelle des 30 836 paires serrées relevées jusqu'à 10⁸ (il faut la formule de Riemann–Siegel hors de la droite), et tester sur elles la loi que les matrices aléatoires prévoient pour leurs distances à la droite (Dueñez, Farmer et leurs coauteurs). Et faire passer à la pièce mauvaise les autres contrôles de la liste : d'après sa première paire fautive, ses coefficients de Li devraient devenir négatifs vers n ≈ 300 000 (notre estimation).
 
 ## Sources
 
@@ -1043,6 +1221,11 @@ Ce que toute cette exploration montre, et ce qu'elle ne montre pas.
 - A. Connes, C. Consani, [Riemann–Roch for the ring ℤ](https://arxiv.org/abs/2306.00456), Comptes Rendus Mathématique 362 (2024) ; P. Scholze, *Perfectoid spaces*, Publications mathématiques de l'IHÉS 116 (2012) ; J.-M. Fontaine, J.-P. Wintenberger, *Le « corps des normes » de certaines extensions algébriques de corps locaux* (1979) ; E. Artin, *Quadratische Körper im Gebiete der höheren Kongruenzen* (1924)
 - C. Mauduit, J. Rivat, [Sur un problème de Gelfond : la somme des chiffres des nombres premiers](https://annals.math.princeton.edu/2010/171-3/p04), Annals of Mathematics 171 (2010) ; D. J. Newman, [On the number of binary digits in a multiple of three](https://www.ams.org/proc/1969-021-03/S0002-9939-1969-0244149-8/), Proceedings of the AMS 21 (1969) ; W. Sawin, M. Shusterman, [On the Chowla and twin primes conjectures over 𝔽_q[T]](https://annals.math.princeton.edu/2022/196-2/p01), Annals of Mathematics 196 (2022)
 - OEIS : [A014580](https://oeis.org/A014580), les premiers sans retenue, et [A091206](https://oeis.org/A091206), les premiers dans les deux mondes ; N. Koblitz, *CM-curves with good cryptographic properties*, Crypto '91 ; [la courbe K-233](https://std.neuromancer.sk/nist/K-233)
+- N. G. de Bruijn, *The roots of trigonometric integrals*, Duke Mathematical Journal 17 (1950) ; C. Newman, *Fourier transforms with only real zeros*, Proceedings of the AMS 61 (1976) ; G. Csordas, W. Smith, R. Varga, *Lehmer pairs of zeros, the de Bruijn–Newman constant Λ, and the Riemann hypothesis*, Constructive Approximation 10 (1994) ; D. H. Lehmer, *On the roots of the Riemann zeta-function*, Acta Mathematica 95 (1956)
+- A. Turing, *Some calculations of the Riemann zeta-function*, Proceedings of the London Mathematical Society 3 (1953), et [Turing et les zéros de ζ](https://empslocal.ex.ac.uk/people/staff/mrwatkin/zeta/turing.htm) ; J. Bober, G. Hiary, [New computations of the Riemann zeta function on the critical line](https://arxiv.org/abs/1607.00709) (2018) ; D. Farmer, [Currently there are no reasons to doubt the Riemann Hypothesis](https://arxiv.org/abs/2211.11671) (2022)
+- A. Speiser, *Geometrisches zur Riemannschen Zetafunktion*, Mathematische Annalen 110 (1934) ; N. Levinson, H. Montgomery, *Zeros of the derivatives of the Riemann zeta-function*, Acta Mathematica 133 (1974) ; K. Soundararajan, *The horizontal distribution of zeros of ζ′(s)*, Duke Mathematical Journal 91 (1998) ; H. Ki, [The zeros of the derivative of the Riemann zeta function near the critical line](https://arxiv.org/abs/math/0701726) (2007) ; E. Dueñez, D. Farmer, S. Froehlich, C. Hughes, F. Mezzadri, T. Phan, [Roots of the derivative of the Riemann zeta function and of characteristic polynomials](https://arxiv.org/abs/1002.0372) (2010)
+- L. Schoenfeld, *Sharper bounds for the Chebyshev functions θ(x) and ψ(x). II*, Mathematics of Computation 30 (1976) ; E. Carneiro, M. Milinovich, K. Soundararajan, [Fourier optimization and prime gaps](https://arxiv.org/abs/1708.04122), Commentarii Mathematici Helvetici 94 (2019) ; T. Oliveira e Silva, S. Herzog, S. Pardi, *Empirical verification of the even Goldbach conjecture and computation of prime gaps up to 4·10¹⁸*, Mathematics of Computation 83 (2014)
+- X.-J. Li, *The positivity of a sequence of numbers and the Riemann hypothesis*, Journal of Number Theory 65 (1997) ; F. Johansson, [Rigorous high-precision computation of the Hurwitz zeta function and its derivatives](https://arxiv.org/abs/1309.2877) (2013) ; M. Balazard, E. Saias, M. Yor, *Notes sur la fonction ζ de Riemann, 2*, Advances in Mathematics 143 (1999) ; J. Lagarias, *An elementary problem equivalent to the Riemann hypothesis*, American Mathematical Monthly 109 (2002)
 - J. E. Littlewood, *Sur la distribution des nombres premiers*, Comptes rendus de l'Académie des sciences 158 (1914) ; M. Reed, B. Simon, *Methods of Modern Mathematical Physics IV* (1978), § XIII.12 (Perron–Frobenius et critère de Beurling–Deny) ; K. Gröchenig, [Schoenberg's theory of totally positive functions and the Riemann zeta function](https://arxiv.org/abs/2007.12889) (2020) ; E. Bombieri, *Remarks on Weil's quadratic functional in the theory of prime numbers I* (2000)
 - T. Kottos, U. Smilansky, [graphes quantiques](https://link.aps.org/doi/10.1103/PhysRevLett.79.4794) (1997) ; P. Kurasov, P. Sarnak, [polynômes stables et quasi-cristaux](https://arxiv.org/abs/2004.05678) (2020) ; L. Alon, A. Cohen, C. Vinzant, [polynômes de Lee–Yang](https://arxiv.org/abs/2303.03201) (2023)
 - Y. Atas et al., [rapport de deux écarts successifs](https://arxiv.org/abs/1212.5611) (2013) ; E. Bogomolny et al., [les zéros à hauteur finie](https://arxiv.org/abs/math/0602270) (2006)
