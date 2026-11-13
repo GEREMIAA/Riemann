@@ -1,0 +1,413 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[margin=1.05in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\hyphenpenalty=10000 \exhyphenpenalty=10000 \tolerance=4000 \emergencystretch=3em
+\frenchspacing
+
+\newtheorem{theoreme}{Théorème}
+\newtheorem{proposition}[theoreme]{Proposition}
+\newtheorem{lemme}[theoreme]{Lemme}
+\theoremstyle{definition}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{remark}
+\newtheorem*{remarque}{Remarque}
+\renewcommand{\proofname}{Démonstration}
+\renewcommand{\refname}{Références}
+\renewcommand{\abstractname}{Résumé}
+\renewcommand{\tablename}{Table}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ps}[2]{\langle #1,\,#2\rangle}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\sh}{sh}
+\DeclareMathOperator{\ch}{ch}
+
+\title{La forme de Weil dans une fenêtre et la récurrence de Nicolas~:\\ ce qui se démontre, et ce qui manque}
+\author{Antony Geremia\thanks{Chercheur indépendant, France. Note rédigée avec l'aide de Claude (Anthropic), dans le cadre du projet
+\emph{La musique des nombres premiers}, \url{https://github.com/GEREMIAA/Musique-Des-Premiers}.}}
+\date{Novembre 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\textbf{Cette note ne démontre pas l'hypothèse de Riemann.} Elle rassemble, avec leurs démonstrations complètes, les énoncés
+établis au cours d'une exploration numérique de deux reformulations de l'hypothèse~: la positivité de Weil, restreinte aux
+fonctions portées par une fenêtre $[x^{-1/2},x^{1/2}]$, et le critère de Nicolas sur les primorielles. Pour la première, on
+sépare la forme de Weil en $W=P+B$, où $P$ est le terme des pôles~; on montre que l'état fondamental de $B$ est strictement
+positif (Perron--Frobenius), que les spectres de $W$ et de $B$ s'entrelacent, que la positivité de $W$ équivaut à deux
+inégalités sur la résolvante de $B$, et que, \emph{si} l'hypothèse de Riemann est vraie, la plus petite énergie paire est
+au moins $\gamma_1^2/R$ fois plus petite que la plus petite énergie impaire. Pour le second, on donne un critère exact de
+décroissance de la marge de Nicolas d'une primorielle à la suivante~: elle décroît à chaque pas tant que $p\le 10^{19}$, et
+croît une infinité de fois au-delà. Ces énoncés sont élémentaires ou classiques dans leur méthode, et probablement connus
+des spécialistes sous d'autres formes. La dernière section dit précisément ce qui manque.
+\end{abstract}
+
+\section{La forme de Weil dans une fenêtre}
+
+\subsection*{Notations}
+Pour $\varphi\in L^2(\R)$ réelle à support compact, on note
+\[
+\widehat\varphi(z)=\int_{\R}\varphi(t)\,e^{izt}\,\dd t\quad(z\in\mathbb{C}),\qquad
+g_\varphi(u)=\int_{\R}\varphi(t)\,\varphi(t+u)\,\dd t,\qquad (\tau_u\varphi)(t)=\varphi(t+u).
+\]
+On a $g_\varphi(0)=\|\varphi\|^2$ et $\|\varphi-\tau_u\varphi\|^2=2\,(g_\varphi(0)-g_\varphi(u))$. On note $\Lambda$ la
+fonction de von Mangoldt, $\psi=\Gamma'/\Gamma$ la fonction digamma, $\gamma$ la constante d'Euler, et
+$\rho=\tfrac12+iz_\rho$ les zéros non triviaux de $\zeta$, comptés avec multiplicité~; $\gamma_1=14{,}1347\ldots$ est
+l'ordonnée du premier.
+
+\subsection*{La formule explicite}
+Pour $\varphi\in C_c^\infty(\R)$ réelle, la formule explicite de Guinand et Weil \cite{weil,bombieri} s'écrit
+\begin{equation}\label{eq:explicite}
+\sum_\rho \widehat\varphi(z_\rho)\,\widehat\varphi(-z_\rho)\;=\;W(\varphi),
+\end{equation}
+\begin{equation}\label{eq:W}
+W(\varphi)=2\,\widehat\varphi(\tfrac i2)\,\widehat\varphi(-\tfrac i2)
++\frac1{2\pi}\int_{\R}|\widehat\varphi(r)|^2\Bigl(\re\psi\bigl(\tfrac14+\tfrac{ir}2\bigr)-\ln\pi\Bigr)\dd r
+-2\sum_{n\ge2}\frac{\Lambda(n)}{\sqrt n}\,g_\varphi(\ln n).
+\end{equation}
+Si l'hypothèse de Riemann est vraie, les $z_\rho=\gamma$ sont réels et le membre de gauche vaut
+$\sum_\gamma|\widehat\varphi(\gamma)|^2\ge0$. Le critère de Weil dit que la réciproque est vraie~: l'hypothèse de Riemann
+équivaut à $W(\varphi)\ge0$ pour toute $\varphi$.
+
+\subsection*{La décomposition $W=P+B$}
+La représentation intégrale de Gauss, $\psi(z)=-\gamma+\int_0^\infty\frac{e^{-v}-e^{-zv}}{1-e^{-v}}\,\dd v$ pour $\re z>0$, donne, après
+le changement de variable $v=2u$,
+\begin{equation}\label{eq:levy}
+\re\psi\bigl(\tfrac14+\tfrac{ir}2\bigr)=\psi(\tfrac14)+\int_0^\infty\bigl(1-\cos(ru)\bigr)\,\nu(u)\,\dd u,
+\qquad \nu(u)=\frac{e^{u/2}}{\sh u}>0 .
+\end{equation}
+Comme $\frac1{2\pi}\int|\widehat\varphi(r)|^2(1-\cos ru)\,\dd r=g_\varphi(0)-g_\varphi(u)=\tfrac12\|\varphi-\tau_u\varphi\|^2$, on obtient
+$W=P+B$ avec
+\begin{align}
+P(\varphi)&=2\,\widehat\varphi(\tfrac i2)\,\widehat\varphi(-\tfrac i2)
+=2\int\varphi(t)e^{t/2}\dd t\int\varphi(t)e^{-t/2}\dd t,\label{eq:P}\\
+B(\varphi)&=E(\varphi)-\kappa\,\|\varphi\|^2-2\sum_{n\ge2}\frac{\Lambda(n)}{\sqrt n}\,g_\varphi(\ln n),\qquad
+E(\varphi)=\frac12\int_0^\infty\|\varphi-\tau_u\varphi\|^2\,\nu(u)\,\dd u,\label{eq:B}
+\end{align}
+où $\kappa=\ln\pi-\psi(\tfrac14)=\ln(8\pi)+\gamma+\tfrac\pi2\approx5{,}372$. Le terme $P$ vient des pôles de $\zeta$~; $E$ est la
+forme de Dirichlet d'un processus de Lévy symétrique, de mesure de Lévy $\nu(u)\,\dd u$.
+
+\subsection*{La fenêtre}
+On fixe $x>1$, $a=\tfrac12\ln x$ et $I=\,]-a,a[$. Une fonction de $L^2(I)$, prolongée par $0$, est une «~onde vivant entre
+$x^{-1/2}$ et $x^{1/2}$~» (variable $t=\ln$ de la position). Pour une telle $\varphi$, $g_\varphi(u)=0$ dès que $|u|\ge\ln x$~:
+dans \eqref{eq:B}, seules les puissances de nombres premiers $n<x$ interviennent. On note
+$\mathcal D=\{\varphi\in L^2(I): E(\varphi)<\infty\}$ le domaine de la forme. Le symbole
+$\eta(r)=\re\psi(\frac14+\frac{ir}2)-\psi(\frac14)$ de $E$ tend vers $+\infty$ comme $\ln|r|$~; comme $I$ est borné,
+l'injection de $\mathcal D$ dans $L^2(I)$ est compacte. La forme $B$ est fermée et minorée sur $\mathcal D$, et $P$ est
+bornée~: les opérateurs autoadjoints associés à $B$ et à $W$, encore notés $B$ et $W$, sont à résolvante compacte. On note
+$\lambda_0(\cdot)\le\lambda_1(\cdot)\le\cdots$ leurs valeurs propres. La réflexion $t\mapsto-t$ commute avec $B$ et $W$~;
+on note $B_{\mathrm p},W_{\mathrm p}$ (resp. $B_{\mathrm i},W_{\mathrm i}$) leurs restrictions aux fonctions paires (resp.
+impaires), et
+\[
+c(t)=\ch(t/2)\,\mathbf 1_I(t),\qquad s(t)=\sh(t/2)\,\mathbf 1_I(t).
+\]
+
+\section{Ce qui se démontre dans une fenêtre}
+
+\begin{lemme}[pair et impair se séparent]\label{lem:parite}
+Pour $\varphi$ paire, $P(\varphi)=2\ps{\varphi}{c}^2$~; pour $\varphi$ impaire, $P(\varphi)=-2\ps{\varphi}{s}^2$. Ainsi
+\[
+W_{\mathrm p}=B_{\mathrm p}+2\,|c\rangle\langle c|,\qquad W_{\mathrm i}=B_{\mathrm i}-2\,|s\rangle\langle s| .
+\]
+\end{lemme}
+\begin{proof}
+Si $\varphi$ est paire, $\int\varphi e^{\pm t/2}=\int\varphi\ch(t/2)$~; si elle est impaire, $\int\varphi e^{\pm t/2}=\pm\int\varphi\sh(t/2)$.
+On conclut par \eqref{eq:P}.
+\end{proof}
+
+Les pôles relèvent donc les ondes paires et abaissent les ondes impaires.
+
+\begin{proposition}[Perron--Frobenius sans les pôles]\label{prop:PF}
+La plus petite valeur propre $\lambda_0(B)$ est simple, et sa fonction propre $\varphi_0$ peut être choisie strictement
+positive presque partout sur $I$. En particulier $\varphi_0$ est paire.
+\end{proposition}
+\begin{proof}
+Pour $\varphi\in\mathcal D$, on a $\bigl||\varphi(t)|-|\varphi(t+u)|\bigr|\le|\varphi(t)-\varphi(t+u)|$, donc
+$|\varphi|\in\mathcal D$ et $E(|\varphi|)\le E(\varphi)$. De plus $g_{|\varphi|}(u)\ge g_\varphi(u)$ pour tout $u$, et
+$\||\varphi|\|=\|\varphi\|$. Donc $B(|\varphi|)\le B(\varphi)$~: par le premier critère de Beurling et Deny
+\cite[§XIII.12]{reedsimon}, le semi-groupe $e^{-tB}$ préserve la positivité.
+
+Montrons qu'il est irréductible. Soit $S\subset I$ mesurable tel que $L^2(S)$ soit invariant par le semi-groupe. Alors la
+multiplication par $\mathbf 1_S$ préserve $\mathcal D$ et la forme bilinéaire vérifie $B(\mathbf 1_S\varphi,\mathbf 1_{I\setminus S}\varphi)=0$
+pour toute $\varphi\in\mathcal D$ \cite[chap.~2]{ouhabaz}. Prenons $\varphi=\mathbf 1_I$, qui est dans $\mathcal D$ car
+$\|\mathbf 1_I-\tau_u\mathbf 1_I\|^2=2\min(u,2a)$ et $\int_0^1u\,\nu(u)\,\dd u<\infty$. Posons $f=\mathbf 1_S$,
+$h=\mathbf 1_{I\setminus S}$. Comme $f$ et $h$ sont à supports disjoints, $\ps fh=0$ et
+\[
+B(f,h)=-\frac12\int_0^\infty\bigl(\ps{f}{\tau_uh}+\ps{\tau_uf}{h}\bigr)\nu(u)\,\dd u
+-\sum_{n<x}\frac{\Lambda(n)}{\sqrt n}\bigl(\ps{f}{\tau_{\ln n}h}+\ps{h}{\tau_{\ln n}f}\bigr).
+\]
+Tous les termes sont négatifs ou nuls, et $\nu>0$. Si $B(f,h)=0$, alors
+$\int_0^{2a}\!\int\bigl(f(t)h(t+u)+f(t+u)h(t)\bigr)\dd t\,\dd u=\iint_{I\times I}f(t)h(t')\,\dd t\,\dd t'=|S|\cdot|I\setminus S|=0$.
+Donc $S$ ou son complémentaire est négligeable~: le semi-groupe est irréductible. Un semi-groupe préservant la positivité et
+irréductible améliore la positivité, et sa plus petite valeur propre, qui existe ici puisque la résolvante est compacte, est
+simple avec une fonction propre strictement positive \cite[§XIII.12]{reedsimon}. Enfin, $\varphi_0(-t)$ est
+aussi fonction propre pour $\lambda_0(B)$, donc lui est proportionnelle, et le facteur vaut $1$ puisque $\varphi_0>0$.
+\end{proof}
+
+\begin{proposition}[entrelacement et règles de somme]\label{prop:entrelacement}
+Notons $\mu_{\mathrm p}=\lambda_0(W_{\mathrm p})$ et $\mu_{\mathrm i}=\lambda_0(W_{\mathrm i})$ les plus petites énergies paire et impaire, et,
+pour $\mu$ hors du spectre de $B_{\mathrm p}$, $G(\mu)=1+2\,\ps{c}{(B_{\mathrm p}-\mu)^{-1}c}$.
+\begin{enumerate}
+\item[(a)] $\lambda_0(B)<\mu_{\mathrm p}\le\lambda_1(B_{\mathrm p})$, et $\mu_{\mathrm i}\le\lambda_0(B_{\mathrm i})$.
+\item[(b)] Si $\mu_{\mathrm p}<\lambda_1(B_{\mathrm p})$, alors $\mu_{\mathrm p}$ est une valeur propre simple de $W_{\mathrm p}$~; c'est l'unique zéro de $G$
+dans $]\lambda_0(B),\lambda_1(B_{\mathrm p})[$, et sa fonction propre est $(B_{\mathrm p}-\mu_{\mathrm p})^{-1}c$. Le cas
+$\mu_{\mathrm p}=\lambda_1(B_{\mathrm p})$ ne se produit que si $c$ est orthogonale à tout l'espace propre de $\lambda_1(B_{\mathrm p})$.
+\item[(c)] Supposons $0$ hors du spectre de $B_{\mathrm p}$. Alors $W_{\mathrm p}\ge0$ si et seulement si $B_{\mathrm p}\ge 0$, ou bien
+$B_{\mathrm p}$ a exactement une valeur propre négative et
+\begin{equation}\label{eq:regle-paire}
+\ps{c}{B_{\mathrm p}^{-1}c}\le-\tfrac12 .
+\end{equation}
+\item[(d)] Supposons $B_{\mathrm i}>0$. Alors $W_{\mathrm i}\ge0$ si et seulement si
+\begin{equation}\label{eq:regle-impaire}
+\ps{s}{B_{\mathrm i}^{-1}s}\le\tfrac12 .
+\end{equation}
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Notons $\lambda_0<\lambda_1\le\lambda_2\le\cdots$ les valeurs propres de $B_{\mathrm p}$ ($\lambda_0=\lambda_0(B)$ est simple par la
+proposition~\ref{prop:PF}) et $\varphi_0,\varphi_1,\ldots$ une base orthonormée de fonctions propres. Alors
+$G(\mu)=1+2\sum_j\ps{c}{\varphi_j}^2/(\lambda_j-\mu)$, et $\ps c{\varphi_0}>0$ car $c>0$ et $\varphi_0>0$.
+
+(a) Comme $W_{\mathrm p}\ge B_{\mathrm p}$, $\mu_{\mathrm p}\ge\lambda_0$~; l'égalité exigerait une fonction propre de $B_{\mathrm p}$ pour $\lambda_0$
+orthogonale à $c$, ce qui est exclu. Dans le plan engendré par $\varphi_0$ et $\varphi_1$, il existe un vecteur unitaire $v$
+orthogonal à $c$~; alors $W_{\mathrm p}(v)=B_{\mathrm p}(v)\le\lambda_1$, donc $\mu_{\mathrm p}\le\lambda_1$. Enfin $W_{\mathrm i}\le B_{\mathrm i}$.
+
+(b) Soit $\mu\in\,]\lambda_0,\lambda_1[$. L'équation $W_{\mathrm p}\phi=\mu\phi$ s'écrit $(B_{\mathrm p}-\mu)\phi=-2\ps c\phi\,c$. Si $\ps c\phi=0$, $\phi$ serait
+vecteur propre de $B_{\mathrm p}$ pour $\mu$~: impossible. Donc $\phi$ est proportionnel à $(B_{\mathrm p}-\mu)^{-1}c$, et en prenant
+le produit scalaire avec $c$, $G(\mu)=0$. Réciproquement tout zéro de $G$ donne une valeur propre. Sur $]\lambda_0,\lambda_1[$,
+$G'(\mu)=2\sum_j\ps c{\varphi_j}^2/(\lambda_j-\mu)^2>0$ et $G(\mu)\to-\infty$ quand $\mu\downarrow\lambda_0$~: $G$ y a au plus un zéro.
+Si $\mu_{\mathrm p}<\lambda_1$, c'est ce zéro, et l'espace propre est de dimension $1$. Si $c$ n'est pas orthogonale à l'espace propre de
+$\lambda_1$, alors $G(\mu)\to+\infty$ quand $\mu\uparrow\lambda_1$, $G$ s'annule dans l'intervalle, et $\mu_{\mathrm p}<\lambda_1$.
+
+(c) Si $B_{\mathrm p}$ a au moins deux valeurs propres négatives (avec multiplicité), un plan où $B_{\mathrm p}<0$ contient un vecteur non nul
+orthogonal à $c$, sur lequel $W_{\mathrm p}=B_{\mathrm p}<0$. Si $B_{\mathrm p}$ en a exactement une, alors $\lambda_0<0<\lambda_1$, et d'après (a) et (b)~:
+$W_{\mathrm p}\ge0$ si et seulement si $\mu_{\mathrm p}\ge0$, si et seulement si $G$ n'a pas de zéro dans $]\lambda_0,0[$, c'est-à-dire, $G$
+étant croissante, si et seulement si $G(0)\le0$. C'est \eqref{eq:regle-paire}.
+
+(d) $W_{\mathrm i}=B_{\mathrm i}^{1/2}\bigl(1-2\,|w\rangle\langle w|\bigr)B_{\mathrm i}^{1/2}$ avec $w=B_{\mathrm i}^{-1/2}s$, et $1-2|w\rangle\langle w|\ge0$ si et
+seulement si $2\|w\|^2\le1$.
+\end{proof}
+
+\begin{remarque}
+D'après le critère de Weil, l'hypothèse de Riemann équivaut donc à ceci~: pour toute fenêtre, $B_{\mathrm p}$ a au plus une
+valeur propre négative, $B_{\mathrm i}\ge0$, et les deux «~règles de somme~» \eqref{eq:regle-paire} et \eqref{eq:regle-impaire}
+sont vraies (aux cas dégénérés près). Numériquement (table~\ref{tab:sommes}), elles le sont avec une marge qui fond~:
+$\ps c{B_{\mathrm p}^{-1}c}=-\tfrac12-\varepsilon$ avec $\varepsilon\approx2\cdot10^{-30}$ pour $x=8$ et $4\cdot10^{-58}$ pour $x=64$.
+Le terme des pôles compense exactement la seule direction négative de $B$.
+\end{remarque}
+
+\begin{proposition}[sous l'hypothèse de Riemann, une onde impaire donne une onde paire plus silencieuse]\label{prop:primitive}
+Supposons l'hypothèse de Riemann. Soit $\phi\in C_c^\infty(I)$ impaire, et $\Phi(t)=\int_{-a}^t\phi$ sa primitive. Alors
+$\Phi\in C_c^\infty(I)$ est paire et
+\[
+W(\Phi)\le\frac{W(\phi)}{\gamma_1^{2}}.
+\]
+Par conséquent $\mu_{\mathrm p}\le \dfrac{R(\phi)}{\gamma_1^2}\cdot\dfrac{W(\phi)}{\|\phi\|^2}$, où $R(\phi)=\|\phi\|^2/\|\Phi\|^2$.
+\end{proposition}
+\begin{proof}
+Comme $\phi$ est impaire, $\int_I\phi=0$, donc $\Phi$ est nulle hors de $I$, lisse et paire. De $\phi=\Phi'$ on tire
+$\widehat\phi(r)=-ir\,\widehat\Phi(r)$. Sous l'hypothèse de Riemann, \eqref{eq:explicite} donne
+$W(\Phi)=\sum_\gamma|\widehat\Phi(\gamma)|^2=\sum_\gamma|\widehat\phi(\gamma)|^2/\gamma^2\le\gamma_1^{-2}\sum_\gamma|\widehat\phi(\gamma)|^2
+=W(\phi)/\gamma_1^2$, puisque $|\gamma|\ge\gamma_1$ pour tout zéro. Enfin $\mu_{\mathrm p}\le W(\Phi)/\|\Phi\|^2$.
+\end{proof}
+
+Comme $\gamma_1^2\approx199{,}8$, l'onde la plus basse est paire dès qu'une onde impaire presque optimale a un rapport
+$R<\gamma_1^2$~; dans nos calculs, $R$ vaut de $6{,}7$ à $16{,}3$ (table~\ref{tab:sommes}). Cette explication suppose
+l'hypothèse~: elle n'en est pas une démonstration.
+
+\subsection*{Le jeu de Weil et la loi de la marge}
+
+\begin{theoreme}[le jeu de Weil n'a qu'un gagnant]\label{th:jeu}
+Supposons l'hypothèse de Riemann. Soient $c_n$ des réels, égaux à $1$ sauf pour un nombre fini de puissances de nombres
+premiers, et non tous égaux à $1$. Alors la forme $W_c$ obtenue en remplaçant $\Lambda(n)$ par $c_n\Lambda(n)$ dans
+\eqref{eq:W} prend des valeurs strictement négatives.
+\end{theoreme}
+\begin{proof}
+Par \eqref{eq:explicite} et l'identité $g_\varphi(u)=\frac1{2\pi}\int|\widehat\varphi(r)|^2\cos(ru)\,\dd r$,
+\[
+W_c(\varphi)=\sum_\gamma|\widehat\varphi(\gamma)|^2-\int_{\R}|\widehat\varphi(r)|^2F(r)\,\dd r,\qquad
+F(r)=\frac1\pi\sum_n(c_n-1)\frac{\Lambda(n)}{\sqrt n}\cos(r\ln n).
+\]
+$F$ est une somme finie, non nulle, de cosinus de fréquences $\ln n>0$ distinctes~: elle est de moyenne nulle et non
+identiquement nulle, donc strictement positive sur un intervalle ouvert. Les zéros étant isolés, on y choisit $r_0$ et
+$\delta>0$ tels que $|r_0\mp\gamma|\ge\delta$ pour tout zéro. Soit $\chi\in C_c^\infty(\R)$ non nulle et
+$\varphi_L(t)=L^{-1/2}\chi(t/L)\cos(r_0t)$. Alors
+$\widehat\varphi_L(r)=\tfrac{\sqrt L}2\bigl(\widehat\chi(L(r-r_0))+\widehat\chi(L(r+r_0))\bigr)$. Quand $L\to\infty$,
+$\int|\widehat\varphi_L|^2F\to\pi\|\chi\|^2F(r_0)>0$, tandis que, $\widehat\chi$ étant à décroissance rapide,
+$\sum_\gamma|\widehat\varphi_L(\gamma)|^2\le C\,L^{-1}\sum_\gamma\bigl(|\gamma-r_0|^{-2}+|\gamma+r_0|^{-2}\bigr)\to0$.
+Donc $W_c(\varphi_L)<0$ pour $L$ assez grand.
+\end{proof}
+
+\begin{lemme}[la loi de la marge]\label{lem:marge}
+Dans une fenêtre, soit $\lambda$ la plus petite valeur propre de $W$ et $\varphi_1$ une fonction propre normalisée.
+Pour une puissance de nombre premier $n<x$, posons $s_n=-2\Lambda(n)n^{-1/2}g_{\varphi_1}(\ln n)$. Si $s_n<0$, on ne peut pas
+multiplier le poids de $n$ par plus de $1+\lambda/|s_n|$ sans que la forme devienne négative. Si $\varphi_1\ge0$, alors
+$s_n\le0$ pour tout $n$. Si de plus $\varphi_1$ est paire et log-concave, $g_{\varphi_1}$ est décroissante sur $[0,\infty[$, et
+la borne $\lambda/|s_p|$ est croissante le long des nombres premiers $p\ge7$.
+\end{lemme}
+\begin{proof}
+Avec le poids $1+t$ pour $n$, l'énergie de $\varphi_1$ vaut $\lambda+t\,s_n$. Si $\varphi_1\ge0$, $g_{\varphi_1}\ge0$. Si
+$\varphi_1$ est paire et log-concave, son autocorrélation est paire et log-concave (Prékopa--Leindler), donc décroissante sur
+$[0,\infty[$~; et $2\ln p/\sqrt p$ décroît le long des nombres premiers à partir de $7$.
+\end{proof}
+
+\subsection*{Vérifications numériques}
+Les tables \ref{tab:niveaux} et \ref{tab:sommes} donnent les quantités des propositions \ref{prop:entrelacement} et
+\ref{prop:primitive}, calculées par une méthode de Galerkin avec $20$ ondes de chaque parité (cosinus et sinus nuls au bord de
+la fenêtre), en arithmétique décimale de $120$ à $200$ chiffres (programme \texttt{structure\_de\_weil.py}). Les énergies
+calculées majorent celles de la forme complète (principe de Rayleigh--Ritz)~; elles illustrent les énoncés et ne les démontrent pas. Le programme \texttt{controles\_de\_la\_note.py} contrôle par ailleurs, sur des ondes tests, la formule \eqref{eq:explicite}--\eqref{eq:W}, la représentation \eqref{eq:levy} et la décomposition $W=P+B$.
+Dans toutes les fenêtres, l'état fondamental calculé de $B$ est strictement positif, $B_{\mathrm p}$ a une seule valeur
+propre négative, $B_{\mathrm i}>0$, et $\lambda_0(B)<\mu_{\mathrm p}<\lambda_1(B_{\mathrm p})$, $\mu_{\mathrm i}<\lambda_0(B_{\mathrm i})$,
+$\mu_{\mathrm p}<\mu_{\mathrm i}$.
+
+\begin{table}[ht]\centering\small
+\begin{tabular}{rrrrrr}\toprule
+$x$ & $\lambda_0(B)$ & $\mu_{\mathrm p}$ & $\lambda_1(B_{\mathrm p})$ & $\mu_{\mathrm i}$ & $\lambda_0(B_{\mathrm i})$\\\midrule
+$2{,}5$ & $-1{,}80$ & $1{,}2\cdot 10^{-5}$ & $5{,}9\cdot 10^{-2}$ & $1{,}9\cdot 10^{-3}$ & $2{,}0\cdot 10^{-2}$ \\
+$4$ & $-2{,}81$ & $9{,}1\cdot 10^{-13}$ & $1{,}2\cdot 10^{-7}$ & $5{,}7\cdot 10^{-10}$ & $1{,}4\cdot 10^{-5}$ \\
+$8$ & $-4{,}46$ & $5{,}8\cdot 10^{-30}$ & $4{,}2\cdot 10^{-24}$ & $4{,}9\cdot 10^{-27}$ & $8{,}9\cdot 10^{-22}$ \\
+$16$ & $-6{,}42$ & $3{,}4\cdot 10^{-42}$ & $2{,}7\cdot 10^{-36}$ & $1{,}2\cdot 10^{-39}$ & $1{,}7\cdot 10^{-34}$ \\
+$32$ & $-8{,}78$ & $1{,}2\cdot 10^{-50}$ & $7{,}3\cdot 10^{-45}$ & $1{,}5\cdot 10^{-48}$ & $3{,}3\cdot 10^{-43}$ \\
+$64$ & $-11{,}79$ & $1{,}7\cdot 10^{-57}$ & $1{,}7\cdot 10^{-51}$ & $2{,}8\cdot 10^{-55}$ & $3{,}3\cdot 10^{-50}$ \\\bottomrule
+\end{tabular}
+\caption{Entrelacement des énergies de $W$ et de $B$ ($20$ ondes de chaque parité).}\label{tab:niveaux}
+\end{table}
+
+\begin{table}[ht]\centering\small
+\begin{tabular}{rrrrrr}\toprule
+$x$ & $-1-2\ps c{B_{\mathrm p}^{-1}c}$ & $1-2\ps s{B_{\mathrm i}^{-1}s}$ & $\mu_{\mathrm i}/\mu_{\mathrm p}$ & $R$ & $\gamma_1^2/R$\\\midrule
+$2{,}5$ & $9{,}6\cdot 10^{-6}$ & $9{,}5\cdot 10^{-2}$ & $163$ & $16{,}3$ & $12{,}3$ \\
+$4$ & $6{,}6\cdot 10^{-13}$ & $2{,}1\cdot 10^{-8}$ & $626$ & $12{,}9$ & $15{,}5$ \\
+$8$ & $3{,}9\cdot 10^{-30}$ & $1{,}5\cdot 10^{-25}$ & $844$ & $11{,}2$ & $17{,}8$ \\
+$16$ & $2{,}1\cdot 10^{-42}$ & $2{,}8\cdot 10^{-38}$ & $339$ & $9{,}6$ & $20{,}7$ \\
+$32$ & $6{,}9\cdot 10^{-51}$ & $2{,}7\cdot 10^{-47}$ & $119$ & $8{,}1$ & $24{,}8$ \\
+$64$ & $8{,}5\cdot 10^{-58}$ & $3{,}9\cdot 10^{-54}$ & $170$ & $6{,}7$ & $29{,}8$ \\\bottomrule
+\end{tabular}
+\caption{Les marges des deux règles de somme \eqref{eq:regle-paire} et \eqref{eq:regle-impaire} (colonnes 2 et 3, positives),
+et le rapport des plus petites énergies impaire et paire, comparé à la borne $\gamma_1^2/R$ de la proposition~\ref{prop:primitive},
+où $R$ est calculé sur l'onde impaire la plus basse.}\label{tab:sommes}
+\end{table}
+
+\section{La récurrence de Nicolas}
+
+Soient $p_1=2<p_2=3<\cdots$ les nombres premiers, $\theta(x)=\sum_{p\le x}\ln p$, $\theta_k=\theta(p_k)$, et, pour $k\ge2$,
+\[
+F_k=\sum_{j\le k}-\ln\Bigl(1-\frac1{p_j}\Bigr)-\gamma-\ln\ln\theta_k .
+\]
+Avec $N_k=p_1\cdots p_k$ et $\varphi$ l'indicatrice d'Euler, $F_k=\ln\bigl(N_k/\varphi(N_k)\bigr)-\ln\bigl(e^\gamma\ln\ln N_k\bigr)$.
+Nicolas \cite{nicolas} a démontré que l'hypothèse de Riemann équivaut à $F_k>0$ pour tout $k$~; et que, si elle est fausse,
+$F_k$ change de signe une infinité de fois.
+
+\begin{proposition}[la marge est une intégrale sur l'avenir]\label{prop:avenir}
+Pour $k\ge2$,
+\[
+F_k=\int_{p_k}^\infty\bigl(t-\theta(t)\bigr)\,\frac{1+\ln t}{t^2\ln^2t}\,\dd t\;-\;H_k\;+\;\varepsilon_k,
+\]
+où $H_k=\sum_{q>p_k}\bigl(-\ln(1-\tfrac1q)-\tfrac1q\bigr)\in\,]0,\tfrac1{2p_k}[$ et
+$\varepsilon_k=\ln\ln p_k-\ln\ln\theta_k-\dfrac{p_k-\theta_k}{p_k\ln p_k}\ge0$.
+\end{proposition}
+\begin{proof}
+Posons $w(t)=(1+\ln t)/(t^2\ln^2t)=-\frac{\dd}{\dd t}\frac1{t\ln t}$. Par sommation d'Abel,
+$\sum_{q\le x}\frac1q=\frac{\theta(x)}{x\ln x}+\int_2^x\theta(t)w(t)\,\dd t$, et $\int_2^xt\,w(t)\,\dd t=\ln\ln x-\frac1{\ln x}-\ln\ln2+\frac1{\ln2}$.
+Par le théorème des nombres premiers, $\int_2^\infty(\theta(t)-t)w(t)\,\dd t$ converge, d'où
+$\sum_{q\le x}\frac1q=\ln\ln x+M+\frac{\theta(x)-x}{x\ln x}+\int_x^\infty(t-\theta(t))w(t)\,\dd t$, où $M$ est la constante de
+Meissel--Mertens. Le théorème de Mertens donne $\gamma=M+\sum_q\bigl(-\ln(1-\frac1q)-\frac1q\bigr)$. En $x=p_k$, on obtient la
+formule annoncée. L'encadrement de $H_k$ vient de $-\ln(1-\frac1q)-\frac1q<\frac1{2q(q-1)}$, et $\varepsilon_k\ge0$ de la convexité de
+$D\mapsto-\ln\ln(p_k-D)$, dont la dérivée en $0$ vaut $1/(p_k\ln p_k)$.
+\end{proof}
+
+La valeur de $F_k$ se calcule avec les $k$ premiers nombres premiers, mais elle est égale à une moyenne pondérée du déficit
+$t-\theta(t)$ \emph{au-delà} de $p_k$~: c'est la constante $\gamma$ qui contient cet avenir.
+
+\begin{lemme}[critère exact de décroissance]\label{lem:critere}
+Soit $k\ge2$, $p=p_{k+1}$ et $\theta^*(p)$ l'unique solution $\theta>1$ de $(p-1)\ln\bigl(1+\frac{\ln p}{\theta}\bigr)=\ln\theta$. Alors
+\[
+F_{k+1}<F_k\iff\theta_k<\theta^*(p_{k+1}),\qquad\text{et}\qquad p-\tfrac12\ln p-\tfrac34<\theta^*(p)<p .
+\]
+\end{lemme}
+\begin{proof}
+On a $F_{k+1}-F_k=-\ln(1-\frac1p)-\ln\frac{\ln(\theta_k+\ln p)}{\ln\theta_k}$. Comme $\ln\theta_k>0$, ceci est négatif si et seulement si
+$\Phi(\theta_k)>0$, où $\Phi(\theta)=(p-1)\ln(1+\frac{\ln p}\theta)-\ln\theta$ est strictement décroissante. D'une part
+$\Phi(p)<(p-1)\frac{\ln p}p-\ln p<0$. D'autre part, soit $L=\ln p$, $\delta_0=\frac L2+\frac34$ et $\theta_0=p-\delta_0>0$. De
+$\ln(1+y)\ge\frac{2y}{2+y}$ et $\ln\theta_0\le L-\frac{\delta_0}p$, il suffit, pour avoir $\Phi(\theta_0)>0$, que
+$2L(p-1)>(2\theta_0+L)(L-\frac{\delta_0}p)=(2p-\frac32)(L-\frac{\delta_0}p)$~; la différence des deux membres vaut
+$\frac L2+\frac32-\frac{3\delta_0}{2p}>0$.
+\end{proof}
+
+\begin{theoreme}[la marge de Nicolas décroît longtemps, mais pas toujours]\label{th:nicolas}
+\leavevmode
+\begin{enumerate}
+\item[(a)] $F_{k+1}<F_k$ pour tout $k\ge2$ tel que $p_{k+1}\le10^{19}$.
+\item[(b)] $F_{k+1}>F_k$ pour une infinité de $k$.
+\item[(c)] Le plus petit $k$ tel que $F_{k+1}>F_k$ vérifie $10^{19}<p_{k+1}<e^{727{,}951332668}<1{,}4\cdot10^{316}$.
+\end{enumerate}
+\end{theoreme}
+\begin{proof}
+(a) Büthe \cite[th.~2]{buthe} a démontré $x-\theta(x)>0{,}05\sqrt x$ pour $1\le x\le10^{19}$. En faisant tendre $x$ vers $p_{k+1}$ par
+valeurs inférieures, $p_{k+1}-\theta_k\ge0{,}05\sqrt{p_{k+1}}$, et $0{,}05\sqrt p\ge\frac12\ln p+\frac34$ dès que $p\ge11\,835$. Le
+lemme~\ref{lem:critere} conclut pour $p_{k+1}\ge11\,835$. Les $1\,436$ pas restants ($5\le p_{k+1}<12\,000$) se vérifient par un calcul
+direct en $60$ chiffres (programme \texttt{nicolas\_petits\_premiers.py})~: le moins net est $F_{k+1}-F_k=-7{,}6\cdot10^{-7}$, en $p_{k+1}=10\,343$.
+
+(b) Littlewood \cite{littlewood} a démontré $\psi(x)-x=\Omega_\pm(\sqrt x\,\ln\ln\ln x)$~; comme $\psi(x)-\theta(x)=O(\sqrt x)$, il
+existe des $x$ arbitrairement grands avec $\theta(x)>x+\ln x$. Soit $p_m$ le plus grand nombre premier $\le x$. Alors
+$\theta_{m-1}=\theta(x)-\ln p_m>x\ge p_m>\theta^*(p_m)$, donc $F_m>F_{m-1}$ par le lemme~\ref{lem:critere}.
+
+(c) Platt et Trudgian \cite{platttrudgian} ont montré qu'il existe $x\in[e^{727{,}951332642},e^{727{,}951332668}]$ avec
+$\theta(x)-x>10^{152}$. L'argument de (b) s'applique à ce $x$~; la borne inférieure vient de (a).
+\end{proof}
+
+\begin{remarque}
+Le crible du projet (programme \texttt{nicolas\_premier\_apres\_premier.c}) a suivi $F_k$ pour les $4\,118\,054\,813$ nombres premiers
+jusqu'à $10^{11}$~: aucune remontée, conformément à (a). L'énoncé «~la marge baisse à chaque pas~» est donc vrai pour les
+$234\,057\,667\,276\,344\,607$ premiers nombres premiers (ceux qui précèdent $10^{19}$), et faux une infinité de fois~: c'est un
+exemple de plus de ce qu'une vérification finie ne dit pas.
+\end{remarque}
+
+\section{Ce qui manque}
+
+Le plan le plus avancé pour démontrer l'hypothèse de Riemann à partir de la forme de Weil d'une fenêtre est celui de Connes,
+Consani et Moscovici \cite{ccm}~: si la plus petite valeur propre de leur forme restreinte est simple et de fonction propre paire,
+la transformée de Fourier de cette fonction propre n'a que des zéros réels~; si de plus ces transformées convergent vers la
+fonction $\Xi$ de Riemann quand la fenêtre grandit, le théorème de Hurwitz donne l'hypothèse. Les énoncés de la section~2 ne
+franchissent aucune de ces deux étapes. Ils les ramènent à ceci.
+
+\begin{conjecture}[simplicité]
+Dans toute fenêtre, $\mu_{\mathrm p}<\lambda_1(B_{\mathrm p})$~; autrement dit, $G$ s'annule dans
+$]\lambda_0(B),\lambda_1(B_{\mathrm p})[$, ce qui est automatique dès que $c$ n'est pas orthogonale à l'espace propre de
+$\lambda_1(B_{\mathrm p})$.
+\end{conjecture}
+\begin{conjecture}[parité]
+Dans toute fenêtre, $\mu_{\mathrm p}<\mu_{\mathrm i}$.
+\end{conjecture}
+\begin{conjecture}[convergence]
+Quand $x\to\infty$, la fonction propre de $\mu_{\mathrm p}$, normalisée, converge vers la fonction $\Phi$ de Riemann, dont $\Xi$ est la
+transformée de Fourier, assez fortement pour que les transformées de Fourier convergent uniformément sur les compacts de
+$\mathbb{C}$.
+\end{conjecture}
+
+La proposition~\ref{prop:primitive} montre que la conjecture de parité découle de l'hypothèse de Riemann (quand $R<\gamma_1^2$)~:
+elle est donc au moins compatible avec elle, mais nous ne savons pas la démontrer sans elle. La difficulté commune se lit dans la
+table~\ref{tab:niveaux}~: toutes les quantités à comparer sont de l'ordre de $10^{-30}$ à $10^{-57}$, alors que $B$ a des
+valeurs propres d'ordre $1$. Aucune fonction d'essai grossière ne peut servir~; il faut des identités exactes. La conjecture de
+convergence contient, à elle seule, l'essentiel de l'hypothèse de Riemann.
+
+\begin{thebibliography}{9}
+\bibitem{bombieri} E. Bombieri, \emph{Remarks on Weil's quadratic functional in the theory of prime numbers I}, Rend. Mat. Acc. Lincei 11 (2000), 183--233.
+\bibitem{buthe} J. Büthe, \emph{An analytic method for bounding $\psi(x)$}, Math. Comp. 87 (2018), 1991--2009, \href{https://arxiv.org/abs/1511.02032}{arXiv:1511.02032}.
+\bibitem{ccm} A. Connes, C. Consani, H. Moscovici, \emph{Zeta spectral triples}, \href{https://arxiv.org/abs/2511.22755}{arXiv:2511.22755} (2025).
+\bibitem{littlewood} J. E. Littlewood, \emph{Sur la distribution des nombres premiers}, C. R. Acad. Sci. Paris 158 (1914), 1869--1872.
+\bibitem{nicolas} J.-L. Nicolas, \emph{Petites valeurs de la fonction d'Euler}, J. Number Theory 17 (1983), 375--388.
+\bibitem{ouhabaz} E. M. Ouhabaz, \emph{Analysis of Heat Equations on Domains}, Princeton University Press, 2005.
+\bibitem{platttrudgian} D. J. Platt, T. S. Trudgian, \emph{On the first sign change of $\theta(x)-x$}, Math. Comp. 85 (2016), 1539--1547, \href{https://arxiv.org/abs/1407.1914}{arXiv:1407.1914}.
+\bibitem{reedsimon} M. Reed, B. Simon, \emph{Methods of Modern Mathematical Physics IV: Analysis of Operators}, Academic Press, 1978.
+\bibitem{weil} A. Weil, \emph{Sur les «~formules explicites~» de la théorie des nombres premiers}, Comm. Sém. Math. Univ. Lund (1952), 252--265.
+\end{thebibliography}
+\end{document}
