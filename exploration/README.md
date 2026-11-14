@@ -523,6 +523,8 @@ Ce que cela veut dire : la règle « chaque membre apporte sa fluctuation » 
 
 Programmes : [`calculs/triplets_rapide.c`](calculs/triplets_rapide.c) (le crible, quelques minutes jusqu'à 10¹⁰ ; la liste des motifs est dans [`calculs/motifs_triplets.txt`](calculs/motifs_triplets.txt)) et [`calculs/musique_des_triplets.py`](calculs/musique_des_triplets.py).
 
+**L'article.** Les résultats de ces trois sections (les jumeaux, les fonctions L dans les paires, les triplets) sont rassemblés dans un article de sept pages, en anglais : [`article_jumeaux.pdf`](article_jumeaux.pdf) (source : [`article_jumeaux.tex`](article_jumeaux.tex), avec ses figures `fig_pairs.pdf` et `fig_triplets.pdf`). Il teste une heuristique par le calcul ; il ne démontre rien.
+
 ### La physique : une fleur de nombres premiers
 
 ![Un graphe quantique à 16 boucles de longueurs ln p : avec un champ magnétique, la statistique GUE des zéros ; sans champ, la statistique GOE ; sa diffraction a des pics en ln n pour tous les produits n, celle des zéros seulement des creux en ln pᵏ](fleur_de_fourier.png)
